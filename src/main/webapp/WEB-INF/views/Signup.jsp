@@ -4,10 +4,34 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Signup</title>
 </head>
-
 <body>
-<h1>signup</h1>
-</body>
+	<h2>Signup</h2>
+
+	<form action="saveuser" method="post">
+		FirstName: <input type="text" name="firstName"  /><br><br> 
+		LastName: <input type="text" name="lastName"  /><br><br> 
+		
+		Gender: Male<input type="radio" name="gender" value="male">
+				FeMale<input type="radio" name="gender" value="female"><bR><br> 
+		
+		ContactNum: <input type="text" name="contactNum"/><br><br> 
+		
+		Email: <input type="text" name="email"/><br><br> 
+		
+		
+		Password: <input type="password" name="password"/><br><br> 
+		
+		BornYear  : <input type="text" name="bornYear"/><br><BR> 
+	
+		<input type="submit" value="Signup"/>
+	
+	</form>
+
+
+<br><br> 
+	<a href="login">Login</a>
+
+</BODY>
 </html>
