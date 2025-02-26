@@ -8,12 +8,12 @@
 		<version>3.4.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>iGate</groupId>
-	<artifactId>iGate</artifactId>
+	<groupId>ExpenseTracker</groupId>
+	<artifactId>ExpenseTracker</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>iGate</name>
-	<description>iGate</description>
+	<name>ExpenseTracker</name>
+	<description>ExpenseTracker</description>
 	<url/>
 	<licenses>
 		<license/>

@@ -1,4 +1,4 @@
-package com.growinted.entity;
+package com.grownited.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,7 +15,7 @@ public class UserEntity {
  private String	firstName;
  private String	lastName;
  private String	bornYear;
- private String	conntacNum;
+ private String	contactNum;
  private String	gender;
  private String	email;
  private String	password;
@@ -62,16 +62,19 @@ public String getBornYear() {
 public void setBornYear(String bornYear) {
 	this.bornYear = bornYear;
 }
-public String getConntacNum() {
-	return conntacNum;
-}
-public void setConntacNum(String conntacNum) {
-	this.conntacNum = conntacNum;
-}
+
 public String getGender() {
 	return gender;
 }
 public void setGender(String gender) {
 	this.gender = gender;
-} 
+}
+public String getContactNum() {
+	return contactNum;
+}
+public void setContactNum(String contactNum) {
+	this.contactNum = contactNum;
+}
+
+
 }

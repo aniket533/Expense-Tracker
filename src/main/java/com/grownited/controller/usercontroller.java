@@ -1,4 +1,4 @@
-package com.growinted.controller;
+package com.grownited.controller;
 
 public class usercontroller {
 

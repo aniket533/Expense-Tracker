@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -19,14 +22,14 @@
             </tr>
         </thead>
         <tbody>
-            <c:forEach var="signUp" items="${signUpList}">
+            <c:forEach  items="${userslist }"  var="u" >
                 <tr>
-                    <td>${signUp.firstName}</td>
-                    <td>${signUp.lastName}</td>
-                    <td>${signUp.email}</td>
-                    <td>${signUp.gender}</td>
-                    <td>${signUp.contactnum}</td>
-                    <td>${signUp.password}</td>
+                    <td>${u.firstName}</td>
+                    <td>${u.lastName}</td>
+                    <td>${u.email}</td>
+                    <td>${u.gender}</td>
+                    <td>${u.contactNum}</td>
+                    <td>${u.password}</td>
                 </tr>
             </c:forEach>
         </tbody>
