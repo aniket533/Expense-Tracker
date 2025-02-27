@@ -1,5 +1,4 @@
-
-package com.example.entity;
+package com.grownited.entity;
 
 import jakarta.persistence.Entity;
 
@@ -18,7 +17,6 @@ public class MemberEntity {
 	private String memberName;
 	private Integer age;
 	private Integer userId;
-	private Integer houseId;
 	private String profilePhoto;
 
 	public Integer getMemberId() {
@@ -53,13 +51,7 @@ public class MemberEntity {
 		this.userId = userId;
 	}
 
-	public Integer getHouseId() {
-		return houseId;
-	}
-
-	public void setHouseId(Integer houseId) {
-		this.houseId = houseId;
-	}
+	
 
 	public String getProfilePhoto() {
 		return profilePhoto;

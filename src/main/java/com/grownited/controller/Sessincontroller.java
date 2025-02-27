@@ -107,10 +107,7 @@ public class Sessincontroller {
    public String updatepaasword() {
 	   return "Login";
    }
-   @GetMapping("newmember")
-   public String newmember() {
-      return "newmember";
-   } 
+ 
 }
 
 

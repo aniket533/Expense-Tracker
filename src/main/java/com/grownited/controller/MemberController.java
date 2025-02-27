@@ -3,6 +3,8 @@ package com.grownited.controller;
 
 import java.util.List;
 
+
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.entity.MemberEntity;
-import com.example.repository.MemberRepository;
+import com.grownited.entity.MemberEntity;
+import com.grownited.repository.MemberRepository;
+
 
 
 @Controller
@@ -29,16 +32,13 @@ public class MemberController {
 	@PostMapping("savemember")
 	public String saveMember(MemberEntity entityMember) {
 		repositoryMember.save(entityMember);
-		return "NewMember";
+		return "redirect:/newmember";
 	}
 
 	@GetMapping("listmember")
 	public String listMember(Model model) {
 		List<MemberEntity> memberList = repositoryMember.findAll();
-		
-		
-		model.addAttribute("memberList", memberList);
-						
+		model.addAttribute("memberlist", memberList);
 		
 		return "ListMember";
 	}

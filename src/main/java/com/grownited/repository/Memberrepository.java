@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.grownited.entity.MemberEntity;
 
+
 @Repository
 public interface MemberRepository extends JpaRepository<MemberEntity, Integer>{
 
