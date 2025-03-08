@@ -59,7 +59,7 @@ public class MemberController {
 	@GetMapping("deletemember")
 	public String deletemember(Integer memberId) {
 		repositoryMember.deleteById(memberId);
-		
+		 
 		return "redirect:/listmember";
 	}
 
