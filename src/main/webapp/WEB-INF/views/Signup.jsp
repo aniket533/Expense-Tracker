@@ -1,40 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Signup</title>
-</head>
-<body>
-	<h2>Signup</h2>
 
-	<form action="saveuser" method="post">
-		FirstName: <input type="text" name="firstName"  /><br><br> 
-		LastName: <input type="text" name="lastName"  /><br><br> 
-		
-		Gender: Male<input type="radio" name="gender" value="male">
-				FeMale<input type="radio" name="gender" value="female"><bR><br> 
-		
-		ContactNum: <input type="text" name="contactNum"/><br><br> 
-		
-		Email: <input type="text" name="email"/><br><br> 
-		
-		
-		Password: <input type="password" name="password"/><br><br> 
-		
-		BornYear  : <input type="text" name="bornYear"/><br><BR> 
-	
-		<input type="submit" value="Signup"/>
-	
-	</form>
-
-
-<br><br> 
-	<a href="login">Login</a>
-
-</BODY>
-</html> -->
 
 <!doctype html>
 <html lang="en">
@@ -89,7 +55,20 @@
           box-shadow: none !important;
       
      </style> 
-    
+     <style>
+     .register-card-body {
+    padding-bottom: 0 !important; /* Reduce bottom padding */
+}
+
+p.mt-2.mb-3 {
+    margin-bottom: 0 !important; /* Remove extra bottom margin */
+}
+
+body {
+    overflow-y: auto; /* Prevent extra scroll space */
+}
+     
+     </style>
     
     
   </head>
@@ -156,28 +135,26 @@
 <!--               <div class="input-group-text"><span class="bi bi-person-lines-fill"></span></div>
  -->            </div>
              <div class="input-group mb-1">
-             <div class="form-floating">
-               <input id="registerprofile" type="file" class="form-control" name="profile" accept="image/*"/>
-              <label for="registerprofile">Profile Pic</label>
-               </div>
-                  </div>
-            </div>
-              <div class="input-group mb-1">
-              <div class="form-floating">
-                <input id="registerContact" type="contact" class="form-control" placeholder="" name ="contactNum"/>
-                <label for="registerContact">Contact</label>
-              </div>
-              
-            </div>
-            
-            
-              <div class="input-group mb-1">
-              <div class="form-floating">
-                <input id="registerFullName" type="Date" class="form-control" placeholder="" name="bornYear" />
-                <label for="registerFullName">D.O.B</label>
-              </div>
-              <!-- <div class="input-group-text"><span class="bi bi-person"></span></div> -->
-            </div>
+							<input type="file" class="form-control" placeholder="Profile"
+								name="profilePic" />
+							<div class="input-group-text">
+								
+							</div>
+						</div>
+           <div class="input-group mb-1">
+  <div class="form-floating">
+    <input id="registerContact" type="text" class="form-control" placeholder="Enter Contact" name="contactNum"/>
+    <label for="registerContact">Contact</label>
+  </div>
+</div>
+
+<div class="input-group mb-1">
+  <div class="form-floating">
+    <input id="registerDOB" type="Date" class="form-control" placeholder="Enter D.O.B" name="bornYear"/>
+    <label for="registerDOB">D.O.B</label>
+  </div>
+</div>
+
             
             <!--begin::Row-->
             <div class="row">
@@ -198,7 +175,7 @@
           </form>
           
           <!-- /.social-auth-links -->
-         <p class=" mt-2 mb-0">
+         <p class=" mt-2 mb-3 ">
            Already have an account? <a href="login" class="link-primary text-center" style="text-decoration: none; font-weight: bold;">LogIn</a>
          </p>
 

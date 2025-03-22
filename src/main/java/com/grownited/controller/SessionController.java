@@ -70,7 +70,7 @@ public class SessionController {
       
 	 
 	 
-	  //serviceMail.sendWelcomeMail(entityuser.getEmail(), entityuser.getFirstName());
+	  serviceMail.sendWelcomeMail(entityuser.getEmail(), entityuser.getFirstName());
 		
 		
 		//BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(5); //salt
@@ -93,7 +93,7 @@ public class SessionController {
 		entityuser.setRole("USER");
 	
 		repouser.save(entityuser);	
-	//	serviceMail.sendWelcomeMail(userEntity.getEmail(), userEntity.getFirstName());
+	//serviceMail.sendWelcomeMail(userEntity.getEmail(), userEntity.getFirstName());
 
 	  return "Login";
   }
