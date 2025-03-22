@@ -20,6 +20,20 @@ public class UserEntity {
  private String	email;
  private String	password;
  private String role;
+ public String otp;
+ private String profilPicPath;
+public String getProfilPicPath() {
+	return profilPicPath;
+}
+public void setProfilPicPath(String profilPicPath) {
+	this.profilPicPath = profilPicPath;
+}
+public String getOtp() {
+	return otp;
+}
+public void setOtp(String otp) {
+	this.otp = otp;
+}
 public Integer getUserId() {
 	return UserId;
 }

@@ -82,6 +82,16 @@
     <!--begin::Required Plugin(AdminLTE)-->
     <link rel="stylesheet" href="dist/css/adminlte.css" />
     <!--end::Required Plugin(AdminLTE)-->
+     <style>
+      /* Remove blue border around the login box */
+      .card-outline.card-primary {
+          border-top: none !important;
+          box-shadow: none !important;
+      
+     </style> 
+    
+    
+    
   </head>
   <!--end::Head-->
   <!--begin::Body-->
@@ -90,29 +100,32 @@
       <!-- /.register-logo -->
       <div class="card card-outline card-primary">
         <div class="card-header">
-          <a
-            href="../index2.html"
-            class="link-dark text-center link-offset-2 link-opacity-100 link-opacity-50-hover"
-          >
-            <h1 class="mb-0"><b>Sign Up</b></h1>
-          </a>
-        </div>
+        
+  <a
+    
+    class="link-dark text-center link-offset-2 link-opacity-100"
+    style="text-decoration: none;"
+  >
+    <h1 class="mb-0"><b>Sign Up</b></h1>
+  </a>
+</div>
+
         <div class="card-body register-card-body">
           <p class="register-box-msg">Register a new membership</p>
-          <form action="saveuser" method="post">
+          <form action="saveuser" method="post" enctype="multipart/form-data">
             <div class="input-group mb-1">
               <div class="form-floating">
-                <input id="registerFullName" type="text" class="form-control" placeholder="" name ="fisrtName"/>
+                <input id="registerFullName" type="text" class="form-control" placeholder="" name ="firstName"/>
                 <label for="registerFullName">First Name</label>
               </div>
-              <div class="input-group-text"><span class="bi bi-person"></span></div>
+              
             </div>
              <div class="input-group mb-1">
               <div class="form-floating">
                 <input id="registerFullName" type="text" class="form-control" placeholder="" name="lastName" />
                 <label for="registerFullName">Last Name</label>
               </div>
-              <div class="input-group-text"><span class="bi bi-person"></span></div>
+              
             </div>
             
             <div class="input-group mb-1">
@@ -120,7 +133,7 @@
                 <input id="registerEmail" type="email" class="form-control" placeholder="" name ="email"/>
                 <label for="registerEmail">Email</label>
               </div>
-              <div class="input-group-text"><span class="bi bi-envelope"></span></div>
+              
             </div>
             
             <div class="input-group mb-1">
@@ -128,7 +141,7 @@
                 <input id="registerPassword" type="password" class="form-control" placeholder="" name ="password" />
                 <label for="registerPassword">Password</label>
                 </div>
-              <div class="input-group-text"><span class="bi bi-lock-fill"></span></div>
+              
               </div>
               
               <div class="input-group mb-1">
@@ -142,13 +155,19 @@
               </div>
 <!--               <div class="input-group-text"><span class="bi bi-person-lines-fill"></span></div>
  -->            </div>
-              
+             <div class="input-group mb-1">
+             <div class="form-floating">
+               <input id="registerprofile" type="file" class="form-control" name="profile" accept="image/*"/>
+              <label for="registerprofile">Profile Pic</label>
+               </div>
+                  </div>
+            </div>
               <div class="input-group mb-1">
               <div class="form-floating">
                 <input id="registerContact" type="contact" class="form-control" placeholder="" name ="contactNum"/>
                 <label for="registerContact">Contact</label>
               </div>
-              <div class="input-group-text"><span class="bi bi-person-lines-fill"></span></div>
+              
             </div>
             
             
@@ -168,8 +187,8 @@
                 </div>
               </div>
               <!-- /.col -->
-              <div class="col-4">
-                <div class="d-grid gap-2">
+              <div class="col-4 mt-2">
+                <div class="d-grid gap-4">
                   <button type="submit" class="btn btn-primary">Sign In</button>
                 </div>
               </div>

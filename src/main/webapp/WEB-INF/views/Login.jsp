@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -9,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Login</title>
 </head>
-<body>
+<body>-
 	<h2>Login</h2>
 	
 	<form action="authenticate" method="post">
@@ -75,6 +74,22 @@
     <!--begin::Required Plugin(AdminLTE)-->
     <link rel="stylesheet" href="dist/css/adminlte.css" />
     <!--end::Required Plugin(AdminLTE)-->
+    
+    
+     <style>
+      /* Remove blue border around the login box */
+      .card-outline.card-primary {
+          border-top: none !important;
+          box-shadow: none !important;
+      }
+      
+      /* Remove outline from input fields */
+      .form-control:focus, .btn:focus {
+          outline: none !important;
+          box-shadow: none !important;
+          border-color: #ccc !important;
+      }
+    </style>
   </head>
   <!--end::Head-->
   <!--begin::Body-->
@@ -82,29 +97,27 @@
     <div class="login-box">
       <div class="card card-outline card-primary">
         <div class="card-header">
-          <a
-            href="../index2.html"
-            class="link-dark text-center link-offset-2 link-opacity-100 link-opacity-50-hover"
-          >
-            <h1 class="mb-0"><b>Login</b></h1>
-          </a>
+         <a  class="link-dark text-center link-offset-2 link-opacity-100 " style="text-decoration: none;">
+  <h1 class="mb-0"><b>Login</b></h1>
+</a>
+
         </div>
         <div class="card-body login-card-body">
           <p class="login-box-msg"></p>
-          <form action="../index3.html" method="post">
+          <form action="authenticate" method="post">
             <div class="input-group mb-1">
               <div class="form-floating">
                 <input id="loginEmail" type="email" class="form-control" value="" placeholder="" name ="email" />
                 <label for="loginEmail">Email</label>
               </div>
-              <div class="input-group-text"><span class="bi bi-envelope"></span></div>
+              
             </div>
             <div class="input-group mb-1">
               <div class="form-floating">
                 <input id="loginPassword" type="password" class="form-control" placeholder="" name="password" />
                 <label for="loginPassword">Password</label>
               </div>
-              <div class="input-group-text"><span class="bi bi-lock-fill"></span></div>
+              
             </div>
             <!--begin::Row-->
             <div class="row">
@@ -135,6 +148,9 @@
           </div> -->
           <!-- /.social-auth-links -->
           <p class="mb-1 mt-1"><a href="forgotpassword"  class="link-primary text-center"  style="text-decoration: none; font-weight: bold;">I forgot my password</a></p>
+
+
+
           <p class="mb-0">
             Don't have an account? <a href="signup" class="link-primary text-center"  style="text-decoration: none; font-weight: bold;">SignUp</a>
           </p>
@@ -190,6 +206,3 @@
   </body>
   <!--end::Body-->
 </html>
-
-
-
