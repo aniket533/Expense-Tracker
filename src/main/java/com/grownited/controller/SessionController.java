@@ -57,7 +57,7 @@ public class SessionController {
   }
 
   @PostMapping("saveuser")
-  public String saveuser(UserEntity entityuser,  MultipartFile profilePic) {
+  public String saveuser(UserEntity entityuser, @RequestParam("profilePic") MultipartFile profilePic) {
   
 	
 	  repouser.save(entityuser);
@@ -76,16 +76,19 @@ public class SessionController {
 		
 	  try {
 	        if (profilePic != null && !profilePic.isEmpty()) {
-	            System.out.println("Uploaded file: " + profilePic.getOriginalFilename());
+	            System.out.println("✅ Received file: " + profilePic.getOriginalFilename());
+	            System.out.println("✅ File size: " + profilePic.getSize() + " bytes");
 
-	            // Example: Uploading to Cloudinary (or your storage)
+	            // Uploading to Cloudinary
 	            Map result = cloudinary.uploader().upload(profilePic.getBytes(), ObjectUtils.emptyMap());
 	            String imageUrl = result.get("url").toString();
 
 	            // ✅ Save profile picture path in entity
 	            entityuser.setProfilePicPath(imageUrl);
+	            System.out.println("✅ Uploaded Image URL: " + imageUrl);
 	        } else {
-	            System.out.println("No file uploaded.");
+	            System.out.println("❌ No file uploaded. Setting default image.");
+	            entityuser.setProfilePicPath("http://example.com/default-profile.jpg"); // Optional
 	        }
 	    } catch (IOException e) {
 	        e.printStackTrace();
@@ -93,7 +96,11 @@ public class SessionController {
 
 	    entityuser.setPassword(encoder.encode(entityuser.getPassword()));
 	    entityuser.setRole("USER");
-	    repouser.save(entityuser);
+
+	    // ✅ Save user after setting profilePicPath
+	    UserEntity savedUser = repouser.save(entityuser);
+	    System.out.println("✅ User saved with ID: " + savedUser.getUserId());
+	    System.out.println("✅ Final Profile Pic Path: " + savedUser.getProfilePicPath());
 
 	    return "Login";
 	}

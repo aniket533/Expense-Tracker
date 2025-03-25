@@ -25,8 +25,8 @@ public class UserEntity {
 public String getProfilePicPath() {
 	return profilePicPath;
 }
-public void setProfilePicPath(String profilPicPath) {
-	this.profilePicPath = profilPicPath;
+public void setProfilePicPath(String profilePicPath) {
+	this.profilePicPath = profilePicPath;
 }
 public String getOtp() {
 	return otp;

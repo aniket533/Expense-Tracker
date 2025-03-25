@@ -136,7 +136,7 @@ body {
  -->            </div>
              <div class="input-group mb-1">
 							<input type="file" class="form-control" placeholder="Profile"
-								name="profilePic" />
+								name="profilePic" accept="image/*" />
 							<div class="input-group-text">
 								
 							</div>
