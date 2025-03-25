@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cloudinary.Cloudinary;
@@ -56,7 +57,7 @@ public class SessionController {
   }
 
   @PostMapping("saveuser")
-  public String saveuser(UserEntity entityuser,MultipartFile profilePic) {
+  public String saveuser(UserEntity entityuser,  MultipartFile profilePic) {
   
 	
 	  repouser.save(entityuser);
@@ -70,33 +71,32 @@ public class SessionController {
       
 	 
 	 
-	  serviceMail.sendWelcomeMail(entityuser.getEmail(), entityuser.getFirstName());
+	  //serviceMail.sendWelcomeMail(entityuser.getEmail(), entityuser.getFirstName());
 		
 		
-		//BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(5); //salt
-		//--------> Not use this line  new keyword because it's gain more memeory
-	  System.out.println(profilePic.getOriginalFilename());//file name
-	  //cloud->
 	  try {
-	  Map result = cloudinary.uploader().upload(profilePic, ObjectUtils.emptyMap());
-		System.out.println(result);
-		System.out.println(result.get("url"));
-		entityuser.setProfilPicPath(result.get("url").toString());
-	  }catch (IOException e) {
-		 e.printStackTrace();
-	  }
-	  
-		
-		String encPassword = encoder.encode(entityuser.getPassword());
-		entityuser.setPassword(encPassword);
-		
-		entityuser.setRole("USER");
-	
-		repouser.save(entityuser);	
-	//serviceMail.sendWelcomeMail(userEntity.getEmail(), userEntity.getFirstName());
+	        if (profilePic != null && !profilePic.isEmpty()) {
+	            System.out.println("Uploaded file: " + profilePic.getOriginalFilename());
 
-	  return "Login";
-  }
+	            // Example: Uploading to Cloudinary (or your storage)
+	            Map result = cloudinary.uploader().upload(profilePic.getBytes(), ObjectUtils.emptyMap());
+	            String imageUrl = result.get("url").toString();
+
+	            // ✅ Save profile picture path in entity
+	            entityuser.setProfilePicPath(imageUrl);
+	        } else {
+	            System.out.println("No file uploaded.");
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+
+	    entityuser.setPassword(encoder.encode(entityuser.getPassword()));
+	    entityuser.setRole("USER");
+	    repouser.save(entityuser);
+
+	    return "Login";
+	}
   
   @GetMapping("detailpage")
 	  public String detailpage(Model model) {
@@ -116,10 +116,7 @@ public class SessionController {
 //submit on forget password
 	
   
-   @PostMapping("updatepaswword")
-   public String updatepaasword() {
-	   return "Login";
-   }
+  
  
    @GetMapping("admindashboard")
    public String admindashboard() {

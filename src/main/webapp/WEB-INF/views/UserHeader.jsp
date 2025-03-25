@@ -30,57 +30,22 @@
           			</a><!-- End Messages Icon -->
         		</li>
 				
-				<c:if test="${not empty user}">
-        			<li class="nav-item dropdown pe-3">
-          				<a class="nav-link nav-profile d-flex align-items-center pe-0 show" href="#" data-bs-toggle="dropdown" aria-expanded="true">
-            				<img src="assets/img/profile.avif" alt="Profile" class="rounded-circle">
-            				<span class="d-none d-md-block dropdown-toggle ps-2">${user.firstName} ${user.lastName}</span>
-          				</a><!-- End Profile Iamge Icon -->
+				<li class="nav-item dropdown pe-3 m-0 p-0">
+    <a class="nav-link nav-profile d-flex align-items-center pe-0" 
+       href="#" data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="${user.profilePicPath}" alt="Profile" 
+             class="rounded-circle" 
+             style="width: 40px; height: 40px; object-fit: cover;">
+        <span class="d-none d-md-block dropdown-toggle ps-2">${user.firstName} ${user.lastName}</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow mt-0">
+        <li><a class="dropdown-item" href="myprofile">My Profile</a></li>
+        <li><a class="dropdown-item" href="editprofile">Edit Profile</a></li>
+         <li><a class="dropdown-item" href="logout">Log Out</a></li>
+    </ul>
+</li>
 
-          				<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" data-popper-placement="bottom-end" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(-16px, 38.4px, 0px);">
-         	    			<li class="dropdown-header">
-              					<h6>${user.firstName} ${user.lastName}</h6>
-            				</li>
-            				<li>
-              					<hr class="dropdown-divider">
-            				</li>
-            				<li>
-              					<a class="dropdown-item d-flex align-items-center" href="myprofile">
-                					<i class="bi bi-person"></i>
-                					<span>My Profile</span>
-              					</a>
-            				</li>
             		
-            				<li>
-              					<a class="dropdown-item d-flex align-items-center" href="editprofile">
-                					<i class="bi bi-pencil"></i>
-                					<span>Edit Profile</span>
-              					</a>
-            				</li>
-            		
-            		
-            				<li>
-              					<hr class="dropdown-divider">
-            				</li>
-            			 
-            				<li>
-             					 <hr class="dropdown-divider">
-            				</li>
-            				 
-            				<li>
-              					<hr class="dropdown-divider">
-            				</li>
-            				<li>
-              					<a class="dropdown-item d-flex align-items-center" href="/logout">
-                					<i class="bi bi-box-arrow-right"></i>
-                					<span>Log Out</span>
-              					</a>
-            				</li>
-          				</ul><!-- End Profile Dropdown Items -->
-        			</li><!-- End Profile Nav -->
-				</c:if>
-      		</ul>
-      		
-    	</nav><!-- End Icons Navigation -->
+            			
    	
 </header>

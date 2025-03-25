@@ -95,27 +95,40 @@
 								<div class="row mb-3">
 									<label for="inputText" class="col-sm-2 col-form-label">LastName</label>
 									<div class="col-sm-8">
-										<input type="text" class="form-control" name="title"
+										<input type="s" class="form-control" name="title"
 											value="${user.lastName}">
 									</div>
 								</div>
-
-
-							 
-
-								<div class="row mb-3">
-								<label for="inputText" class="col-sm-2 col-form-label">Gender</label>
-
+                                
+                                <div class="row mb-3">
+									<label for="inputText" class="col-sm-2 col-form-label">Email</label>
 									<div class="col-sm-8">
-										<input class="form-check-input" type="radio" name="gender"
-											id="male" value="Male"  ${user.gender.equalsIgnoreCase("Male")?"checked":""}  > <label
-											class="form-check-label" for="male"  >Male</label> <input
-											class="form-check-input" type="radio" name="gender"
-											id="female" value="Female"  ${user.gender.equalsIgnoreCase("Female")?"checked":""}> <label
-											class="form-check-label" for="female">Female</label>
+										<input type="text" class="form-control" name="title"
+											value="${user.email}">
 									</div>
 								</div>
+								
+								 <div class="row mb-3">
+									<label for="inputText" class="col-sm-2 col-form-label">Profile Pic</label>
+									<div class="col-sm-8">
+										<input type="file" class="form-control" name="title"
+											value="${user.profilePicPath}">
+									</div>
+								</div>
+								
+								
+								<div class="row mb-3">
+									<label for="inputText" class="col-sm-2 col-form-label">Contact Num</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control" name="title"
+											value="${user.contactNum}">
+									</div>
+								</div>
+								
+								
+							 
 
+								
 
 								<input type="submit" class="btn btn-primary"
 									value="Update Profile"> <a href="myprofile"

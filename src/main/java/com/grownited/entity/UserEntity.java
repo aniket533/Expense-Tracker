@@ -21,12 +21,12 @@ public class UserEntity {
  private String	password;
  private String role;
  public String otp;
- private String profilPicPath;
-public String getProfilPicPath() {
-	return profilPicPath;
+ private String profilePicPath;
+public String getProfilePicPath() {
+	return profilePicPath;
 }
-public void setProfilPicPath(String profilPicPath) {
-	this.profilPicPath = profilPicPath;
+public void setProfilePicPath(String profilPicPath) {
+	this.profilePicPath = profilPicPath;
 }
 public String getOtp() {
 	return otp;

@@ -75,8 +75,7 @@
 		<!-- End Page Title -->
 
 		 
-		 
-		 
+		
 		 
 		 
 		 
@@ -91,11 +90,9 @@
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-              <img src="assets/img/profile.avif" alt="Profile" class="rounded-circle">
+              <img src="${user.profilePicPath }" alt="Profile" class="sqare-circle">
               <h2>${user.firstName.toUpperCase()} ${user.lastName.toUpperCase()}</h2>
-              <h3>
-               	User
-              </h3>
+             
            <!--    <div class="social-links mt-2">
                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                 <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -132,7 +129,10 @@
                   <p class="small fst-italic">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</p>
  -->
                   <h5 class="card-title">Profile Details</h5>
-
+                    
+                   
+				
+                    
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Full Name</div>
                     <div class="col-lg-9 col-md-8">${user.firstName} ${user.lastName}</div>
@@ -141,7 +141,7 @@
  
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Role</div>
-                    <div class="col-lg-9 col-md-8">User</div>
+                    <div class="col-lg-9 col-md-8">${user.role}</div>
                   </div>
 
                   <div class="row">

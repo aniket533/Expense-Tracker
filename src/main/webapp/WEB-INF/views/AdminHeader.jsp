@@ -29,10 +29,11 @@
           			</a><!-- End Messages Icon -->
         		</li>
 				
+				
 				<c:if test="${not empty user}">
-        			<li class="nav-item dropdown pe-3">
+        			
           				<a class="nav-link nav-profile d-flex align-items-center pe-0 show" href="#" data-bs-toggle="dropdown" aria-expanded="true">
-            				<img src="assets/img/profile.avif" alt="Profile" class="rounded-circle">
+            				<img src="${user.profilePicPath }" class="rounded-circle">
             				<span class="d-none d-md-block dropdown-toggle ps-2">${user.firstName} ${user.lastName}</span>
           				</a><!-- End Profile Iamge Icon -->
 
@@ -44,7 +45,7 @@
               					<hr class="dropdown-divider">
             				</li>
             				<li>
-              					<a class="dropdown-item d-flex align-items-center" href="#">
+              					<a class="dropdown-item d-flex align-items-center" href="myprofile">
                 					<i class="bi bi-person"></i>
                 					<span>My Profile</span>
               					</a>

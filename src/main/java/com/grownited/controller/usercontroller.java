@@ -44,7 +44,7 @@ public class UserController {
 		return "redirect:/listuser";
 	}
 	
-	 
+	
 	
 }
 
