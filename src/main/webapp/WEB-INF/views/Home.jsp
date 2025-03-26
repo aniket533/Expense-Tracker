@@ -11,7 +11,7 @@
 	
 	Welcome , ${user.firstName} 
 	
-	< <br>
+	<br>
 		<img src="${user.profilePicPath}"  height="200px" width="200px"/>
 	
 	<br> 

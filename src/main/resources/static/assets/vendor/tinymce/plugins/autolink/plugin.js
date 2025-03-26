@@ -1,5 +1,5 @@
 /**
- * TinyMCE version 7.6.1 (2025-01-22)
+ * TinyMCE version 6.8.2 (2023-12-11)
  */
 
 (function () {
@@ -110,7 +110,7 @@
     const voidElements = editor.schema.getVoidElements();
     const autoLinkPattern = getAutoLinkPattern(editor);
     const {dom, selection} = editor;
-    if (dom.getParent(selection.getNode(), 'a[href]') !== null || editor.mode.isReadOnly()) {
+    if (dom.getParent(selection.getNode(), 'a[href]') !== null) {
       return null;
     }
     const rng = selection.getRng();

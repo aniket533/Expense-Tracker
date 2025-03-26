@@ -1,7 +1,7 @@
 /**
 * Template Name: NiceAdmin
+* Updated: Jan 29 2024 with Bootstrap v5.3.2
 * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-* Updated: Apr 20 2024 with Bootstrap v5.3.3
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
@@ -756,6 +756,23 @@ h6 {
 .sidebar-nav .nav-content a.active i {
   background-color: #4154f1;
 }
+
+
+/*--------------------------------------------------------------
+  Main
+--------------------------------------------------------------*/
+main {
+  min-height: 580px;
+  color: #012970;
+}
+   
+/*--------------------------------------------------------------
+  Section
+--------------------------------------------------------------*/  
+section {
+  padding-bottom: 50px;
+}
+
 
 /*--------------------------------------------------------------
 # Dashboard

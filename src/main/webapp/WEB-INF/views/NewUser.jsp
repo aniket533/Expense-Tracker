@@ -75,33 +75,13 @@
  				Gender: <br>
  					&emsp; <input type="radio" value="Male" name="gender"> Male <br>
  					&emsp; <input type="radio" value="Female" name="gender"> Female <br><br>
- 				Date of Birth: <input type="date" name="dateOfBirth"> <br><br>
- 				Address: <textarea rows=5 cols=50></textarea> <br><br>
- 				State: 
- 					<select name="state">
- 						<option value="-1">---Select State---</option>
- 						<option value="Gujarat"> Gujarat </option>
- 						<option value="Rajasthan"> Rajasthan </option>
- 						<option value="Maharashtra"> Maharashtra </option>
- 					</select> <br><br>
- 				City: 
- 					<select name="city">
- 						<option value="-1">---Select City---</option>
- 						<option value="Ahmedabad"> Ahmedabad </option>
- 						<option value="Bhavnagar"> Bhavnagar </option>
- 						<option value="Jaypur"> Jaypur </option>
- 						<option value="Mumbai"> Mumbai </option>
- 					</select> <br><br>
- 				Contact Number: <input type="text" name="contactNumber"> <br><br>
- 				Email Address: <input type="text" name="emailAddress"> <br><br>
+ 				Date of Birth: <input type="date" name="bornYear"> <br><br>
+ 				
+ 					
+ 				Contact Number: <input type="text" name="contactNum"> <br><br>
+ 				Email Address: <input type="text" name="email"> <br><br>
  				Password: <input type="password" name="password"> <br><br>
- 				Role: 
- 					<select name="roleId">
- 						<option value="-1">---Select Role---</option>
- 						<c:forEach items="${roleList}" var="role">
- 							<option value=${role.roleId}>${role.roleName}</option>
- 						</c:forEach>
- 					</select> <br><br>
+ 				
  				<input type="submit" value="Save User">
 			</form>
     	</section>

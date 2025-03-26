@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -10,7 +9,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-<title>Edit User Profile | Expense Tracker</title>
+<title>Edit User Profile | Expense Manager</title>
 <meta content="" name="description">
 <meta content="" name="keywords">
 
@@ -95,40 +94,27 @@
 								<div class="row mb-3">
 									<label for="inputText" class="col-sm-2 col-form-label">LastName</label>
 									<div class="col-sm-8">
-										<input type="s" class="form-control" name="title"
+										<input type="text" class="form-control" name="title"
 											value="${user.lastName}">
 									</div>
 								</div>
-                                
-                                <div class="row mb-3">
+
+
+							 <div class="row mb-3">
+									<label for="number" class="col-sm-2 col-form-label">Phone Num</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control" name="title"
+											value="${user.contactNum}">
+									</div>
+								</div>
+
+								<div class="row mb-3">
 									<label for="inputText" class="col-sm-2 col-form-label">Email</label>
 									<div class="col-sm-8">
 										<input type="text" class="form-control" name="title"
 											value="${user.email}">
 									</div>
 								</div>
-								
-								 <div class="row mb-3">
-									<label for="inputText" class="col-sm-2 col-form-label">Profile Pic</label>
-									<div class="col-sm-8">
-										<input type="file" class="form-control" name="title"
-											value="${user.profilePicPath}">
-									</div>
-								</div>
-								
-								
-								<div class="row mb-3">
-									<label for="inputText" class="col-sm-2 col-form-label">Contact Num</label>
-									<div class="col-sm-8">
-										<input type="text" class="form-control" name="title"
-											value="${user.contactNum}">
-									</div>
-								</div>
-								
-								
-							 
-
-								
 
 								<input type="submit" class="btn btn-primary"
 									value="Update Profile"> <a href="myprofile"

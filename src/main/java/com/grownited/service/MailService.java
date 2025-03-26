@@ -1,3 +1,4 @@
+
 package com.grownited.service;
 
 import org.apache.logging.log4j.message.SimpleMessage;
@@ -30,21 +31,21 @@ public class MailService {
 
 	}
 
-	public void sendOtpForForgetPassword(String email, String firstName,String otp) {
-		String subject = "OTP for Resetpassword";
-		String body = "Hey " + firstName
-				+ ", It seems you have request for forget password, please use below otp for reset password.  If not then simply ignore the message!OTP:"+otp;
-		String from = "tejasshah2k19@gmail.com";
+	public void sendOtpForForgetPassword(String toEmail, String name, String otp) {
+	    System.out.println("Sending OTP to: " + toEmail); // Debugging email
+	    System.out.println("OTP: " + otp);
+	    
+	    try {
+	        SimpleMailMessage message = new SimpleMailMessage();
+	        message.setTo(toEmail);
+	        message.setSubject("Your OTP for Password Reset");
+	        message.setText("Hello " + name + ",\n\nYour OTP for password reset is: " + otp + "\n\nThank you!");
 
-		// logic
-		SimpleMailMessage message = new SimpleMailMessage();
-
-		message.setFrom(from);
-		message.setTo(email);
-		message.setSubject(subject);
-		message.setText(body);
-
-		mailSender.send(message);
-
+	        mailSender.send(message);
+	        System.out.println("OTP email sent successfully!"); // Confirm email sent
+	        
+	    } catch (Exception e) {
+	        System.out.println("Error sending email: " + e.getMessage());
+	    }
 	}
 }

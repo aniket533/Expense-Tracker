@@ -4,6 +4,8 @@ package com.grownited.controller;
 
 
 import java.io.IOException;
+
+
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -71,7 +73,7 @@ public class SessionController {
       
 	 
 	 
-	  //serviceMail.sendWelcomeMail(entityuser.getEmail(), entityuser.getFirstName());
+	  serviceMail.sendWelcomeMail(entityuser.getEmail(), entityuser.getFirstName());
 		
 		
 	  try {
@@ -103,7 +105,7 @@ public class SessionController {
 	    System.out.println("✅ Final Profile Pic Path: " + savedUser.getProfilePicPath());
 
 	    return "Login";
-	}
+  }
   
   @GetMapping("detailpage")
 	  public String detailpage(Model model) {
@@ -117,7 +119,7 @@ public class SessionController {
   }
   //open on forgetpassword jsp
   @GetMapping("forgotpassword")
-  public String forgetPaasword() {
+  public String forgotpassword() {
      return "ForgotPassword";
   } 
 //submit on forget password
@@ -152,31 +154,30 @@ public class SessionController {
  
    
    @PostMapping("sendotp")
-	public String sendOtp(String email, Model model) {
-		// email valid
-		Optional<UserEntity> op = repouser.findByEmail(email);
-		if (op.isEmpty()) {
-			// email invalid
-			model.addAttribute("error","Email not found");
-			return "ForgetPassword";
-		} else {
-			// email valid
-			// send mail otp
-			// opt generate
-			// send mail otp
-			String otp = "";
-			otp = (int) (Math.random() * 1000000) + "";// 0.25875621458541
+   public String sendotp(String email, Model model) {
+       Optional<UserEntity> userOptional = repouser.findByEmail(email); // Use Optional<UserEntity>
 
-			UserEntity user = op.get();
-			user.setOtp(otp);
-			repouser.save(user);// update otp for user
-			serviceMail.sendOtpForForgetPassword(email, user.getFirstName(), otp);
-			return "ChangePassword";
+       if (userOptional.isEmpty()) {
+           model.addAttribute("error", "Email not found");
+           return "ForgotPassword";
+       } 
 
-		}
-	}
-   
-   @PostMapping("updatepassword")
+       UserEntity user = userOptional.get();
+       String otp = String.valueOf((int) (Math.random() * 1000000)); // Generate 6-digit OTP
+
+       System.out.println("Generated OTP: " + otp); // Debugging OTP
+
+       user.setOtp(otp);
+       repouser.save(user); // Save OTP in the database
+
+       System.out.println("OTP Saved for: " + user.getEmail()); // Debugging save
+
+       serviceMail.sendOtpForForgetPassword(email, user.getFirstName(), otp);
+
+       return "ChangePassword";
+   }
+
+   @PostMapping("changepassword")
 	public String updatePassword(String email, String password, String otp, Model model) {
 		Optional<UserEntity> op = repouser.findByEmail(email);
 		if (op.isEmpty()) {
