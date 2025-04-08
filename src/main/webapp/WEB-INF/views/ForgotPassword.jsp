@@ -51,7 +51,7 @@
               <div class="d-flex justify-content-center py-4">
                 <a href="/" class="logo d-flex align-items-center w-auto">
                   <img src="assets/img/logo.png" alt="">
-                  <span class="d-none d-lg-block">ExpenseTracker</span>
+                  <span class="d-none d-lg-block">Budget Buddy</span>
                 </a>
               </div><!-- End Logo -->
 
@@ -63,12 +63,12 @@
                     <h5 class="card-title text-center pb-0 fs-4">Forget Password</h5>
                   </div>
 
-                  <form action="sendotp" method="post" class="row g-3 needs-validation" novalidate>
+                  <form action="sendotp" method="post" class="row g-3 needs-validation">
 
                     <div class="col-12">
-                      <label for="emailAddress" class="form-label">Email Address</label>
+                      <label for="emailAddress" class="form-label" > Email Address</label>
                       <div class="input-group has-validation">
-                        <input type="email" name="emailAddress" class="form-control" id="emailAddress" required>
+                        <input type="email" name="email" class="form-control" id="emailAddress" required>
                         <div class="invalid-feedback">Please enter your email address!</div>
                       </div>
                     </div>
@@ -87,7 +87,7 @@
               </div>
 
              
-  <a href="updatePassword" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="changepassword" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>

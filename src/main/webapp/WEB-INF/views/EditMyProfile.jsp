@@ -9,7 +9,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-<title>Edit User Profile | Expense Manager</title>
+<title>Edit  Profile | Expense Manager</title>
 <meta content="" name="description">
 <meta content="" name="keywords">
 
@@ -66,10 +66,7 @@
 		<div class="pagetitle">
 			<h1>Edit Profile</h1>
 			<nav>
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home">Home</a></li>
-					<li class="breadcrumb-item active">Edit User Profile</li>
-				</ol>
+				
 			</nav>
 		</div>
 		<!-- End Page Title -->
@@ -86,7 +83,7 @@
 								<div class="row mb-3">
 									<label for="inputText" class="col-sm-2 col-form-label">FirstName</label>
 									<div class="col-sm-8">
-										<input type="text" class="form-control" name="title"
+										<input type="text" class="form-control" name="firstName"
 											value="${user.firstName}">
 									</div>
 								</div>
@@ -94,7 +91,7 @@
 								<div class="row mb-3">
 									<label for="inputText" class="col-sm-2 col-form-label">LastName</label>
 									<div class="col-sm-8">
-										<input type="text" class="form-control" name="title"
+										<input type="text" class="form-control" name="lastName"
 											value="${user.lastName}">
 									</div>
 								</div>
@@ -103,23 +100,55 @@
 							 <div class="row mb-3">
 									<label for="number" class="col-sm-2 col-form-label">Phone Num</label>
 									<div class="col-sm-8">
-										<input type="text" class="form-control" name="title"
+										<input type="text" class="form-control" name="contactNum"
 											value="${user.contactNum}">
 									</div>
 								</div>
+								
 
 								<div class="row mb-3">
 									<label for="inputText" class="col-sm-2 col-form-label">Email</label>
 									<div class="col-sm-8">
-										<input type="text" class="form-control" name="title"
-											value="${user.email}">
+										<input type="text" class="form-control" name="email" value="${user.email}">
 									</div>
 								</div>
+								
+								<div class="row mb-3">
+									<label for="number" class="col-sm-2 col-form-label"></label>
+									<div class="col-sm-8">
+										<input type="hidden" class="form-control" name="role"
+											value="${user.role}">
+									</div>
+								</div>
+								<div class="row mb-3">
+									<label for="number" class="col-sm-2 col-form-label"></label>
+									<div class="col-sm-8">
+										<input type="hidden" class="form-control" name="gender"
+											value="${user.gender}">
+									</div>
+								</div>
+								
+								<div class="row mb-3">
+									<label for="number" class="col-sm-2 col-form-label"></label>
+									<div class="col-sm-8">
+										<input type="hidden" class="form-control" name="profilePicPath"
+											value="${user.profilePicPath}">
+									</div>
+								</div>
+								
 
 								<input type="submit" class="btn btn-primary"
 									value="Update Profile"> <a href="myprofile"
 									class="btn btn-danger">Cancel</a>
 
+
+ <div class="row mb-3">
+									<label for="number" class="col-sm-2 col-form-label"></label>
+									<div class="col-sm-8">
+										<input type="hidden" class="form-control" name="password"
+											value="${user.password}">
+									</div>
+								</div>
 							</form>
 
 						</div>

@@ -30,7 +30,9 @@ public class MailService {
 		mailSender.send(message);
 
 	}
-
+	
+	
+	
 	public void sendOtpForForgetPassword(String toEmail, String name, String otp) {
 	    System.out.println("Sending OTP to: " + toEmail); // Debugging email
 	    System.out.println("OTP: " + otp);

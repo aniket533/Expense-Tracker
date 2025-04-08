@@ -253,7 +253,7 @@
       }]
     },
     options: {
-      scales: {
+      scales: {                  
         y: {
           beginAtZero: true
         }

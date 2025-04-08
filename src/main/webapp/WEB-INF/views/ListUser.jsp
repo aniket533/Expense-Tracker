@@ -106,7 +106,7 @@
     }
 </style>
 
-<table>
+<table id="userTable" class="display">
     <thead>
         <tr>
             <th>User Id</th>
@@ -121,9 +121,9 @@
         </tr>
     </thead>
     <tbody>
-        <c:forEach items="${userList}" var="user">
+        <c:forEach var="user" items="${userList}">
             <tr>
-                <td>${user.userId}</td>
+                <td>${user.userId}</td>  <!-- Changed from user.id -->
                 <td>${user.firstName}</td>
                 <td>${user.lastName}</td>
                 <td>${user.gender}</td>
@@ -131,12 +131,35 @@
                 <td>${user.email}</td>
                 <td>${user.bornYear}</td>
                 <td>${user.role}</td>
-                <td><a href="deleteuser?userId=${user.userId}">Delete</a>  |<a href="edituser?userId=${user.userId}">Edit</a></td>
+                <td>
+                    <a href="deleteUser?id=${user.userId}">Delete</a> | 
+                  <a href="editUser?userId=${user.userId}">Edit</a>    |<a href="viewUser?userId=${user.userId}">View</a>
+                  
+
+                </td>
             </tr>
         </c:forEach>
     </tbody>
 </table>
 
+
+<!-- Pagination Section (Insert Here) -->
+<div class="pagination" style="margin-top: 20px;">
+    <c:if test="${currentPage > 1}">
+        <a href="listuser?page=${currentPage - 1}" class="btn btn-primary">Previous</a>
+    </c:if>
+
+    <c:forEach begin="1" end="${totalPages}" var="i">
+        <a href="listuser?page=${i}" 
+           class="btn <c:if test="${i == currentPage}">btn-dark</c:if>">
+            ${i}
+        </a>
+    </c:forEach>
+
+    <c:if test="${currentPage < totalPages}">
+        <a href="listuser?page=${currentPage + 1}" class="btn btn-primary">Next</a>
+    </c:if>
+</div>
 			<br>
 			<a href="newuser">Add User</a>
     	</section>
@@ -166,6 +189,25 @@
 
   	<!-- Template Main JS File -->
   	<script src="assets/js/main.js"></script>
+
+<!-- Include jQuery and DataTables -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+<!-- Initialize DataTables -->
+<script>
+    $(document).ready(function () {
+        $('#userTable').DataTable({
+            "paging": true,      // Enables pagination
+            "lengthMenu": [5, 10, 25, 50], // Records per page
+            "ordering": true,    // Enables sorting
+            "info": true,        // Show table information
+            "searching": true    // Enables search box
+        });
+    });
+</script>
+
 
 </body>
 

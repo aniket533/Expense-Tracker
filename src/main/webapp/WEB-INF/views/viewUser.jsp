@@ -9,7 +9,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-<title>My Profile | Expense Tracker</title>
+<title>User profile | Expense Tracker</title>
 <meta content="" name="description">
 <meta content="" name="keywords">
 
@@ -54,46 +54,23 @@
 	<!-- End Session Validate -->
 
 	<!-- ======= Header ======= -->
-	<jsp:include page="UserHeader.jsp"></jsp:include>
-	<!-- End Header -->
+<jsp:include page="AdminHeader.jsp"></jsp:include>	
 
 	<!-- ======= Sidebar ======= -->
-	<jsp:include page="UserSidebar.jsp"></jsp:include>
+	<jsp:include page="AdminSidebar.jsp"></jsp:include>
 	<!-- End Sidebar-->
 
 	<main id="main" class="main">
 
 		<div class="pagetitle">
-			<h1>My Profile</h1>
+			<h1>User Profile</h1>
 			<nav>
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home">Home</a></li>
-					<li class="breadcrumb-item active">My Profile</li>
-				</ol>
+				
 			</nav>
 		</div>
 		<!-- End Page Title -->
 
-		 
-		
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 <section class="section profile">
-      <div class="row">
-        <div class="col-xl-4">
-
-          <div class="card">
-            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-
-              <img src="${user.profilePicPath }" alt="Profile" class="sqare-circle">
-              <h2>${user.firstName.toUpperCase()} ${user.lastName.toUpperCase()}</h2>
-             
-           
+	
             </div>
           </div>
 
@@ -126,43 +103,44 @@
                   <h5 class="card-title">Profile Details</h5>
                     
                    
-				
+				   <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">User ID</div>
+                    <div class="col-lg-9 col-md-8">${user.userId} </div>
+                  </div>
                     
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                    <div class="col-lg-9 col-md-8">${user.firstName} ${user.lastName}</div>
+                    <div class="col-lg-3 col-md-4 label ">First Name</div>
+                    <div class="col-lg-9 col-md-8">${user.firstName} </div>
                   </div>
 
+                   <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">Last Name</div>
+                    <div class="col-lg-9 col-md-8">${user.lastName} </div>
+                  </div>
+ 
+                    <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Gender</div>
+                    <div class="col-lg-9 col-md-8">${user.gender }</div>
+                  </div>
+                   
+                    <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Contact Num</div>
+                    <div class="col-lg-9 col-md-8">${user.contactNum}</div>
+                  </div>
+ 
+                    <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Email</div>
+                    <div class="col-lg-9 col-md-8">${user.email}</div>
+                  </div>
+ 
+                   <div class="row">
+                    <div class="col-lg-3 col-md-4 label">D.O.B</div>
+                    <div class="col-lg-9 col-md-8">${user.bornYear}</div>
+                  </div>
  
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Role</div>
                     <div class="col-lg-9 col-md-8">${user.role}</div>
-                  </div>
-                  
-                   
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Gender</div>
-                    <div class="col-lg-9 col-md-8">${user.gender }</div>
-                  </div>
-
-
-                  
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">D.O.B</div>
-                    <div class="col-lg-9 col-md-8">${user.bornYear }</div>
-                  </div>
-                  
-                 
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Phone Num</div>
-                    <div class="col-lg-9 col-md-8">${user.contactNum}</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Email</div>
-                    <div class="col-lg-9 col-md-8">${user.email}</div>
                   </div>
 
                 </div>

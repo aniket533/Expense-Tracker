@@ -25,6 +25,7 @@ import com.grownited.entity.UserEntity;
 import com.grownited.repository.UserRepository;
 import com.grownited.service.MailService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 
@@ -128,7 +129,18 @@ public class SessionController {
   
  
    @GetMapping("admindashboard")
-   public String admindashboard() {
+   public String admindashboard(Model model) {
+	   
+	   Long totalUsers = repouser.count();
+	   
+	   Integer totaluser = repouser.findByRole("USER").size();
+	   
+	   Integer totalAdmin = repouser.findByRole("ADMIN").size();
+	    
+	   long totalexpense = repouser.findByRole("USER").size();
+	   
+	   model.addAttribute("totalUser",totaluser);
+	   
        return "AdminDashboard";  // This should match the actual template/view name
    }
   
@@ -139,46 +151,49 @@ public class SessionController {
        return "Home"; 
    }
    
-   @GetMapping("logout")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "redirect:/login";// login url
-	}
-   
-  
-   
-  
-   
-  
-  
- 
-   
-   @PostMapping("sendotp")
-   public String sendotp(String email, Model model) {
-       Optional<UserEntity> userOptional = repouser.findByEmail(email); // Use Optional<UserEntity>
-
-       if (userOptional.isEmpty()) {
-           model.addAttribute("error", "Email not found");
-           return "ForgotPassword";
-       } 
-
-       UserEntity user = userOptional.get();
-       String otp = String.valueOf((int) (Math.random() * 1000000)); // Generate 6-digit OTP
-
-       System.out.println("Generated OTP: " + otp); // Debugging OTP
-
-       user.setOtp(otp);
-       repouser.save(user); // Save OTP in the database
-
-       System.out.println("OTP Saved for: " + user.getEmail()); // Debugging save
-
-       serviceMail.sendOtpForForgetPassword(email, user.getFirstName(), otp);
-
-       return "ChangePassword";
+   @GetMapping("/logout")
+   public String logout(HttpServletRequest request) {
+       HttpSession session = request.getSession(false);
+       if (session != null) {
+           session.invalidate();
+       }
+       return "redirect:/login?logout";
    }
+  
+   
+  
+  
+   @PostMapping("sendotp")
+	public String sendOtp(String email,Model model) {
+		// email valid
+	   System.out.println(email);
+		Optional<UserEntity> op = repouser.findByEmail(email);
+		System.out.println(op);
+		if (op.isEmpty()) {
+			// email invalid
+			model.addAttribute("error", "Email not found");
+			return "ForgotPassword";
+		} else {
+			// email valid
+			// send mail otp
+			
+			// opt generate
+			// send mail otp
+			String otp = "";
+			otp = (int) (Math.random() * 1000000) + "";// 0.25875621458541
 
-   @PostMapping("changepassword")
-	public String updatePassword(String email, String password, String otp, Model model) {
+			UserEntity user = op.get();
+			user.setOtp(otp);
+			repouser.save(user);// update otp for user
+			serviceMail.sendOtpForForgetPassword(user.getEmail(), user.getFirstName(), otp);
+			System.out.println("otp send");
+			return "ChangePassword";
+
+		}
+	}
+
+   @PostMapping("updatepassword")
+	public String updatepassword(String email, String password, String otp, Model model) {
 		Optional<UserEntity> op = repouser.findByEmail(email);
 		if (op.isEmpty()) {
 			model.addAttribute("error", "Invalid Data");
@@ -203,40 +218,33 @@ public class SessionController {
 
    
    @PostMapping("authenticate")
-	public String authenticate(String email, String password, Model model, HttpSession session) {// sakira@yopmail.com
-																									// sakira
-		System.out.println(email);
-		System.out.println(password);
-
-		// users -> email,password
-		Optional<UserEntity> op = repouser.findByEmail(email);
-		// select * from users where email = :email and password = :password
-		if (op.isPresent()) {
-			// true
-			// email
-			UserEntity dbUser = op.get();
-
-			boolean ans = encoder.matches(password, dbUser.getPassword());
-
-			if (ans == true) {
-				session.setAttribute("user", dbUser); // session -> user set
-				if (dbUser.getRole().equals("ADMIN")) {
-
-					return "redirect:/admindashboard";
-				} else if (dbUser.getRole().equals("USER")) {
-
-					return "redirect:/userdashboard";
-				} else {
-					model.addAttribute("error", "Please contact Admin with Error Code #0991");
-					return "Login";
-				}
-
-			}
-		}
-		model.addAttribute("error", "Invalid Credentials");
-		return "Login";
-	}
-   
+   public String authenticate(String email, String password, Model model, HttpSession session) {
+       Optional<UserEntity> op = repouser.findByEmail(email);
+       if (op.isPresent()) {
+           UserEntity dbUser = op.get();
+           boolean ans = encoder.matches(password, dbUser.getPassword());
+           
+           if (ans) {
+               // Store user in session
+               session.setAttribute("user", dbUser);
+               
+               // Explicitly set session timeout (optional)
+               session.setMaxInactiveInterval(24 * 60 * 60); // 24 hours
+               
+               // For debugging
+               System.out.println("Session ID: " + session.getId());
+               System.out.println("User stored in session: " + dbUser.getEmail());
+               
+               if (dbUser.getRole().equals("ADMIN")) {
+                   return "redirect:/admindashboard";
+               } else {
+                   return "redirect:/userdashboard";
+               }
+           }
+       }
+       model.addAttribute("error", "Invalid Credentials");
+       return "Login";
+   }
 }
 
 

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     
@@ -113,15 +113,9 @@
             </div>
             <!--end::Row-->
           </form>
-          <!-- <div class="social-auth-links text-center mb-3 d-grid gap-2">
-            <p>- OR -</p>
-            <a href="#" class="btn btn-primary">
-              <i class="bi bi-facebook me-2"></i> Sign in using Facebook
-            </a>
-            <a href="#" class="btn btn-danger">
-              <i class="bi bi-google me-2"></i> Sign in using Google+
-            </a>
-          </div> -->
+          
+          
+          
           <!-- /.social-auth-links -->
           <p class="mb-1 mt-1"><a href="forgotpassword"  class="link-primary text-center"  style="text-decoration: none; font-weight: bold;">I forgot my password</a></p>
 
@@ -181,4 +175,4 @@
     <!--end::Script-->
   </body>
   <!--end::Body-->
-</html>
+</html> >
