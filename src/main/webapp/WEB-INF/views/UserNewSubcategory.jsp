@@ -9,7 +9,7 @@
   	<meta charset="utf-8">
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  	<title>New Expense | Expense Manager</title>
+  	<title>New Sub-category | Expense Manager</title>
   	<meta content="" name="description">
   	<meta content="" name="keywords">
 
@@ -49,75 +49,43 @@
   	<!-- End Session Validate -->
 
   	<!-- ======= Header ======= -->
-  	<jsp:include page="AdminHeader.jsp"></jsp:include>
+  	<jsp:include page="UserHeader.jsp"></jsp:include>
   	<!-- End Header -->
 
   	<!-- ======= Sidebar ======= -->
-  	<jsp:include page="AdminSidebar.jsp"></jsp:include>
+  	<jsp:include page="UserSidebar.jsp"></jsp:include>
   	<!-- End Sidebar-->
 
   	<main id="main" class="main">
 
     	<div class="pagetitle">
-      		<h1>New Expense</h1>
+      		<h1>New Sub-category</h1>
       		<nav>
         		<ol class="breadcrumb">
           			<li class="breadcrumb-item"><a href="home">Home</a></li>
-          			<li class="breadcrumb-item active">New Expense</li>
+          			<li class="breadcrumb-item active">New Sub-category</li>
         		</ol>
       		</nav>
     	</div><!-- End Page Title -->
 
     	<section class="section dashboard">
-			<form action="saveexpense" method="post">
-				Title: <input type="text" name="title"> <br><br>
+			<form action="savesubcategory" method="post">
+				Sub-category Name: <input type="text" name="subcategoryName"> <br><br> 
 				Category: 
 					<select name="categoryId">
 						<option value="-1">---Select Category---</option>
 						<c:forEach items="${categoryList}" var="category">
 							<option value="${category.categoryId}">${category.categoryName}</option>
 						</c:forEach>
-					</select> <br><br>
-				Sub-category:
-					<select name="subcategoryId">
-						<option value="-1">---Select Sub-category---</option>
-						<c:forEach items="${subcategoryList}" var="subcategory">
-							<option value="${subcategory.subcategoryId}">${subcategory.subcategoryName}</option>
-						</c:forEach>
-					</select> <br><br>
-				Vendor:
-					<select name="vendorId">
-						<option value="-1">---Select Vendor---</option>
-						<c:forEach items="${vendorList}" var="vendor">
-							<option value="${vendor.vendorId}">${vendor.vendorName}</option>
-						</c:forEach>
-					</select> <br><br>
-				Account Type:
-					<select name="accountTypeId">
-						<option value="-1">---Select Account Type---</option>
-						<c:forEach items="${accountList}" var="account">
-							<option value="${account.accountId}">${account.title}</option>
-						</c:forEach>
-					</select> <br><br>
-				
-				Amount: <input type="text" name="amount"> <br><br>
-				Date: <input type="date" name="date"> <br><br>
-				Description: <textarea rows="5" cols="50"></textarea> <br><br>
-				User:
-					<select name="userId">
-						<option value="-1">---Select User---</option>
-						<c:forEach items="${userList}" var="user">
-							<option value="${user.userId}">${user.firstName} ${user.lastName}</option>
-						</c:forEach>
-					</select> <br><br>
-				<input type="submit" value="Save Expense">
+					</select> <br><br> 
+				<input type="submit" value="Save Subcategory">
 			</form>
     	</section>
 
   	</main><!-- End #main -->
 
   	<!-- ======= Footer ======= -->
-  	<jsp:include page="AdminFooter.jsp"></jsp:include>
+  	<jsp:include page="UserFooter.jsp"></jsp:include>
   	<!-- End Footer -->
 
   	<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

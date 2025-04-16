@@ -88,13 +88,8 @@
 				Amount: <input type="text" name="amount"> <br><br>
 				Date: <input type="date" name="date"> <br><br>
 				Description: <textarea rows="5" cols="50"></textarea> <br><br>
-				User: 
-					<select name="userId">
-						<option value="-1">---Select User---</option>
-						<c:forEach items="${userList}" var="user">
-							<option value="${user.userId}">${user.firstName} ${user.lastName}</option>
-						</c:forEach>
-					</select><br><br>
+				
+					
 				<input type="submit" value="Save Income">
 			</form>
     	</section>

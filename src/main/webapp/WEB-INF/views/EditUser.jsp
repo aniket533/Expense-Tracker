@@ -61,16 +61,14 @@
                             <h5 class="card-title">Profile Details</h5>
                             
                             <!-- Profile Edit Form -->
-                            <form id="profileForm" action="updatemyprofile" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
+                            <form id="profileForm" action="updateUser" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
                                 <!-- Hidden Fields -->
                                 <input type="hidden" name="userId" value="${user.userId}">
-                                <input type="hidden" name="role" value="${user.role}">
-                                <input type="hidden" name="gender" value="${user.gender}">
-                                <input type="hidden" name="password" value="${user.password}">
+                                <input type="hidden" name="currentProfilePic" value="${user.profilePicPath }">
                                 
                                 <!-- Personal Information Section -->
                                 <div class="row mb-3">
-                                    <label for="firstName" class="col-sm-3 col-form-label">First Name </label>
+                                    <label for="firstName" class="col-sm-3 col-form-label">First Name</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" id="firstName" name="firstName" 
                                             value="${user.firstName}" required maxlength="50">
@@ -79,7 +77,7 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="lastName" class="col-sm-3 col-form-label">Last Name </label>
+                                    <label for="lastName" class="col-sm-3 col-form-label">Last Name</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" id="lastName" name="lastName" 
                                             value="${user.lastName}" required maxlength="50">
@@ -88,7 +86,7 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="contactNum" class="col-sm-3 col-form-label">Phone Number </label>
+                                    <label for="contactNum" class="col-sm-3 col-form-label">Phone Number</label>
                                     <div class="col-sm-9">
                                         <input type="tel" class="form-control" id="contactNum" name="contactNum" 
                                             value="${user.contactNum}" required pattern="[0-9]{10,15}">
@@ -97,7 +95,7 @@
                                 </div>
                                 
                                 <div class="row mb-3">
-                                    <label for="bornYear" class="col-sm-3 col-form-label">Date of Birth </label>
+                                    <label for="bornYear" class="col-sm-3 col-form-label">Date of Birth</label>
                                     <div class="col-sm-9">
                                         <input type="date" class="form-control" id="bornYear" name="bornYear" 
                                             value="${user.bornYear}" required>
@@ -107,7 +105,7 @@
                                 
                                 <!-- Account Information Section -->
                                 <div class="row mb-3">
-                                    <label for="email" class="col-sm-3 col-form-label">Email </label>
+                                    <label for="email" class="col-sm-3 col-form-label">Email</label>
                                     <div class="col-sm-9">
                                         <input type="email" class="form-control" id="email" name="email" 
                                             value="${user.email}" required>
@@ -115,16 +113,19 @@
                                     </div>
                                 </div>
                                 
+                              <input type="hidden" name="role" value="${user.role}">
+                                
                                 <!-- Profile Picture Upload -->
                                 <div class="row mb-3">
                                     <label for="profilePic" class="col-sm-3 col-form-label">Profile Picture</label>
                                     <div class="col-sm-9">
                                         <input type="file" class="form-control" id="profilePic" name="profilePic" accept="image/*">
-                                        <small class="text-muted">Max file size: 2MB. Accepted formats: JPG, PNG </small>
+                                        <small class="text-muted">Max file size: 2MB. Accepted formats: JPG, PNG</small>
                                         <c:if test="${not empty user.profilePicPath}">
                                             <div class="mt-2">
-                                                <img src="${pageContext.request.contextPath}/${user.profilePicPath}" 
+                                                <img src="${user.profilePicPath}" 
                                                     alt="Current Profile Picture" class="img-thumbnail" width="100">
+                                                <p class="small text-muted mt-1">Current profile picture</p>
                                             </div>
                                         </c:if>
                                     </div>
@@ -133,7 +134,7 @@
                                 <!-- Form Actions -->
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary">Update Profile</button>
-                                    <a href="myprofile" class="btn btn-outline-secondary ms-2">Cancel</a>
+                                    <a href="listuser" class="btn btn-outline-secondary ms-2">Cancel</a>
                                 </div>
                             </form>
                         </div>

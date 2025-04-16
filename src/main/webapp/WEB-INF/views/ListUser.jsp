@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -41,6 +40,9 @@
   	* Author: BootstrapMade.com
   	* License: https://bootstrapmade.com/license/
   	======================================================== -->
+  	
+  	<!-- DataTables Buttons CSS -->
+  	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
 </head>
 
 <body>
@@ -132,7 +134,7 @@
                 <td>${user.bornYear}</td>
                 <td>${user.role}</td>
                 <td>
-                    <a href="deleteUser?id=${user.userId}">Delete</a> | 
+                    <a href="deleteUser?userId=${user.userId}">Delete</a> | 
                   <a href="editUser?userId=${user.userId}">Edit</a>    |<a href="viewUser?userId=${user.userId}">View</a>
                   
 
@@ -183,32 +185,69 @@
   	<script src="assets/vendor/php-email-form/validate.js"></script>
   	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 					
+	<!-- DataTables and Buttons JS -->
 	<script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
-	<script src="https://cdn.datatables.net/2.2.2/js/dataTables.bootstrap5.min.js"></script>
-	
+	<script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+	<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
 
   	<!-- Template Main JS File -->
   	<script src="assets/js/main.js"></script>
 
-<!-- Include jQuery and DataTables -->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-
-<!-- Initialize DataTables -->
+<!-- Initialize DataTables with Buttons -->
 <script>
     $(document).ready(function () {
         $('#userTable').DataTable({
-            "paging": true,      // Enables pagination
-            "lengthMenu": [5, 10, 25, 50], // Records per page
-            "ordering": true,    // Enables sorting
-            "info": true,        // Show table information
-            "searching": true    // Enables search box
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'copy',
+                    exportOptions: {
+                        columns: ':not(:last-child)' // Exclude last column (Action)
+                    }
+                },
+                {
+                    extend: 'csv',
+                    exportOptions: {
+                        columns: ':not(:last-child)' // Exclude last column (Action)
+                    }
+                },
+                {
+                    extend: 'excel',
+                    exportOptions: {
+                        columns: ':not(:last-child)' // Exclude last column (Action)
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    exportOptions: {
+                        columns: ':not(:last-child)' // Exclude last column (Action)
+                    }
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: ':not(:last-child)' // Exclude last column (Action)
+                    }
+                }
+            ],
+            "paging": true,
+            "lengthMenu": [5, 10, 25, 50],
+            "ordering": true,
+            "info": true,
+            "searching": true,
+            "columnDefs": [
+                {
+                    "targets": -1, // Last column
+                    "orderable": false // Make Action column non-orderable
+                }
+            ]
         });
     });
 </script>
-
-
 </body>
 
 </html>

@@ -37,7 +37,7 @@ public class UserIncomeController {
 		model.addAttribute("accountList", accountList);
 		model.addAttribute("statusList", statusList);
 		model.addAttribute("userList", userList);
-		return "NewIncome";
+		return "UserNewIncome";
 	}
 
 	@PostMapping("/usersaveincome")

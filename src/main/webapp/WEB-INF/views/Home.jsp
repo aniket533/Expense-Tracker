@@ -137,6 +137,23 @@
         z-index: 1;
         color: white;
         padding: 100px 50px 50px;
+        text-align: center;
+    }
+    
+    .main-content h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+    }
+    
+    .main-content p {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+    }
+    
+    .main-content .ta {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-top: 30px;
     }
 </style>
 </head>
@@ -171,7 +188,8 @@
     <!-- Main Content -->
     <main class="main-content">
         <h1>Welcome to ExpenseTracker</h1>
-        <p>Manage your finances with ease</p>
+        <p>Manage your finances with ease </p>
+        <div class="ta"></div>
     </main>
 
 </body>

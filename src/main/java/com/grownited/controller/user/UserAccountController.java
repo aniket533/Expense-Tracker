@@ -57,6 +57,6 @@ public class UserAccountController {
         UserEntity user = (UserEntity) session.getAttribute("user");
         accountEntity.setUserId(user.getUserId()); // Ensure correct user association
         accountRepo.save(accountEntity);
-        return "redirect:/userlistaccount";
+        return "redirect:/userdashboard";
     }
 }

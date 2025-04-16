@@ -49,11 +49,11 @@
   	<!-- End Session Validate -->
 
   	<!-- ======= Header ======= -->
-  	<jsp:include page="AdminHeader.jsp"></jsp:include>
+  	<jsp:include page="UserHeader.jsp"></jsp:include>
   	<!-- End Header -->
 
   	<!-- ======= Sidebar ======= -->
-  	<jsp:include page="AdminSidebar.jsp"></jsp:include>
+  	<jsp:include page="UserSidebar.jsp"></jsp:include>
   	<!-- End Sidebar-->
 
   	<main id="main" class="main">
@@ -103,13 +103,7 @@
 				Amount: <input type="text" name="amount"> <br><br>
 				Date: <input type="date" name="date"> <br><br>
 				Description: <textarea rows="5" cols="50"></textarea> <br><br>
-				User:
-					<select name="userId">
-						<option value="-1">---Select User---</option>
-						<c:forEach items="${userList}" var="user">
-							<option value="${user.userId}">${user.firstName} ${user.lastName}</option>
-						</c:forEach>
-					</select> <br><br>
+				
 				<input type="submit" value="Save Expense">
 			</form>
     	</section>
@@ -117,7 +111,7 @@
   	</main><!-- End #main -->
 
   	<!-- ======= Footer ======= -->
-  	<jsp:include page="AdminFooter.jsp"></jsp:include>
+  	<jsp:include page="UserFooter.jsp"></jsp:include>
   	<!-- End Footer -->
 
   	<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

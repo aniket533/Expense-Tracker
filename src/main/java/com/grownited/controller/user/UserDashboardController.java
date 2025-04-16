@@ -100,27 +100,25 @@ public class UserDashboardController {
     }*/
     
     @PostMapping("updatemyprofile")
-	public String updateMyProfile(UserEntity entity) {
-//		System.out.println(entity.getUserId());
-		
-		
-		Optional<UserEntity> op = userRepo.findById(entity.getUserId());
-		
-		if(op.isPresent()) {
-			
-			UserEntity dbuser = op.get();
-			dbuser.setFirstName(entity.getFirstName());
-			dbuser.setLastName(entity.getLastName());
-//			dbuser.setGender(entity.getGender());
-			dbuser.setEmail(entity.getEmail());
-			dbuser.setBornYear(entity.getBornYear());
-			dbuser.setContactNum(entity.getContactNum());
-//			dbuser.setProfilePicPath(entity.getProfilePicPath());
-			
-			
-			
-			userRepo.save(entity);
-		}	
-		return "redirect:/listuser";
-	}
+    public String updateMyProfile(UserEntity entity, HttpSession session) {
+
+        Optional<UserEntity> op = userRepo.findById(entity.getUserId());
+
+        if(op.isPresent()) {
+            UserEntity dbuser = op.get();
+            dbuser.setFirstName(entity.getFirstName());
+            dbuser.setLastName(entity.getLastName());
+            dbuser.setEmail(entity.getEmail());
+            dbuser.setBornYear(entity.getBornYear());
+            dbuser.setContactNum(entity.getContactNum());
+
+            userRepo.save(dbuser);
+
+            // 🟢 Update session
+            session.setAttribute("user", dbuser);
+        }
+
+        return "redirect:/userdashboard";  // redirect to reflect new data
+    }
+
 }

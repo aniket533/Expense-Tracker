@@ -77,7 +77,6 @@
 					<th>Sub-category</th>
 					<th>Vendor</th>
 					<th>Account</th>
-					<th>Status</th>
 					<th>Amount</th>
 					<th>Date</th>
 					<th>Description</th>
@@ -91,7 +90,6 @@
 						<td>${expense.subCategoryName}</td>
 						<td>${expense.vendorName}</td>
 						<td>${expense.title}</td>
-						<td>${expense.statusName}</td>
 						<td>${expense.amount}</td>
 						<td>${expense.date}</td>
 						<td>${expense.description}</td>

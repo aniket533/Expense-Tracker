@@ -6,12 +6,7 @@
        			<span>Dashboard</span>
        		</a>
     	</li><!-- End Dashboard Nav -->
-    	<li class="nav-item">
-       		<a class="nav-link " href="listrole">
-       			<i class="bi bi-grid"></i>
-       			<span>Roles</span>
-       		</a>
-    	</li><!-- End Roles Nav -->
+    	
     	<li class="nav-item">
        		<a class="nav-link" href="listuser">
        			<i class="bi bi-grid"></i>
@@ -54,11 +49,6 @@
        			<span>Expenses</span>
        		</a>
     	</li><!-- End Expenses Nav -->
-    	<li class="nav-item">
-       		<a class="nav-link " href="liststatus">
-       			<i class="bi bi-grid"></i>
-       			<span>Status</span>
-       		</a>
-    	</li><!-- End Status Nav -->
+    	
     </ul>
 </aside>

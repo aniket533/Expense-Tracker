@@ -42,11 +42,6 @@
        			<span>Expenses</span>
        		</a>
     	</li><!-- End Expenses Nav -->
-    	<li class="nav-item">
-       		<a class="nav-link " href="userliststatus">
-       			<i class="bi bi-grid"></i>
-       			<span>Status</span>
-       		</a>
-    	</li><!-- End Status Nav -->
+    	
     </ul>
 </aside>
