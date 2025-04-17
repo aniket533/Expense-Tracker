@@ -40,6 +40,65 @@
   	* Author: BootstrapMade.com
   	* License: https://bootstrapmade.com/license/
   	======================================================== -->
+  	<style>
+    	.card {
+      		border-radius: 10px;
+      		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    	}
+    	.table-container {
+      		padding: 20px;
+    	}
+    	.table {
+      		width: 100%;
+      		border-collapse: collapse;
+    	}
+    	.table th {
+      		background-color: #4154f1;
+      		color: white;
+      		padding: 12px;
+      		text-align: left;
+    	}
+    	.table td {
+      		padding: 12px;
+      		border-bottom: 1px solid #e9ecef;
+    	}
+    	.table tr:hover {
+      		background-color: #f8f9fa;
+    	}
+    	.action-btn {
+      		display: inline-block;
+      		padding: 6px 12px;
+      		border-radius: 4px;
+      		text-decoration: none;
+      		font-weight: 500;
+      		transition: all 0.3s;
+    	}
+    	.delete-btn {
+      		background-color: #dc3545;
+      		color: white;
+    	}
+    	.delete-btn:hover {
+      		background-color: #bb2d3b;
+      		color: white;
+    	}
+    	.add-btn {
+      		background-color: #4154f1;
+      		color: white;
+      		padding: 10px 20px;
+      		border-radius: 5px;
+      		text-decoration: none;
+      		display: inline-block;
+      		margin-top: 20px;
+      		transition: all 0.3s;
+    	}
+    	.add-btn:hover {
+      		background-color: #2a3ac9;
+      		color: white;
+    	}
+    	.table-responsive {
+      		overflow-x: auto;
+    	}
+  	</style>
 </head>
 
 <body>
@@ -69,22 +128,42 @@
     	</div><!-- End Page Title -->
 
     	<section class="section dashboard">
-			<table border="3">
-				<tr>
-					<th>Vendor Id</th>
-					<th>Vendor Name</th>
-					<th>Action</th>
-				</tr>
-				<c:forEach items="${vendorList}" var="vendor">
-					<tr>
-						<td>${vendor.vendorId}</td>
-						<td>${vendor.vendorName}</td>
-						<td><a href="deletevendor?vendorId=${vendor.vendorId}">Delete</a></td>
-					</tr>
-				</c:forEach>
-			</table>
-			<br>
-			<a href="usernewvendor">Add Vendor</a>
+      		<div class="row">
+        		<div class="col-lg-12">
+          			<div class="card">
+            			<div class="card-body">
+              				<h5 class="card-title">Vendors</h5>
+              				<div class="table-responsive">
+                				<table class="table table-hover">
+                  					<thead>
+                    						<tr>
+                      						<th scope="col">Vendor ID</th>
+                      						<th scope="col">Vendor Name</th>
+                      						<th scope="col">Action</th>
+                    						</tr>
+                  					</thead>
+                  					<tbody>
+                    						<c:forEach items="${vendorList}" var="vendor">
+                      						<tr>
+                        						<td>${vendor.vendorId}</td>
+                        						<td>${vendor.vendorName}</td>
+                        						<td>
+                          							<a href="deletevendor?vendorId=${vendor.vendorId}" class="action-btn delete-btn">
+                            							<i class="bi bi-trash"></i> Delete
+                          							</a>
+                        						</td>
+                      						</tr>
+                    						</c:forEach>
+                  					</tbody>
+                				</table>
+              				</div>
+              				<a href="usernewvendor" class="add-btn">
+                				<i class="bi bi-plus-circle"></i> Add New Vendor
+              				</a>
+            			</div>
+          			</div>
+        		</div>
+      		</div>
     	</section>
 
   	</main><!-- End #main -->

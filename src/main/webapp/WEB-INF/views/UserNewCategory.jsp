@@ -40,6 +40,58 @@
   	* Author: BootstrapMade.com
   	* License: https://bootstrapmade.com/license/
   	======================================================== -->
+  	<style>
+    	.card {
+      		border-radius: 10px;
+      		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      		padding: 20px;
+    	}
+    	.form-group {
+      		margin-bottom: 1.5rem;
+    	}
+    	.form-label {
+      		font-weight: 600;
+      		margin-bottom: 0.5rem;
+      		display: block;
+    	}
+    	.form-control {
+      		width: 100%;
+      		padding: 0.75rem 1rem;
+      		border: 1px solid #ced4da;
+      		border-radius: 0.375rem;
+      		transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    	}
+    	.form-control:focus {
+      		border-color: #4154f1;
+      		outline: 0;
+      		box-shadow: 0 0 0 0.25rem rgba(65, 84, 241, 0.25);
+    	}
+    	.btn-primary {
+      		background-color: #4154f1;
+      		border-color: #4154f1;
+      		color: white;
+      		padding: 0.75rem 1.5rem;
+      		border-radius: 0.375rem;
+      		font-weight: 500;
+      		transition: all 0.3s;
+    	}
+    	.btn-primary:hover {
+      		background-color: #2a3ac9;
+      		border-color: #2a3ac9;
+    	}
+    	.btn-primary:focus {
+      		box-shadow: 0 0 0 0.25rem rgba(65, 84, 241, 0.5);
+    	}
+    	.form-container {
+      		max-width: 600px;
+      		margin: 0 auto;
+    	}
+    	.required-field::after {
+      		content: "*";
+      		color: #dc3545;
+      		margin-left: 4px;
+    	}
+  	</style>
 </head>
 
 <body>
@@ -69,10 +121,28 @@
     	</div><!-- End Page Title -->
 
     	<section class="section dashboard">
-			<form action="usersavecategory" method="post">
-				Category Name: <input type="text" name="categoryName"> <br><br> 
-				<input type="submit" value="Save Category">
-			</form>
+      		<div class="row">
+        		<div class="col-lg-12">
+          			<div class="card">
+            			<div class="card-body">
+              				<h5 class="card-title">Create New Category</h5>
+              				<div class="form-container">
+                				<form action="usersavecategory" method="post" class="row g-3">
+                  					<div class="col-md-12 form-group">
+                    						<label for="categoryName" class="form-label required-field">Category Name</label>
+                    						<input type="text" class="form-control" id="categoryName" name="categoryName" required>
+                  					</div>
+                  					<div class="text-center">
+                    						<button type="submit" class="btn btn-primary">
+                      							<i class="bi bi-save"></i> Save Category
+                    						</button>
+                  					</div>
+                				</form>
+              				</div>
+            			</div>
+          			</div>
+        		</div>
+      		</div>
     	</section>
 
   	</main><!-- End #main -->

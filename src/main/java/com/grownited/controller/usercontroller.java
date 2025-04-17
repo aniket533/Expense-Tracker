@@ -37,7 +37,7 @@ public class UserController {
     
     @GetMapping("/listuser")
     public String listUser(Model model) {
-        model.addAttribute("userList", userRepo.findAll());
+        model.addAttribute("userList", userRepo.findByRole("USER"));
         return "ListUser";
     }
     

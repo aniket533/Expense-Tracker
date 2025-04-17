@@ -17,7 +17,6 @@ public class ExpenseEntity {
 	private Integer subcategoryId;
 	private Integer vendorId;
 	private Integer accountId;
-	private Integer statusId;
 	private Double amount;
 	private String date;
 	private String description;
@@ -73,13 +72,7 @@ public class ExpenseEntity {
 		this.accountId = accountId;
 	}
 
-	public Integer getStatusId() {
-		return statusId;
-	}
-
-	public void setStatusId(Integer statusId) {
-		this.statusId = statusId;
-	}
+	
 
 	public Double getAmount() {
 		return amount;

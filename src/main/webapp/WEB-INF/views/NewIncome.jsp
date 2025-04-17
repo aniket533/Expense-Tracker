@@ -33,13 +33,108 @@
   	<!-- Template Main CSS File -->
   	<link href="assets/css/style.css" rel="stylesheet">
 	
-  	<!-- =======================================================
-  	* Template Name: NiceAdmin
-  	* Updated: Jan 29 2024 with Bootstrap v5.3.2
-  	* Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  	* Author: BootstrapMade.com
-  	* License: https://bootstrapmade.com/license/
-  	======================================================== -->
+  	<style>
+    	/* Custom CSS for Income Form */
+    	.income-form {
+      		max-width: 800px;
+      		margin: 0 auto;
+      		padding: 30px;
+      		background: #fff;
+      		border-radius: 10px;
+      		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    	}
+    
+    	.form-group {
+      		margin-bottom: 20px;
+    	}
+    
+    	.form-group label {
+      		display: block;
+      		margin-bottom: 8px;
+      		font-weight: 500;
+      		color: #4154f1;
+    	}
+    
+    	.form-control {
+      		width: 100%;
+      		padding: 10px 15px;
+      		border: 1px solid #ddd;
+      		border-radius: 6px;
+      		font-size: 16px;
+      		transition: all 0.3s ease;
+    	}
+    
+    	.form-control:focus {
+      		border-color: #4154f1;
+      		box-shadow: 0 0 0 3px rgba(65, 84, 241, 0.1);
+      		outline: none;
+    	}
+    
+    	select.form-control {
+      		appearance: none;
+      		background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+      		background-repeat: no-repeat;
+      		background-position: right 12px center;
+      		background-size: 16px 12px;
+    	}
+    
+    	textarea.form-control {
+      		min-height: 120px;
+      		resize: vertical;
+    	}
+    
+    	.submit-btn {
+      		background-color: #4154f1;
+      		color: white;
+      		padding: 12px 25px;
+      		border: none;
+      		border-radius: 6px;
+      		font-size: 16px;
+      		font-weight: 500;
+      		cursor: pointer;
+      		transition: all 0.3s ease;
+      		display: inline-flex;
+      		align-items: center;
+      		gap: 8px;
+      		box-shadow: 0 2px 10px rgba(65, 84, 241, 0.2);
+    	}
+    
+    	.submit-btn:hover {
+      		background-color: #2a3ac7;
+      		transform: translateY(-2px);
+      		box-shadow: 0 4px 12px rgba(65, 84, 241, 0.3);
+    	}
+    
+    	.form-row {
+      		display: flex;
+      		gap: 20px;
+    	}
+    
+    	.form-col {
+      		flex: 1;
+    	}
+    
+    	@media (max-width: 768px) {
+      		.form-row {
+        		flex-direction: column;
+        		gap: 0;
+      		}
+    	}
+    
+    	.card {
+      		border-radius: 10px;
+      		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      		padding: 25px;
+      		margin-bottom: 30px;
+      		background-color: #fff;
+    	}
+    
+    	.card-title {
+      		color: #4154f1;
+      		margin-bottom: 20px;
+      		font-weight: 600;
+    	}
+  	</style>
 </head>
 
 <body>
@@ -69,29 +164,71 @@
     	</div><!-- End Page Title -->
 
     	<section class="section dashboard">
-			<form action="saveincome" method="post">
-				Title: <input type="text" name="title"> <br><br>
-				Account Type:
-					<select name="accountId">
-						<option value="-1">---Select Account Type---</option>
-						<c:forEach items="${accountList}" var="account">
-							<option value="${account.accountId}">${account.title}</option>
-						</c:forEach>
-					</select><br><br>
-				Status: 
-					<select name="statusId">
-						<option value="-1">---Select Status---</option>
-						<c:forEach items="${statusList}" var="status">
-							<option value="${status.statusId}">${status.statusName}</option>
-						</c:forEach>
-					</select><br><br>
-				Amount: <input type="text" name="amount"> <br><br>
-				Date: <input type="date" name="date"> <br><br>
-				Description: <textarea rows="5" cols="50"></textarea> <br><br>
-				
-					
-				<input type="submit" value="Save Income">
-			</form>
+      		<div class="row">
+        		<div class="col-lg-12">
+          			<div class="card">
+            			<div class="card-body">
+              				<h5 class="card-title">Income Details</h5>
+              				
+              				<form action="saveincome" method="post" class="income-form">
+                				<div class="form-group">
+                  					<label for="title">Title</label>
+                  					<input type="text" id="title" name="title" class="form-control" required>
+                				</div>
+                
+                				<div class="form-row">
+                  					<div class="form-col">
+                    						<div class="form-group">
+                      							<label for="accountId">Account Type</label>
+                      							<select id="accountId" name="accountId" class="form-control" required>
+                        							<option value="">--- Select Account Type ---</option>
+                        							<c:forEach items="${accountList}" var="account">
+                          								<option value="${account.accountId}">${account.title}</option>
+                        							</c:forEach>
+                      							</select>
+                    						</div>
+                  					</div>
+                  					<div class="form-col">
+                    						<div class="form-group">
+                      							<label for="userId">User</label>
+                      							<select id="userId" name="userId" class="form-control" required>
+                        							<option value="">--- Select User ---</option>
+                        							<c:forEach items="${userList}" var="user">
+                          								<option value="${user.userId}">${user.firstName} ${user.lastName}</option>
+                        							</c:forEach>
+                      							</select>
+                    						</div>
+                  					</div>
+                				</div>
+                
+                				<div class="form-row">
+                  					<div class="form-col">
+                    						<div class="form-group">
+                      							<label for="amount">Amount</label>
+                      							<input type="number" id="amount" name="amount" class="form-control" step="0.01" min="0" required>
+                    						</div>
+                  					</div>
+                  					<div class="form-col">
+                    						<div class="form-group">
+                      							<label for="date">Date</label>
+                      							<input type="date" id="date" name="date" class="form-control" required>
+                    						</div>
+                  					</div>
+                				</div>
+                
+                				<div class="form-group">
+                  					<label for="description">Description</label>
+                  					<textarea id="description" name="description" class="form-control" rows="5"></textarea>
+                				</div>
+                
+                				<button type="submit" class="submit-btn">
+                  					<i class="bi bi-save"></i> Save Income
+                				</button>
+              				</form>
+            			</div>
+          			</div>
+        		</div>
+      		</div>
     	</section>
 
   	</main><!-- End #main -->
@@ -116,5 +253,4 @@
   	<script src="assets/js/main.js"></script>
 
 </body>
-
 </html>

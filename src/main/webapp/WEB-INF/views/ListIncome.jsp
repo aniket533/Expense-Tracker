@@ -33,13 +33,112 @@
   	<!-- Template Main CSS File -->
   	<link href="assets/css/style.css" rel="stylesheet">
 	
-  	<!-- =======================================================
-  	* Template Name: NiceAdmin
-  	* Updated: Jan 29 2024 with Bootstrap v5.3.2
-  	* Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  	* Author: BootstrapMade.com
-  	* License: https://bootstrapmade.com/license/
-  	======================================================== -->
+  	<style>
+        /* Custom CSS for Income List */
+        .income-table-container {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        .income-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+        
+        .income-table th {
+            background-color: #4154f1;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .income-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+        }
+        
+        .income-table tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .income-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .action-link {
+            color: #4154f1;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .action-link:hover {
+            color: #3143c5;
+            text-decoration: underline;
+        }
+        
+        .add-income-btn {
+            display: inline-block;
+            background-color: #4154f1;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            margin-top: 1rem;
+        }
+        
+        .add-income-btn:hover {
+            background-color: #3143c5;
+            color: white;
+        }
+        
+        /* Responsive table */
+        @media (max-width: 768px) {
+            .income-table-container {
+                padding: 1rem;
+                overflow-x: auto;
+            }
+            
+            .income-table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+        
+        /* Status badges */
+        .status-badge {
+            display: inline-block;
+            padding: 0.35rem 0.65rem;
+            border-radius: 50rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .status-active {
+            background-color: #d1e7dd;
+            color: #0f5132;
+        }
+        
+        .status-inactive {
+            background-color: #f8d7da;
+            color: #842029;
+        }
+        
+        /* Amount formatting */
+        .income-amount {
+            font-weight: 600;
+            color: #2a9d8f;
+        }
+    </style>
 </head>
 
 <body>
@@ -69,34 +168,54 @@
     	</div><!-- End Page Title -->
 
     	<section class="section dashboard">
-			<table border="3">
-			<tr>
-				<th>Income Id</th>
-				<th>Title</th>
-				<th>Account Type Id</th>
-				<th>Status Id</th>
-				<th>Amount</th>
-				<th>Date</th>
-				<th>Description</th>
-				<th>User Id</th>
-				<th>Action</th>
-			</tr>
-			<c:forEach items="${incomeList}" var="income">
-				<tr>
-					<td>${income.incomeId}</td>
-					<td>${income.title}</td>
-					<td>${income.accountTypeId}</td>
-					<td>${income.statusId}</td>
-					<td>${income.amount}</td>
-					<td>${income.date}</td>
-					<td>${income.description}</td>
-					<td>${income.userId}</td>
-					<td><a href="deleteincome?incomeId=${income.incomeId}">Delete</a></td>
-				</tr>
-				</c:forEach>
-			</table>
-			<br>
-			<a href="newincome">Add Income</a>
+      		<div class="row">
+        		<div class="col-lg-12">
+          			<div class="income-table-container">
+            			<div class="table-responsive">
+              				<table class="income-table">
+                				<thead>
+                  					<tr>
+                    					<th>Income ID</th>
+                    					<th>Title</th>
+                    					<th>Account Type</th>
+                    					<th>Status</th>
+                    					<th>Amount</th>
+                    					<th>Date</th>
+                    					<th>Description</th>
+                    					<th>User</th>
+                    					<th>Action</th>
+                  					</tr>
+                				</thead>
+                				<tbody>
+                  					<c:forEach items="${incomeList}" var="income">
+                    					<tr>
+                      						<td>${income.incomeId}</td>
+                      						<td>${income.title}</td>
+                      						<td>${income.accountId}</td>
+                      						<td>
+                          						
+                      						</td>
+                      						<td class="income-amount">$${income.amount}</td>
+                      						<td>${income.date}</td>
+                      						<td>${income.description}</td>
+                      						<td>${income.userId}</td>
+                      						<td>
+                          						<a href="deleteincome?incomeId=${income.incomeId}" class="action-link" 
+                             						onclick="return confirm('Are you sure you want to delete this income record?')">
+                              						Delete
+                          						</a>
+                      						</td>
+                    					</tr>
+                  					</c:forEach>
+                				</tbody>
+              				</table>
+            			</div>
+            			<a href="newincome" class="add-income-btn">
+              				<i class="bi bi-plus-circle"></i> Add New Income
+            			</a>
+          			</div>
+        		</div>
+      		</div>
     	</section>
 
   	</main><!-- End #main -->
@@ -121,5 +240,4 @@
   	<script src="assets/js/main.js"></script>
 
 </body>
-
 </html>

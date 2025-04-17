@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -34,13 +33,102 @@
   	<!-- Template Main CSS File -->
   	<link href="assets/css/style.css" rel="stylesheet">
 	
-  	<!-- =======================================================
-  	* Template Name: NiceAdmin
-  	* Updated: Jan 29 2024 with Bootstrap v5.3.2
-  	* Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  	* Author: BootstrapMade.com
-  	* License: https://bootstrapmade.com/license/
-  	======================================================== -->
+  	<style>
+    	/* Custom table styling */
+    	.expense-table {
+      		width: 100%;
+      		border-collapse: collapse;
+      		font-size: 0.95em;
+    	}
+    
+    	.expense-table thead tr {
+      		background-color: #4154f1;
+      		color: #ffffff;
+    	}
+    
+    	.expense-table th {
+      		padding: 12px 15px;
+      		text-align: left;
+      		font-weight: 600;
+    	}
+    
+    	.expense-table td {
+      		padding: 12px 15px;
+      		border-bottom: 1px solid #e9ecef;
+      		vertical-align: middle;
+    	}
+    
+    	.expense-table tbody tr:last-child td {
+      		border-bottom: none;
+    	}
+    
+    	.expense-table tbody tr:hover {
+      		background-color: #f6f9ff;
+    	}
+    
+    	/* Card styling */
+    	.expense-card {
+      		border-radius: 8px;
+      		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      		border: none;
+    	}
+    
+    	.expense-card .card-body {
+      		padding: 25px;
+    	}
+    
+    	.expense-card .card-title {
+      		color: #4154f1;
+      		margin-bottom: 20px;
+    	}
+    
+    	/* Add expense button */
+    	.add-expense-btn {
+      		display: inline-flex;
+      		align-items: center;
+      		padding: 10px 20px;
+      		background-color: #4154f1;
+      		color: white;
+      		border: none;
+      		border-radius: 6px;
+      		text-decoration: none;
+      		transition: all 0.3s ease;
+      		font-weight: 500;
+    	}
+    
+    	.add-expense-btn:hover {
+      		background-color: #2a3ab9;
+      		transform: translateY(-2px);
+      		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      		color: white;
+    	}
+    
+    	.add-expense-btn i {
+      		margin-right: 8px;
+    	}
+    
+    	/* Amount styling */
+    	.amount-cell {
+      		font-weight: 600;
+      		color: #dc3545;
+    	}
+    
+    	/* Responsive table */
+    	.table-responsive {
+      		overflow-x: auto;
+      		-webkit-overflow-scrolling: touch;
+    	}
+    
+    	@media (max-width: 992px) {
+      		.expense-table {
+        		font-size: 0.85em;
+      		}
+      		.expense-table th, 
+      		.expense-table td {
+        		padding: 8px 10px;
+      		}
+    	}
+  	</style>
 </head>
 
 <body>
@@ -70,36 +158,54 @@
     	</div><!-- End Page Title -->
 
     	<section class="section dashboard">
-			<table border="2" class="table table-bordered">
-				<tr>
-					<th>Expense Title</th>
-					<th>Category</th>
-					<th>Sub-category</th>
-					<th>Vendor</th>
-					<th>Account</th>
-					<th>Amount</th>
-					<th>Date</th>
-					<th>Description</th>
-					<th>User</th>
-					<th>Action</th>
-				</tr>
-				<c:forEach items="${expenseList}" var="expense">
-					<tr>
- 						<td>${expense.expenseTitle}</td>
-						<td>${expense.categoryName}</td>
-						<td>${expense.subCategoryName}</td>
-						<td>${expense.vendorName}</td>
-						<td>${expense.title}</td>
-						<td>${expense.amount}</td>
-						<td>${expense.date}</td>
-						<td>${expense.description}</td>
-						<td>${expense.firstName}</td>
-						<td><a href="deleteexpense?expenseId=${expense.expenseId}">Delete</a></td>
-					</tr>
-				</c:forEach>
-			</table>
-			<br>
-			<a href="newexpense">Add Expense</a>
+      		<div class="row">
+        		<div class="col-lg-12">
+          			<div class="card expense-card">
+            				<div class="card-body">
+              					<h5 class="card-title">Expenses</h5>
+              
+              					<div class="table-responsive">
+                					<table class="table expense-table">
+                  						<thead>
+                    							<tr>
+                      								<th>ID</th>
+                      								<th>Title</th>
+                      								<th>Amount</th>
+                      								<th>Date</th>
+                      								<th>User</th>
+                      								<th>Account</th>
+                      								<th>Vendor</th>
+                      								<th>Category</th>
+                      								<th>Sub-category</th>
+                    							</tr>
+                  						</thead>
+                  						<tbody>
+                    							<c:forEach items="${expenseList}" var="expense">
+                      								<tr>
+                        									<td>${expense.expenseId}</td>
+                        									<td>${expense.expenseTitle}</td>
+                        									<td class="amount-cell">${expense.amount}</td>
+                        									<td>${expense.date}</td>
+                        									<td>${expense.firstName}</td>
+                        									<td>${expense.accountTitle}</td>
+                        									<td>${expense.vendorName}</td>
+                        									<td>${expense.categoryName}</td>
+                        									<td>${expense.subCategoryName}</td>
+                      								</tr>
+                    							</c:forEach>
+                  						</tbody>
+                					</table>
+              					</div>
+              
+              					<div class="text-end mt-3">
+                					<a href="newexpense" class="add-expense-btn">
+                  						<i class="bi bi-plus-circle"></i> Add New Expense
+                					</a>
+              					</div>
+            				</div>
+          			</div>
+        		</div>
+      		</div>
     	</section>
 
   	</main><!-- End #main -->

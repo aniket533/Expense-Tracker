@@ -154,6 +154,8 @@ public class SessionController {
    @GetMapping("/logout")
    public String logout(HttpServletRequest request) {
        HttpSession session = request.getSession(false);
+       
+
        if (session != null) {
            session.invalidate();
        }
@@ -223,18 +225,14 @@ public class SessionController {
        if (op.isPresent()) {
            UserEntity dbUser = op.get();
            boolean ans = encoder.matches(password, dbUser.getPassword());
-           
+
            if (ans) {
-               // Store user in session
+               // ✅ Fix added here
                session.setAttribute("user", dbUser);
-               
-               // Explicitly set session timeout (optional)
+               session.setAttribute("userId", dbUser.getUserId());
+
                session.setMaxInactiveInterval(24 * 60 * 60); // 24 hours
-               
-               // For debugging
-               System.out.println("Session ID: " + session.getId());
-               System.out.println("User stored in session: " + dbUser.getEmail());
-               
+
                if (dbUser.getRole().equals("ADMIN")) {
                    return "redirect:/admindashboard";
                } else {
@@ -245,6 +243,7 @@ public class SessionController {
        model.addAttribute("error", "Invalid Credentials");
        return "Login";
    }
+
 }
 
 

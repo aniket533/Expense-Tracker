@@ -33,13 +33,90 @@
   	<!-- Template Main CSS File -->
   	<link href="assets/css/style.css" rel="stylesheet">
 	
-  	<!-- =======================================================
-  	* Template Name: NiceAdmin
-  	* Updated: Jan 29 2024 with Bootstrap v5.3.2
-  	* Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  	* Author: BootstrapMade.com
-  	* License: https://bootstrapmade.com/license/
-  	======================================================== -->
+  	<style>
+        /* Custom CSS for New Account Form */
+        .account-form {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .account-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .account-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #4154f1;
+        }
+        
+        .account-form input[type="text"],
+        .account-form input[type="number"],
+        .account-form select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .account-form input[type="text"]:focus,
+        .account-form input[type="number"]:focus,
+        .account-form select:focus {
+            border-color: #4154f1;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(65, 84, 241, 0.1);
+        }
+        
+        .account-form .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+        }
+        
+        .account-form .checkbox-group input {
+            margin-right: 0.5rem;
+        }
+        
+        .account-form .submit-btn {
+            background-color: #4154f1;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .account-form .submit-btn:hover {
+            background-color: #3143c5;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .account-form {
+                padding: 1.5rem;
+            }
+        }
+        
+        /* Form validation styling */
+        .error-message {
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        
+        .is-invalid {
+            border-color: #dc3545 !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -69,19 +146,41 @@
     	</div><!-- End Page Title -->
 
     	<section class="section dashboard">
-			<form action="saveaccount" method="post">
-				Title: <input type="text" name="title"> <br><br>
-				Amount: <input type="number" name="amount"> <br><br>
-				User: 
-					<select name="userId">
-						<option value="-1"></option>
-						<c:forEach items="${userList}" var="user">
-							<option value="${user.userId}">${user.firstName} ${user.lastName}</option>
-						</c:forEach>
-					</select> <br><br>
-				<input type="checkbox" name="isDefault"> Set as Default <br><br> 
-				<input type="submit" value="Save Account">
-			</form>
+      		<div class="row">
+        		<div class="col-lg-12">
+          			<div class="account-form">
+            			<h5 class="card-title">Create New Account</h5>
+            			<form action="saveaccount" method="post">
+              				<div class="form-group">
+                				<label for="title">Account Title</label>
+                				<input type="text" id="title" name="title" class="form-control" required>
+              				</div>
+              
+              				<div class="form-group">
+                				<label for="amount">Initial Amount</label>
+                				<input type="number" id="amount" name="amount" class="form-control" step="0.01" required>
+              				</div>
+              
+              				<div class="form-group">
+                				<label for="userId">User</label>
+                				<select id="userId" name="userId" class="form-control" required>
+                  					<option value="">Select User</option>
+                  					<c:forEach items="${userList}" var="user">
+                    						<option value="${user.userId}">${user.firstName} ${user.lastName}</option>
+                  					</c:forEach>
+                				</select>
+              				</div>
+              
+              				<div class="checkbox-group">
+                				<input type="checkbox" id="isDefault" name="isDefault">
+                				<label for="isDefault">Set as Default Account</label>
+              				</div>
+              
+              				<button type="submit" class="submit-btn">Save Account</button>
+            			</form>
+          			</div>
+        		</div>
+      		</div>
     	</section>
 
   	</main><!-- End #main -->
@@ -105,6 +204,32 @@
   	<!-- Template Main JS File -->
   	<script src="assets/js/main.js"></script>
 
-</body>
+  	<script>
+    	// Basic form validation
+    	document.querySelector('form').addEventListener('submit', function(e) {
+      		const title = document.getElementById('title').value.trim();
+      		const amount = document.getElementById('amount').value.trim();
+      		const userId = document.getElementById('userId').value;
+      
+      		if (!title) {
+        		e.preventDefault();
+        		alert('Please enter an account title');
+        		return;
+      		}
+      
+      		if (!amount) {
+        		e.preventDefault();
+        		alert('Please enter an initial amount');
+        		return;
+      		}
+      
+      		if (!userId) {
+        		e.preventDefault();
+        		alert('Please select a user');
+        		return;
+      		}
+    	});
+  	</script>
 
+</body>
 </html>

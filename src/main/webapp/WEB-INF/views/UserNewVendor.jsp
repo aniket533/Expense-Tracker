@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -34,13 +33,94 @@
   	<!-- Template Main CSS File -->
   	<link href="assets/css/style.css" rel="stylesheet">
 	
-  	<!-- =======================================================
-  	* Template Name: NiceAdmin
-  	* Updated: Jan 29 2024 with Bootstrap v5.3.2
-  	* Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  	* Author: BootstrapMade.com
-  	* License: https://bootstrapmade.com/license/
-  	======================================================== -->
+  	<style>
+        /* Custom CSS for New Vendor Form */
+        .vendor-form-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .vendor-form-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        .vendor-form-card h5 {
+            color: #4154f1;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #4154f1;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: #4154f1;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(65, 84, 241, 0.1);
+        }
+        
+        .btn-primary {
+            background-color: #4154f1;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: #3143c5;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .vendor-form-card {
+                padding: 1.5rem;
+            }
+        }
+        
+        /* Form validation styling */
+        .error-message {
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        
+        .is-invalid {
+            border-color: #dc3545 !important;
+        }
+        
+        /* Form header */
+        .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+    </style>
 </head>
 
 <body>
@@ -70,10 +150,26 @@
     	</div><!-- End Page Title -->
 
     	<section class="section dashboard">
-			<form action="savevendor" method="post">
-				Vendor Name: <input type="text" name="vendorName"> <br><br> 
-				<input type="submit" value="Save Vendor">
-			</form>
+      		<div class="row">
+        		<div class="col-lg-12">
+          			<div class="vendor-form-container">
+            			<div class="vendor-form-card">
+              				<div class="form-header">
+                				<h5>Create New Vendor</h5>
+              				</div>
+              				<form action="usersavevendor" method="post">
+                				<div class="form-group">
+                  					<label for="vendorName">Vendor Name</label>
+                  					<input type="text" id="vendorName" name="vendorName" class="form-control" required>
+                				</div>
+                				<button type="submit" class="btn-primary">
+                  					<i class="bi bi-save"></i> Save Vendor
+                				</button>
+              				</form>
+            			</div>
+          			</div>
+        		</div>
+      		</div>
     	</section>
 
   	</main><!-- End #main -->
@@ -97,6 +193,19 @@
   	<!-- Template Main JS File -->
   	<script src="assets/js/main.js"></script>
 
-</body>
+  	<script>
+    	// Basic form validation
+    	document.querySelector('form').addEventListener('submit', function(e) {
+      		const vendorName = document.getElementById('vendorName').value.trim();
+      
+      		if (!vendorName) {
+        		e.preventDefault();
+        		alert('Please enter a vendor name');
+        		document.getElementById('vendorName').focus();
+        		return;
+      		}
+    	});
+  	</script>
 
+</body>
 </html>

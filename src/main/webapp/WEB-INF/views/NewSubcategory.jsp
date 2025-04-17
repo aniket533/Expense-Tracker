@@ -33,13 +33,106 @@
   	<!-- Template Main CSS File -->
   	<link href="assets/css/style.css" rel="stylesheet">
 	
-  	<!-- =======================================================
-  	* Template Name: NiceAdmin
-  	* Updated: Jan 29 2024 with Bootstrap v5.3.2
-  	* Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  	* Author: BootstrapMade.com
-  	* License: https://bootstrapmade.com/license/
-  	======================================================== -->
+  	<style>
+    	/* Form Container Styling */
+    	.subcategory-form-container {
+      		background: #fff;
+      		padding: 30px;
+      		border-radius: 8px;
+      		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      		max-width: 600px;
+      		margin: 0 auto;
+    	}
+    
+    	/* Form Group Styling */
+    	.form-group {
+      		margin-bottom: 25px;
+    	}
+    
+    	/* Label Styling */
+    	.form-group label {
+      		display: block;
+      		margin-bottom: 8px;
+      		font-weight: 500;
+      		color: #4154f1;
+    	}
+    
+    	/* Input Field Styling */
+    	.form-control {
+      		width: 100%;
+      		padding: 10px 15px;
+      		border: 1px solid #ddd;
+      		border-radius: 6px;
+      		font-size: 1em;
+      		transition: all 0.3s ease;
+    	}
+    
+    	.form-control:focus {
+      		border-color: #4154f1;
+      		box-shadow: 0 0 0 3px rgba(65, 84, 241, 0.1);
+      		outline: none;
+    	}
+    
+    	/* Select Dropdown Styling */
+    	.form-select {
+      		width: 100%;
+      		padding: 10px 15px;
+      		border: 1px solid #ddd;
+      		border-radius: 6px;
+      		font-size: 1em;
+      		background-color: #fff;
+      		background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+      		background-repeat: no-repeat;
+      		background-position: right 0.75rem center;
+      		background-size: 16px 12px;
+      		transition: all 0.3s ease;
+    	}
+    
+    	.form-select:focus {
+      		border-color: #4154f1;
+      		box-shadow: 0 0 0 3px rgba(65, 84, 241, 0.1);
+    	}
+    
+    	/* Submit Button Styling */
+    	.submit-btn {
+      		background-color: #4154f1;
+      		color: white;
+      		border: none;
+      		padding: 12px 25px;
+      		border-radius: 6px;
+      		cursor: pointer;
+      		font-size: 1em;
+      		font-weight: 500;
+      		transition: all 0.3s ease;
+      		display: inline-flex;
+      		align-items: center;
+    	}
+    
+    	.submit-btn:hover {
+      		background-color: #2a3ab9;
+      		transform: translateY(-2px);
+      		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    	}
+    
+    	.submit-btn i {
+      		margin-right: 8px;
+    	}
+    
+    	/* Form Title */
+    	.form-title {
+      		color: #4154f1;
+      		margin-bottom: 30px;
+      		padding-bottom: 10px;
+      		border-bottom: 2px solid #f6f9ff;
+    	}
+    
+    	/* Responsive adjustments */
+    	@media (max-width: 768px) {
+      		.subcategory-form-container {
+        		padding: 20px;
+      		}
+    	}
+  	</style>
 </head>
 
 <body>
@@ -69,17 +162,31 @@
     	</div><!-- End Page Title -->
 
     	<section class="section dashboard">
-			<form action="savesubcategory" method="post">
-				Sub-category Name: <input type="text" name="subcategoryName"> <br><br> 
-				Category: 
-					<select name="categoryId">
-						<option value="-1">---Select Category---</option>
-						<c:forEach items="${categoryList}" var="category">
-							<option value="${category.categoryId}">${category.categoryName}</option>
-						</c:forEach>
-					</select> <br><br> 
-				<input type="submit" value="Save Subcategory">
-			</form>
+      		<div class="row">
+        		<div class="col-lg-12">
+          			<div class="subcategory-form-container">
+            				<h3 class="form-title">Create New Sub-category</h3>
+            				<form action="savesubcategory" method="post">
+              					<div class="form-group">
+                					<label for="subcategoryName">Sub-category Name</label>
+                					<input type="text" id="subcategoryName" name="subcategoryName" class="form-control" required>
+              					</div>
+              					<div class="form-group">
+                					<label for="categoryId">Category</label>
+                					<select id="categoryId" name="categoryId" class="form-select" required>
+                  						<option value="-1">--- Select Category ---</option>
+                  						<c:forEach items="${categoryList}" var="category">
+                    							<option value="${category.categoryId}">${category.categoryName}</option>
+                  						</c:forEach>
+                					</select>
+              					</div>
+              					<button type="submit" class="submit-btn">
+                					<i class="bi bi-save"></i>Save Subcategory
+              					</button>
+            				</form>
+          			</div>
+        		</div>
+      		</div>
     	</section>
 
   	</main><!-- End #main -->

@@ -33,13 +33,104 @@
   	<!-- Template Main CSS File -->
   	<link href="assets/css/style.css" rel="stylesheet">
 	
-  	<!-- =======================================================
-  	* Template Name: NiceAdmin
-  	* Updated: Jan 29 2024 with Bootstrap v5.3.2
-  	* Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  	* Author: BootstrapMade.com
-  	* License: https://bootstrapmade.com/license/
-  	======================================================== -->
+  	<style>
+    	/* Custom CSS for Account Form */
+    	.account-form {
+      		max-width: 600px;
+      		margin: 0 auto;
+      		padding: 30px;
+      		background: #fff;
+      		border-radius: 10px;
+      		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    	}
+    
+    	.form-group {
+      		margin-bottom: 25px;
+    	}
+    
+    	.form-group label {
+      		display: block;
+      		margin-bottom: 8px;
+      		font-weight: 500;
+      		color: #4154f1;
+    	}
+    
+    	.form-control {
+      		width: 100%;
+      		padding: 12px 15px;
+      		border: 1px solid #ddd;
+      		border-radius: 6px;
+      		font-size: 16px;
+      		transition: all 0.3s ease;
+    	}
+    
+    	.form-control:focus {
+      		border-color: #4154f1;
+      		box-shadow: 0 0 0 3px rgba(65, 84, 241, 0.1);
+      		outline: none;
+    	}
+    
+    	.checkbox-group {
+      		display: flex;
+      		align-items: center;
+      		margin-bottom: 25px;
+    	}
+    
+    	.checkbox-group input[type="checkbox"] {
+      		width: 18px;
+      		height: 18px;
+      		margin-right: 10px;
+      		accent-color: #4154f1;
+    	}
+    
+    	.checkbox-group label {
+      		margin: 0;
+      		font-weight: normal;
+      		color: #495057;
+    	}
+    
+    	.submit-btn {
+      		background-color: #4154f1;
+      		color: white;
+      		padding: 12px 30px;
+      		border: none;
+      		border-radius: 6px;
+      		font-size: 16px;
+      		font-weight: 500;
+      		cursor: pointer;
+      		transition: all 0.3s ease;
+      		display: inline-flex;
+      		align-items: center;
+      		gap: 8px;
+      		box-shadow: 0 2px 10px rgba(65, 84, 241, 0.2);
+    	}
+    
+    	.submit-btn:hover {
+      		background-color: #2a3ac7;
+      		transform: translateY(-2px);
+      		box-shadow: 0 4px 12px rgba(65, 84, 241, 0.3);
+    	}
+    
+    	.card {
+      		border-radius: 10px;
+      		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      		padding: 25px;
+      		margin-bottom: 30px;
+      		background-color: #fff;
+    	}
+    
+    	.card-title {
+      		color: #4154f1;
+      		margin-bottom: 20px;
+      		font-weight: 600;
+    	}
+    
+    	@media (max-width: 768px) {
+      		.account-form {
+        		padding: 20px;
+      		}
+    	}
+  	</style>
 </head>
 
 <body>
@@ -69,13 +160,36 @@
     	</div><!-- End Page Title -->
 
     	<section class="section dashboard">
-			<form action="usersaveaccount" method="post">
-				Title: <input type="text" name="title"> <br><br>
-				Amount: <input type="number" name="amount"> <br><br>
-				 <br><br>
-				<input type="checkbox" name="isDefault"> Set as Default <br><br> 
-				<input type="submit" value="Save Account">
-			</form>
+      		<div class="row">
+        		<div class="col-lg-12">
+          			<div class="card">
+            			<div class="card-body">
+              				<h5 class="card-title">Account Information</h5>
+              				
+              				<form action="usersaveaccount" method="post" class="account-form">
+                				<div class="form-group">
+                  					<label for="title">Account Title</label>
+                  					<input type="text" id="title" name="title" class="form-control" required placeholder="e.g., Bank Account, Cash Wallet">
+                				</div>
+                
+                				<div class="form-group">
+                  					<label for="amount">Initial Amount</label>
+                  					<input type="number" id="amount" name="amount" class="form-control" step="0.01" min="0" required placeholder="0.00">
+                				</div>
+                
+                				<div class="checkbox-group">
+                  					<input type="checkbox" id="isDefault" name="isDefault">
+                  					<label for="isDefault">Set as Default Account</label>
+                				</div>
+                
+                				<button type="submit" class="submit-btn">
+                  					<i class="bi bi-save"></i> Save Account
+                				</button>
+              				</form>
+            			</div>
+          			</div>
+        		</div>
+      		</div>
     	</section>
 
   	</main><!-- End #main -->
@@ -100,5 +214,4 @@
   	<script src="assets/js/main.js"></script>
 
 </body>
-
 </html>

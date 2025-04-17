@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -34,13 +33,90 @@
   	<!-- Template Main CSS File -->
   	<link href="assets/css/style.css" rel="stylesheet">
 	
-  	<!-- =======================================================
-  	* Template Name: NiceAdmin
-  	* Updated: Jan 29 2024 with Bootstrap v5.3.2
-  	* Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  	* Author: BootstrapMade.com
-  	* License: https://bootstrapmade.com/license/
-  	======================================================== -->
+  	<style>
+    	/* Custom CSS for Categories Table */
+    	.category-table {
+      		width: 100%;
+      		border-collapse: collapse;
+      		margin: 25px 0;
+      		font-size: 0.9em;
+      		min-width: 400px;
+      		border-radius: 5px 5px 0 0;
+      		overflow: hidden;
+      		box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    	}
+    
+    	.category-table thead tr {
+      		background-color: #4154f1;
+      		color: #ffffff;
+      		text-align: left;
+      		font-weight: bold;
+    	}
+    
+    	.category-table th,
+    	.category-table td {
+      		padding: 12px 15px;
+    	}
+    
+    	.category-table tbody tr {
+      		border-bottom: 1px solid #dddddd;
+    	}
+    
+    	.category-table tbody tr:nth-of-type(even) {
+      		background-color: #f3f3f3;
+    	}
+    
+    	.category-table tbody tr:last-of-type {
+      		border-bottom: 2px solid #4154f1;
+    	}
+    
+    	.category-table tbody tr:hover {
+      		background-color: #f1f3ff;
+    	}
+    
+    	.action-btn {
+      		display: inline-block;
+      		padding: 6px 12px;
+      		border-radius: 4px;
+      		text-decoration: none;
+      		font-weight: 500;
+      		transition: all 0.3s ease;
+    	}
+    
+    	.delete-btn {
+      		background-color: #ff3d3d;
+      		color: white;
+    	}
+    
+    	.delete-btn:hover {
+      		background-color: #ff0000;
+      		transform: translateY(-2px);
+    	}
+    
+    	.add-category-btn {
+      		background-color: #4154f1;
+      		color: white;
+      		padding: 10px 20px;
+      		border-radius: 4px;
+      		text-decoration: none;
+      		font-weight: 500;
+      		display: inline-block;
+      		margin-top: 20px;
+      		transition: all 0.3s ease;
+    	}
+    
+    	.add-category-btn:hover {
+      		background-color: #2a3ac7;
+      		transform: translateY(-2px);
+    	}
+    
+    	.card {
+      		border-radius: 10px;
+      		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      		padding: 20px;
+      		margin-bottom: 30px;
+    	}
+  	</style>
 </head>
 
 <body>
@@ -70,22 +146,44 @@
     	</div><!-- End Page Title -->
 
     	<section class="section dashboard">
-			<table border="3">
-				<tr>
-					<th>Category Id</th>
-					<th>Category Name</th>
-					<th>Action</th>
-				</tr>
-				<c:forEach items="${categoryList}" var="category">
-					<tr>
-						<td>${category.categoryId}</td>
-						<td>${category.categoryName}</td>
-						<td><a href="deletecategory?categoryId=${category.categoryId}">Delete</a></td>
-					</tr>
-				</c:forEach>
-			</table>
-			<br>
-			<a href="newcategory">Add Category</a>
+      		<div class="row">
+        		<div class="col-lg-12">
+          			<div class="card">
+            			<div class="card-body">
+              				<h5 class="card-title">Categories</h5>
+              				
+              				<!-- Table with stripped rows -->
+              				<table class="category-table">
+                				<thead>
+                  					<tr>
+                    					<th>Category ID</th>
+                    					<th>Category Name</th>
+                    					<th>Action</th>
+                  					</tr>
+                				</thead>
+                				<tbody>
+                  					<c:forEach items="${categoryList}" var="category">
+                    					<tr>
+                      						<td>${category.categoryId}</td>
+                      						<td>${category.categoryName}</td>
+                      						<td>
+                        						<a href="deletecategory?categoryId=${category.categoryId}" class="action-btn delete-btn">
+                          							<i class="bi bi-trash"></i> Delete
+                        						</a>
+                      						</td>
+                    					</tr>
+                  					</c:forEach>
+                				</tbody>
+              				</table>
+              				<!-- End Table with stripped rows -->
+              				
+              				<a href="newcategory" class="add-category-btn">
+                					<i class="bi bi-plus-circle"></i> Add New Category
+              				</a>
+            			</div>
+          			</div>
+        		</div>
+      		</div>
     	</section>
 
   	</main><!-- End #main -->
@@ -110,5 +208,4 @@
   	<script src="assets/js/main.js"></script>
 
 </body>
-
 </html>

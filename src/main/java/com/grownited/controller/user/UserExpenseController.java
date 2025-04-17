@@ -1,3 +1,4 @@
+
 package com.grownited.controller.user;
 
 import java.util.List;
@@ -24,6 +25,8 @@ import com.grownited.repository.StatusRepository;
 import com.grownited.repository.SubcategoryRepository;
 import com.grownited.repository.UserRepository;
 import com.grownited.repository.VendorRepository;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UserExpenseController {
@@ -59,22 +62,38 @@ public class UserExpenseController {
 		return "UserNewExpense";
 	}
 	
-	@PostMapping("/usersaveexpense")
-	public String usersaveExpense(ExpenseEntity expense) {
-		expenseRepo.save(expense);
-		return "redirect:/userlistexpense";
-	}
-	
 	@GetMapping("/userlistexpense")
-	public String userlistExpense(Model model) {
-		List<ExpenseDto> expenseList = expenseRepo.getAllExpenses();
-		model.addAttribute("expenseList", expenseList);
-		return "UserListExpense";
+	public String userlistExpense(Model model, HttpSession session) {
+	    Integer userId = (Integer) session.getAttribute("userId");
+	    
+	    // Get only this user's expenses
+	    List<ExpenseEntity> userExpenses = expenseRepo.findByUserId(userId);
+	    model.addAttribute("expenseList", userExpenses);
+	    
+	    // Add category list to the model
+	    List<CategoryEntity> categoryList = categoryRepo.findAll();
+	    model.addAttribute("categoryList", categoryList);
+	    
+	    return "UserListExpense";
 	}
+	@PostMapping("/usersaveexpense")
+	public String usersaveExpense(ExpenseEntity expense, HttpSession session) {
+	    if (expense.getUserId() == null) {
+	        Integer userId = (Integer) session.getAttribute("userId");
+	        System.out.println("Setting userId from session: " + userId);
+	        expense.setUserId(userId); // ✅ yeh line important hai
+	    }
+
+	    expenseRepo.save(expense);
+	    return "redirect:/userlistexpense";
+	}
+
+
 	
 	@GetMapping("/userdeleteexpense")
 	public String userdeleteExpense(@RequestParam Integer expenseId) {
-		expenseRepo.deleteById(expenseId);
-		return "redirect:/userlistexpense";
+	    expenseRepo.deleteById(expenseId);
+	    return "redirect:/userlistexpense"; // ✅ Correct way to reload fresh expense list
 	}
-}
+
+} 

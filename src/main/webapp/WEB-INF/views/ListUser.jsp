@@ -73,41 +73,82 @@
 
     	<section class="section dashboard">
 			<style>
+    .table-container {
+        overflow-x: auto;
+        background: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.1);
+        margin: 2rem 0;
+    }
+
     table {
         width: 100%;
         border-collapse: collapse;
-        text-align: left;
-    }
-    
-    th, td {
-        border: 1px solid black;
-        padding: 10px;
+        font-family: 'Nunito', sans-serif;
+        color: #444444;
+        margin: 0;
     }
 
     th {
-        background-color: #f2f2f2;
-        font-weight: bold;
+        background-color: #4154f1;
+        color: white;
+        padding: 1rem 1.5rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.85em;
+        letter-spacing: 0.5px;
     }
 
     td {
-        background-color: #fff;
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid #f0f0f0;
+        font-size: 0.95em;
     }
 
     tr:nth-child(even) {
-        background-color: #f9f9f9;
+        background-color: #f9faff;
     }
 
-    a {
+    tr:hover {
+        background-color: #f1f3ff;
+        transition: background-color 0.3s ease;
+    }
+
+    .action-links {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .action-links a {
+        color: #4154f1;
         text-decoration: none;
-        color: blue;
-        font-weight: bold;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        transition: all 0.3s ease;
     }
 
-    a:hover {
-        text-decoration: underline;
+    .action-links a:hover {
+        background-color: #4154f1;
+        color: white;
+        text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+        th, td {
+            padding: 0.75rem 1rem;
+        }
+        
+        .table-container {
+            border-radius: 0.25rem;
+        }
     }
 </style>
 
+<div class="table-container">
+    <table id="userTable" class="display">
+        <!-- Table content remains the same -->
+    </table>
+</div>
 <table id="userTable" class="display">
     <thead>
         <tr>

@@ -1,34 +1,39 @@
-
 package com.grownited.entity;
 
-import jakarta.persistence.Entity;
-
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "vendors")
 public class VendorEntity {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer vendorId;
-	private String vendorName;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer vendorId;
+    private String vendorName;
 
-	public Integer getVendorId() {
-		return vendorId;
-	}
+    // ✅ New field to track who added this vendor
+    private Integer userId;
 
-	public void setVendorId(Integer vendorId) {
-		this.vendorId = vendorId;
-	}
+    public Integer getVendorId() {
+        return vendorId;
+    }
 
-	public String getVendorName() {
-		return vendorName;
-	}
+    public void setVendorId(Integer vendorId) {
+        this.vendorId = vendorId;
+    }
 
-	public void setVendorName(String vendorName) {
-		this.vendorName = vendorName;
-	}
+    public String getVendorName() {
+        return vendorName;
+    }
+
+    public void setVendorName(String vendorName) {
+        this.vendorName = vendorName;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 }

@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -34,13 +33,111 @@
   	<!-- Template Main CSS File -->
   	<link href="assets/css/style.css" rel="stylesheet">
 	
-  	<!-- =======================================================
-  	* Template Name: NiceAdmin
-  	* Updated: Jan 29 2024 with Bootstrap v5.3.2
-  	* Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  	* Author: BootstrapMade.com
-  	* License: https://bootstrapmade.com/license/
-  	======================================================== -->
+  	<style>
+    	/* Custom CSS for Categories Table */
+    	.category-table {
+      		width: 100%;
+      		border-collapse: collapse;
+      		margin: 25px 0;
+      		font-size: 0.9em;
+      		min-width: 400px;
+      		border-radius: 8px;
+      		overflow: hidden;
+      		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    	}
+    
+    	.category-table thead tr {
+      		background-color: #4154f1;
+      		color: #ffffff;
+      		text-align: left;
+      		font-weight: bold;
+    	}
+    
+    	.category-table th,
+    	.category-table td {
+      		padding: 12px 15px;
+    	}
+    
+    	.category-table tbody tr {
+      		border-bottom: 1px solid #e0e0e0;
+    	}
+    
+    	.category-table tbody tr:nth-of-type(even) {
+      		background-color: #f8f9fa;
+    	}
+    
+    	.category-table tbody tr:last-of-type {
+      		border-bottom: 2px solid #4154f1;
+    	}
+    
+    	.category-table tbody tr:hover {
+      		background-color: #f1f3ff;
+    	}
+    
+    	.action-btn {
+      		display: inline-flex;
+      		align-items: center;
+      		padding: 6px 12px;
+      		border-radius: 4px;
+      		text-decoration: none;
+      		font-weight: 500;
+      		font-size: 0.85rem;
+      		transition: all 0.3s ease;
+    	}
+    
+    	.delete-btn {
+      		background-color: #ff3d3d;
+      		color: white;
+    	}
+    
+    	.delete-btn:hover {
+      		background-color: #ff0000;
+      		transform: translateY(-2px);
+      		box-shadow: 0 2px 8px rgba(255, 0, 0, 0.2);
+    	}
+    
+    	.add-category-btn {
+      		background-color: #4154f1;
+      		color: white;
+      		padding: 10px 20px;
+      		border-radius: 6px;
+      		text-decoration: none;
+      		font-weight: 500;
+      		display: inline-flex;
+      		align-items: center;
+      		gap: 8px;
+      		margin-top: 20px;
+      		transition: all 0.3s ease;
+      		box-shadow: 0 2px 10px rgba(65, 84, 241, 0.2);
+    	}
+    
+    	.add-category-btn:hover {
+      		background-color: #2a3ac7;
+      		transform: translateY(-2px);
+      		box-shadow: 0 4px 12px rgba(65, 84, 241, 0.3);
+    	}
+    
+    	.card {
+      		border-radius: 10px;
+      		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      		padding: 25px;
+      		margin-bottom: 30px;
+      		background-color: #fff;
+    	}
+    
+    	.card-title {
+      		color: #4154f1;
+      		margin-bottom: 20px;
+      		font-weight: 600;
+    	}
+    
+    	.no-data {
+      		text-align: center;
+      		padding: 20px;
+      		color: #6c757d;
+      		font-style: italic;
+    	}
+  	</style>
 </head>
 
 <body>
@@ -64,28 +161,59 @@
       		<nav>
         		<ol class="breadcrumb">
           			<li class="breadcrumb-item"><a href="home">Home</a></li>
-          			<li class="breadcrumb-item active">List Category</li>
+          			<li class="breadcrumb-item active">List Categories</li>
         		</ol>
       		</nav>
     	</div><!-- End Page Title -->
 
     	<section class="section dashboard">
-			<table border="3">
-				<tr>
-					<th>Category Id</th>
-					<th>Category Name</th>
-					<th>Action</th>
-				</tr>
-				<c:forEach items="${categoryList}" var="category">
-					<tr>
-						<td>${category.categoryId}</td>
-						<td>${category.categoryName}</td>
-						<td><a href="userdeletecategory?categoryId=${category.categoryId}">Delete</a></td>
-					</tr>
-				</c:forEach>
-			</table>
-			<br>
-			<a href="usernewcategory">Add Category</a>
+      		<div class="row">
+        		<div class="col-lg-12">
+          			<div class="card">
+            			<div class="card-body">
+              				<h5 class="card-title">Your Categories</h5>
+              				
+              				<!-- Table with styled rows -->
+              				<table class="category-table">
+                				<thead>
+                  					<tr>
+                    					<th>Category ID</th>
+                    					<th>Category Name</th>
+                    					<th>Actions</th>
+                  					</tr>
+                				</thead>
+                				<tbody>
+                  					<c:choose>
+                    					<c:when test="${not empty categoryList}">
+                      						<c:forEach items="${categoryList}" var="category">
+                        						<tr>
+                          							<td>${category.categoryId}</td>
+                          							<td>${category.categoryName}</td>
+                          							<td>
+                            							<a href="userdeletecategory?categoryId=${category.categoryId}" class="action-btn delete-btn">
+                              								<i class="bi bi-trash"></i> Delete
+                            							</a>
+                          							</td>
+                        						</tr>
+                      						</c:forEach>
+                    					</c:when>
+                    					<c:otherwise>
+                      						<tr>
+                        						<td colspan="3" class="no-data">No categories found. Add your first category!</td>
+                      						</tr>
+                    					</c:otherwise>
+                  					</c:choose>
+                				</tbody>
+              				</table>
+              				<!-- End Table -->
+              				
+              				<a href="usernewcategory" class="add-category-btn">
+                					<i class="bi bi-plus-circle"></i> Add New Category
+              				</a>
+            			</div>
+          			</div>
+        		</div>
+      		</div>
     	</section>
 
   	</main><!-- End #main -->
@@ -110,5 +238,4 @@
   	<script src="assets/js/main.js"></script>
 
 </body>
-
 </html>

@@ -43,6 +43,7 @@
        			<span>Incomes</span>
        		</a>
     	</li><!-- End Incomes Nav -->
+    	
     	<li class="nav-item">
        		<a class="nav-link " href="listexpense">
        			<i class="bi bi-grid"></i>

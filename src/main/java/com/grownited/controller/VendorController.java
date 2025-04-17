@@ -24,9 +24,12 @@ public class VendorController {
 	
 	@PostMapping("/savevendor")
 	public String saveVendor(VendorEntity vendor) {
-		vendorRepo.save(vendor);
-		return "redirect:/listvendor";
+	    vendor.setUserId(null);  // ✅ global vendor
+	    vendorRepo.save(vendor);
+	    return "redirect:/listvendor";
 	}
+
+
 	
 	@GetMapping("/listvendor")
 	public String listVendor(Model model) {
