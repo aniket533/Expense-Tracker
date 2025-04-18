@@ -201,7 +201,7 @@
                                     <div class="col-sm-8">
                                         <select name="accountId" class="form-select" required>
                                             <option value="">--Select Account--</option>
-                                            <c:forEach items="${accounts}" var="a">
+                                            <c:forEach items="${accountList}" var="a">
                                                 <option value="${a.accountId}">${a.title}</option>
                                             </c:forEach>
                                         </select>

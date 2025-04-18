@@ -18,6 +18,8 @@ import com.grownited.repository.IncomeRepository;
 import com.grownited.repository.StatusRepository;
 import com.grownited.repository.UserRepository;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class UserIncomeController {
 	@Autowired
@@ -30,8 +32,11 @@ public class UserIncomeController {
 	UserRepository userRepo;
 
 	@GetMapping("/usernewincome")
-	public String usernewIncome(Model model) {
-		List<IncomeEntity> accountList = incomeRepo.findAll();
+	public String usernewIncome(Model model,HttpSession session) {
+		UserEntity user=(UserEntity) session.getAttribute("user");
+		Integer userId=user.getUserId();
+		
+		List<AccountEntity> accountList = accountRepo.findByUserId(userId);
 		List<StatusEntity> statusList = statusRepo.findAll();
 		List<UserEntity> userList = userRepo.findAll();
 		model.addAttribute("accountList", accountList);

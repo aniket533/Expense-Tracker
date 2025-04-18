@@ -46,7 +46,9 @@ public class UserExpenseController {
 	UserRepository userRepo;
 	
 	@GetMapping("/usernewexpense")
-	public String usernewExpense(Model model) {
+	public String usernewExpense(Model model, HttpSession session ) {
+		UserEntity user=(UserEntity) session.getAttribute("user");
+		Integer userId=user.getUserId();
 		List<CategoryEntity> categoryList = categoryRepo.findAll();
 		List<SubcategoryEntity> subcategoryList = subcategoryRepo.findAll();
 		List<VendorEntity> vendorList = vendorRepo.findAll();
