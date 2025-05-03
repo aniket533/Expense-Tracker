@@ -34,85 +34,87 @@
   	<link href="assets/css/style.css" rel="stylesheet">
 	
   	<style>
-    	/* Vendor List Table Styling */
-    	.vendor-table-container {
-      		background: #fff;
-      		padding: 20px;
-      		border-radius: 8px;
-      		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-      		margin-bottom: 30px;
-    	}
-    
+    	/* Custom CSS for Vendors Table - Matching Category style */
     	.vendor-table {
       		width: 100%;
       		border-collapse: collapse;
-      		font-size: 0.95em;
+      		margin: 25px 0;
+      		font-size: 0.9em;
+      		min-width: 400px;
+      		border-radius: 5px 5px 0 0;
+      		overflow: hidden;
+      		box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     	}
     
     	.vendor-table thead tr {
       		background-color: #4154f1;
-      		color: #fff;
+      		color: #ffffff;
       		text-align: left;
+      		font-weight: bold;
     	}
     
-    	.vendor-table th {
-      		padding: 12px 15px;
-      		font-weight: 600;
-    	}
-    
+    	.vendor-table th,
     	.vendor-table td {
       		padding: 12px 15px;
-      		border-bottom: 1px solid #eee;
     	}
     
-    	.vendor-table tbody tr:last-child td {
-      		border-bottom: none;
+    	.vendor-table tbody tr {
+      		border-bottom: 1px solid #dddddd;
+    	}
+    
+    	.vendor-table tbody tr:nth-of-type(even) {
+      		background-color: #f3f3f3;
+    	}
+    
+    	.vendor-table tbody tr:last-of-type {
+      		border-bottom: 2px solid #4154f1;
     	}
     
     	.vendor-table tbody tr:hover {
-      		background-color: #f6f9ff;
+      		background-color: #f1f3ff;
     	}
     
-    	/* Add Vendor Button */
+    	.action-btn {
+      		display: inline-block;
+      		padding: 6px 12px;
+      		border-radius: 4px;
+      		text-decoration: none;
+      		font-weight: 500;
+      		transition: all 0.3s ease;
+    	}
+    
+    	.delete-btn {
+      		background-color: #ff3d3d;
+      		color: white;
+    	}
+    
+    	.delete-btn:hover {
+      		background-color: #ff0000;
+      		transform: translateY(-2px);
+    	}
+    
     	.add-vendor-btn {
-      		display: inline-flex;
-      		align-items: center;
-      		padding: 10px 20px;
       		background-color: #4154f1;
       		color: white;
+      		padding: 10px 20px;
+      		border-radius: 4px;
       		text-decoration: none;
-      		border-radius: 6px;
-      		transition: all 0.3s ease;
-      		margin-bottom: 20px;
       		font-weight: 500;
+      		display: inline-block;
+      		margin-top: 20px;
+      		transition: all 0.3s ease;
     	}
     
     	.add-vendor-btn:hover {
-      		background-color: #2a3ab9;
+      		background-color: #2a3ac7;
       		transform: translateY(-2px);
-      		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     	}
     
-    	.add-vendor-btn i {
-      		margin-right: 8px;
-    	}
-    
-    	/* Global Badge */
-    	.global-badge {
-      		background-color: #2eca6a;
-      		color: white;
-      		padding: 4px 10px;
-      		border-radius: 20px;
-      		font-size: 0.8em;
-      		font-weight: 500;
-    	}
-    
-    	/* Responsive adjustments */
-    	@media (max-width: 768px) {
-      		.vendor-table {
-        		display: block;
-        		overflow-x: auto;
-      		}
+    	.card {
+      		border-radius: 10px;
+      		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      		padding: 20px;
+      		margin-bottom: 30px;
     	}
   	</style>
 </head>
@@ -146,29 +148,42 @@
     	<section class="section dashboard">
       		<div class="row">
         		<div class="col-lg-12">
-          			<div class="vendor-table-container">
-            				<a href="newvendor" class="add-vendor-btn">
-              					<i class="bi bi-plus-circle"></i>Add Vendor
-            				</a>
-            
-            				<table class="vendor-table">
-              					<thead>
-                					<tr>
-                  						<th>Vendor ID</th>
-                  						<th>Vendor Name</th>
-                  						
-                					</tr>
-              					</thead>
-              					<tbody>
-                					<c:forEach var="vendor" items="${vendorList}">
-                  						<tr>
-                    							<td>${vendor.vendorId}</td>
-                    							<td>${vendor.vendorName}</td>
-                    							
-                  						</tr>
-                					</c:forEach>
-              					</tbody>
-            				</table>
+          			<div class="card">
+            			<div class="card-body">
+              				<h5 class="card-title">Vendors</h5>
+              				
+              				<!-- Table with stripped rows -->
+              				<table class="vendor-table">
+                				<thead>
+                  					<tr>
+                    					<th>Vendor ID</th>
+                    					<th>Vendor Name</th>
+                    					<th>User ID</th>
+                    					<th>Action</th>
+                    					
+                  					</tr>
+                				</thead>
+                				<tbody>
+                  					<c:forEach items="${vendorList}" var="vendor">
+                    					<tr>
+                      						<td>${vendor.vendorId}</td>
+                      						<td>${vendor.vendorName}</td>
+                      						<td>${vendor.userId}</td>
+                      						<td>
+                        						<a href="deletevendor?vendorId=${vendor.vendorId}" class="action-btn delete-btn">
+                          							<i class="bi bi-trash"></i> Delete
+                        						</a>
+                      						</td>
+                    					</tr>
+                  					</c:forEach>
+                				</tbody>
+              				</table>
+              				<!-- End Table with stripped rows -->
+              				
+              				<a href="newvendor" class="add-vendor-btn">
+                					<i class="bi bi-plus-circle"></i> Add New Vendor
+              				</a>
+            			</div>
           			</div>
         		</div>
       		</div>
@@ -196,5 +211,4 @@
   	<script src="assets/js/main.js"></script>
 
 </body>
-
 </html>

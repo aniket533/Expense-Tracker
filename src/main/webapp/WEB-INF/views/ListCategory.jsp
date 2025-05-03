@@ -158,6 +158,7 @@
                   					<tr>
                     					<th>Category ID</th>
                     					<th>Category Name</th>
+                    					<th>user ID</th>
                     					<th>Action</th>
                   					</tr>
                 				</thead>
@@ -166,6 +167,7 @@
                     					<tr>
                       						<td>${category.categoryId}</td>
                       						<td>${category.categoryName}</td>
+                      						<td>${category.userId}</td>
                       						<td>
                         						<a href="deletecategory?categoryId=${category.categoryId}" class="action-btn delete-btn">
                           							<i class="bi bi-trash"></i> Delete

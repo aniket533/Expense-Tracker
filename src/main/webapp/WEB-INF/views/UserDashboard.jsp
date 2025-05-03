@@ -84,7 +84,7 @@
 				<!-- Sales Card -->
 				<div class="col-xxl-3 col-md-3">
 					<div class="card info-card sales-card">
-
+                         
 
 
 						<div class="card-body">
@@ -95,7 +95,7 @@
 							<div class="d-flex align-items-center">
 								<div
 									class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-									<i class="bi bi-cart"></i>
+									<i class="bi bi-currency-rupee"></i>
 								</div>
 								<div class="ps-2">
 									<h6>Rs ${currentMonthExp}</h6>
@@ -125,7 +125,7 @@
 							<div class="d-flex align-items-center">
 								<div
 									class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-									<i class="bi bi-currency-dollar"></i>
+									<i class="bi bi-currency-rupee"></i>
 								</div>
 								<div class="ps-2">
 									<h6>Rs ${currentYearExp}</h6>

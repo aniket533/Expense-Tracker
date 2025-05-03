@@ -127,21 +127,21 @@
   	<main id="main" class="main">
 
     	<div class="pagetitle">
-      		<h1>My Income</h1>
-      		<nav>
-        		<ol class="breadcrumb">
-          			<li class="breadcrumb-item"><a href="home">Home</a></li>
-          			<li class="breadcrumb-item active">List Income</li>
-        		</ol>
-      		</nav>
-    	</div><!-- End Page Title -->
+    <h1>List of Incomes</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="home">Home</a></li>
+            <li class="breadcrumb-item active">List Income</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
 
     	<section class="section dashboard">
       		<div class="row">
         		<div class="col-lg-12">
           			<div class="card">
             			<div class="card-body">
-              				<h5 class="card-title">Income Records</h5>
+              				<h5 class="card-title"> Your Incomes </h5>
               				<div class="table-responsive">
                 				<table class="table table-hover">
                   					<thead>
@@ -154,20 +154,20 @@
                   					</thead>
                   					<tbody>
                     						<c:choose>
-                      						<c:when test="${not empty income}">
-                        						<c:forEach items="${income}" var="inc">
-                          						<tr>
-                            						<td>${inc.title}</td>
-                            						<td class="amount-positive">$${inc.amount}</td>
-                            						<td>${inc.date}</td>
-                            						<td>
-                              							<a href="userdeleteincome?incomeId=${inc.incomeId}" class="action-btn delete-btn">
-                                							<i class="bi bi-trash"></i> Delete
-                              							</a>
-                            						</td>
-                          						</tr>
-                        						</c:forEach>
-                      						</c:when>
+                      						<c:when test="${not empty incomeList}">
+    <c:forEach items="${incomeList}" var="inc">
+        <tr>
+            <td>${inc.title}</td>
+            <td class="amount-positive">$${inc.amount}</td>
+            <td>${inc.date}</td>
+            <td>
+                <a href="userdeleteincome?incomeId=${inc.incomeId}" class="action-btn delete-btn">
+                    <i class="bi bi-trash"></i> Delete
+                </a>
+            </td>
+        </tr>
+    </c:forEach>
+</c:when>
                       						<c:otherwise>
                         						<tr>
                           						<td colspan="4" class="no-data">No income records found</td>

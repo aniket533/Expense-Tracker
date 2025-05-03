@@ -4,8 +4,7 @@ package com.grownited.controller;
 
 
 import java.io.IOException;
-
-
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -22,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.grownited.entity.UserEntity;
+import com.grownited.repository.ExpenseRepository;
 import com.grownited.repository.UserRepository;
 import com.grownited.service.MailService;
 
@@ -37,6 +37,10 @@ public class SessionController {
 	
 	@Autowired
 	MailService serviceMail;
+	
+	@Autowired
+	ExpenseRepository expenseRepo;
+
 	
 	@Autowired
 	UserRepository repouser;
@@ -128,28 +132,81 @@ public class SessionController {
   
   
  
-   @GetMapping("admindashboard")
-   public String admindashboard(Model model) {
-	   
-	   Long totalUsers = repouser.count();
-	   
-	   Integer totaluser = repouser.findByRole("USER").size();
-	   
-	   Integer totalAdmin = repouser.findByRole("ADMIN").size();
-	    
-	   long totalexpense = repouser.findByRole("USER").size();
-	   
-	   model.addAttribute("totalUser",totaluser);
-	   
-       return "AdminDashboard";  // This should match the actual template/view name
+  @GetMapping("admindashboard")
+  public String admindashboard(Model model) {
+      // User counts
+      Integer totaluser = repouser.findByRole("USER").size();
+      Integer totalAdmin = repouser.findByRole("ADMIN").size();
+      
+      // Get total expenses by user
+      List<Object[]> userExpenses = expenseRepo.getTotalExpensesByUser();
+      
+      // Calculate total expense across all users
+      Double totalExpenseAmount = userExpenses.stream()
+              .mapToDouble(e -> (Double)e[2])
+              .sum();
+      
+      List<Integer[]> monthlyExpenses = expenseRepo.getExpenseSumByMonth();
+      Map<Integer, Double> monthlyData = new HashMap<>();
+      
+      for (Integer[] data : monthlyExpenses) {
+          monthlyData.put(data[1], data[0].doubleValue());
+      }
+      
+      // Fill in all 12 months (even if no data)
+      for (int month = 1; month <= 12; month++) {
+          monthlyData.putIfAbsent(month, 0.0);
+      }
+      
+      model.addAttribute("monthlyData", monthlyData);
+      
+      // Add attributes to model
+      model.addAttribute("totalUser", totaluser);
+      model.addAttribute("totalAdmin", totalAdmin);
+      model.addAttribute("userExpenses", userExpenses);
+      model.addAttribute("totalexpense", totalExpenseAmount);
+      
+      return "AdminDashboard";
+  }
+   @GetMapping("adminnotification")
+   public String adminnotification() {
+       return "AdminNotification"; 
    }
-  
-   
    
    @GetMapping("home")
    public String home() {
        return "Home"; 
    }
+   
+   @GetMapping("/editadminprofile") 
+   public String editadminProfile() { 
+       return "EditAdminProfile"; 
+   }
+   
+   
+   @PostMapping("updateadminprofile")
+   public String updateMyProfile(UserEntity entity, HttpSession session) {
+
+       Optional<UserEntity> op = repouser.findById(entity.getUserId());
+
+       if(op.isPresent()) {
+           UserEntity dbuser = op.get();
+           dbuser.setFirstName(entity.getFirstName());
+           dbuser.setLastName(entity.getLastName());
+           dbuser.setEmail(entity.getEmail());
+           dbuser.setBornYear(entity.getBornYear());
+           dbuser.setContactNum(entity.getContactNum());
+
+           repouser.save(dbuser);
+
+           // 🟢 Update session
+           session.setAttribute("user", dbuser);
+       }
+
+       return "redirect:/admindashboard";  // redirect to reflect new data
+   }
+
+   
    
    @GetMapping("/logout")
    public String logout(HttpServletRequest request) {

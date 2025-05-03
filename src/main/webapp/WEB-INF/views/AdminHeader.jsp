@@ -2,7 +2,7 @@
    	
    	<div class="d-flex align-items-center justify-content-between">
     	
-    	<a href="home" class="logo d-flex align-items-center">
+    	<a  class="logo d-flex align-items-center">
        		<img src="assets/img/logo.png" alt="">
        		<span class="d-none d-lg-block">ExpenseTracker</span>
    		</a>
@@ -16,18 +16,13 @@
       		<ul class="d-flex align-items-center">
         		
         		<li class="nav-item dropdown">
-          			<a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+          			<a class="nav-link nav-icon" href="adminnotification" data-bs-toggle="dropdown">
             			<i class="bi bi-bell"></i>
             			<span class="badge bg-primary badge-number"></span>
           			</a><!-- End Notification Icon -->
 				</li>
 					
-        		<li class="nav-item dropdown">
-          			<a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            			<i class="bi bi-chat-left-text"></i>
-            			<span class="badge bg-success badge-number"></span>
-          			</a><!-- End Messages Icon -->
-        		</li>
+        		
 				
 				
 				<c:if test="${not empty user}">
@@ -51,7 +46,10 @@
               					</a>
             				</li>
             				<li>
-              					<hr class="dropdown-divider">
+              					<a class="dropdown-item d-flex align-items-center" href="editadminprofile">
+              					<i class="bi bi-pencil-square"></i>
+              					<span>Edit Profile</span>
+              					</a>
             				</li>
             			 
             				<li>

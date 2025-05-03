@@ -9,7 +9,7 @@ public interface SubCategoryDto {
 	public String getCategoryName(); 
 	public Integer getCategoryId();
 	public String getSubcategoryName();
-	
+	public Integer getUserId();
  
 
 }

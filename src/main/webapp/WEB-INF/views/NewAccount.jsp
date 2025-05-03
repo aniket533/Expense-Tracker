@@ -156,25 +156,22 @@
                 				<input type="text" id="title" name="title" class="form-control" required>
               				</div>
               
-              				<div class="form-group">
-                				<label for="amount">Initial Amount</label>
-                				<input type="number" id="amount" name="amount" class="form-control" step="0.01" required>
-              				</div>
+              				
               
               				<div class="form-group">
-                				<label for="userId">User</label>
-                				<select id="userId" name="userId" class="form-control" required>
-                  					<option value="">Select User</option>
-                  					<c:forEach items="${userList}" var="user">
-                    						<option value="${user.userId}">${user.firstName} ${user.lastName}</option>
-                  					</c:forEach>
-                				</select>
-              				</div>
+    <label for="userId">User</label>
+    <select id="userId" name="userId" class="form-control" required>
+        <option value="">Select User</option>
+       <!-- Added "Select All" option -->
+        <c:forEach items="${userList}" var="user">
+            <c:if test="${user.role == 'USER'}"> <!-- Only show users with USER role -->
+                <option value="${user.userId}">  ${user.userId}  ${user.firstName} ${user.lastName}</option>
+            </c:if>
+        </c:forEach>
+    </select>
+</div>
               
-              				<div class="checkbox-group">
-                				<input type="checkbox" id="isDefault" name="isDefault">
-                				<label for="isDefault">Set as Default Account</label>
-              				</div>
+              				
               
               				<button type="submit" class="submit-btn">Save Account</button>
             			</form>

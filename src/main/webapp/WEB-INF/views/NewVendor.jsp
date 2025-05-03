@@ -6,34 +6,34 @@
 <html lang="en">
 
 <head>
-  	<meta charset="utf-8">
-	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  	<title>New Vendor | Expense Manager</title>
-  	<meta content="" name="description">
-  	<meta content="" name="keywords">
+    <title>New Vendor | Expense Manager</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
 
-  	<!-- Favicons -->
-  	<link href="assets/img/favicon.png" rel="icon">
-  	<link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  	<!-- Google Fonts -->	
-  	<link href="https://fonts.gstatic.com" rel="preconnect">
-  	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-  	<!-- Vendor CSS Files -->
-  	<link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  	<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  	<link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  	<link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  	<link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  	<link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  	<link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
-	
-  	<!-- Template Main CSS File -->
-  	<link href="assets/css/style.css" rel="stylesheet">
-	
-  	<style>
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet">
+
+    <style>
         /* Custom CSS for Vendor Form */
         .vendor-form-container {
             max-width: 600px;
@@ -117,83 +117,104 @@
 
 <body>
 
-	<!-- ======= Session Validate ======= -->
-  	<%@include file="SessionValidate.jsp" %>
-  	<!-- End Session Validate -->
+    <!-- ======= Session Validate ======= -->
+    <%@include file="SessionValidate.jsp"%>
+    <!-- End Session Validate -->
+    
+    <!-- ======= Header ======= -->
+    <jsp:include page="AdminHeader.jsp"></jsp:include>
+    <!-- End Header -->
 
-  	<!-- ======= Header ======= -->
-  	<jsp:include page="AdminHeader.jsp"></jsp:include>
-  	<!-- End Header -->
+    <!-- ======= Sidebar ======= -->
+    <jsp:include page="AdminSidebar.jsp"></jsp:include>
+    <!-- End Sidebar -->
 
-  	<!-- ======= Sidebar ======= -->
-  	<jsp:include page="AdminSidebar.jsp"></jsp:include>
-  	<!-- End Sidebar-->
+    <main id="main" class="main">
 
-  	<main id="main" class="main">
+        <div class="pagetitle">
+            <h1>New Vendor</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="home">Home</a></li>
+                    <li class="breadcrumb-item active">New Vendor</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
 
-    	<div class="pagetitle">
-      		<h1>New Vendor</h1>
-      		<nav>
-        		<ol class="breadcrumb">
-          			<li class="breadcrumb-item"><a href="home">Home</a></li>
-          			<li class="breadcrumb-item active">New Vendor</li>
-        		</ol>
-      		</nav>
-    	</div><!-- End Page Title -->
+        <section class="section dashboard">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="vendor-form-container">
+                        <div class="vendor-form-card">
+                            <h5>Create New Vendor</h5>
+                            <form action="savevendor" method="post">
+                                <div class="form-group">
+                                    <label for="vendorName">Vendor Name</label>
+                                    <input type="text" id="vendorName" name="vendorName" class="form-control" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="userId"> User</label>
+                                    <select id="userId" name="userId" class="form-control" required>
+                                        <option value="">Select User</option>
+                                        <c:forEach items="${userList}" var="user">
+                                            <c:if test="${user.role == 'USER'}">
+                                                <option value="${user.userId}"> ${user.userId}  ${user.firstName} ${user.lastName}</option>
+                                            </c:if>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                
+                                <button type="submit" class="btn-primary">Save Vendor</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    	<section class="section dashboard">
-      		<div class="row">
-        		<div class="col-lg-12">
-          			<div class="vendor-form-container">
-            			<div class="vendor-form-card">
-              				<h5>Create New Vendor</h5>
-              				<form action="savevendor" method="post">
-                				<div class="form-group">
-                  					<label for="vendorName">Vendor Name</label>
-                  					<input type="text" id="vendorName" name="vendorName" class="form-control" required>
-                				</div>
-                				<button type="submit" class="btn-primary">Save Vendor</button>
-              				</form>
-            			</div>
-          			</div>
-        		</div>
-      		</div>
-    	</section>
+    </main><!-- End #main -->
 
-  	</main><!-- End #main -->
+    <!-- ======= Footer ======= -->
+    <jsp:include page="AdminFooter.jsp"></jsp:include>
+    <!-- End Footer -->
 
-  	<!-- ======= Footer ======= -->
-  	<jsp:include page="AdminFooter.jsp"></jsp:include>
-  	<!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  	<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/chart.js/chart.umd.js"></script>
+    <script src="assets/vendor/echarts/echarts.min.js"></script>
+    <script src="assets/vendor/quill/quill.min.js"></script>
+    <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
 
-  	<!-- Vendor JS Files -->
-  	<script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
-  	<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  	<script src="assets/vendor/chart.js/chart.umd.js"></script>
-  	<script src="assets/vendor/echarts/echarts.min.js"></script>
-  	<script src="assets/vendor/quill/quill.min.js"></script>
-  	<script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-  	<script src="assets/vendor/tinymce/tinymce.min.js"></script>
-  	<script src="assets/vendor/php-email-form/validate.js"></script>
+    <!-- Template Main JS File -->
+    <script src="assets/js/main.js"></script>
 
-  	<!-- Template Main JS File -->
-  	<script src="assets/js/main.js"></script>
-
-  	<script>
-    	// Basic form validation
-    	document.querySelector('form').addEventListener('submit', function(e) {
-      		const vendorName = document.getElementById('vendorName').value.trim();
-      
-      		if (!vendorName) {
-        		e.preventDefault();
-        		alert('Please enter a vendor name');
-        		document.getElementById('vendorName').focus();
-        		return;
-      		}
-    	});
-  	</script>
+    <script>
+        // Form validation
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const vendorName = document.getElementById('vendorName').value.trim();
+            const userId = document.getElementById('userId').value;
+            
+            if (!vendorName) {
+                e.preventDefault();
+                alert('Please enter a vendor name');
+                document.getElementById('vendorName').focus();
+                return;
+            }
+            
+            if (!userId) {
+                e.preventDefault();
+                alert('Please select a user');
+                document.getElementById('userId').focus();
+                return;
+            }
+        });
+    </script>
 
 </body>
 </html>

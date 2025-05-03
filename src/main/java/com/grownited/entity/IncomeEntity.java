@@ -4,83 +4,114 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "incomes")
 public class IncomeEntity {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer incomeId;
-	private String title;
-	private Integer accountId;
-	private Integer statusId;
-	private Double amount;
-	private String date;
-	private String description;
-	private Integer userId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer incomeId;
+    
+    private String title;
+    
+    @ManyToOne
+    @JoinColumn(name = "accountId", insertable = false, updatable = false)
+    private AccountEntity account;
+    
+    private Integer accountId;
+    
+    private Integer statusId;
+    private Double amount;
+    private String date;
+    private String description;
+    
+    @ManyToOne
+    @JoinColumn(name = "userId", insertable = false, updatable = false)
+    private UserEntity user;
+    
+    private Integer userId;
 
-	public Integer getIncomeId() {
-		return incomeId;
-	}
+    // Getters and Setters
+    public Integer getIncomeId() {
+        return incomeId;
+    }
 
-	public void setIncomeId(Integer incomeId) {
-		this.incomeId = incomeId;
-	}
+    public void setIncomeId(Integer incomeId) {
+        this.incomeId = incomeId;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public Integer getAccountId() {
-		return accountId;
-	}
+    public AccountEntity getAccount() {
+        return account;
+    }
 
-	public void setAccountId(Integer accountId) {
-		this.accountId = accountId;
-	}
+    public void setAccount(AccountEntity account) {
+        this.account = account;
+    }
 
-	public Integer getStatusId() {
-		return statusId;
-	}
+    public Integer getAccountId() {
+        return accountId;
+    }
 
-	public void setStatusId(Integer statusId) {
-		this.statusId = statusId;
-	}
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
+    }
 
-	public Double getAmount() {
-		return amount;
-	}
+    public Integer getStatusId() {
+        return statusId;
+    }
 
-	public void setAmount(Double amount) {
-		this.amount = amount;
-	}
+    public void setStatusId(Integer statusId) {
+        this.statusId = statusId;
+    }
 
-	public String getDate() {
-		return date;
-	}
+    public Double getAmount() {
+        return amount;
+    }
 
-	public void setDate(String date) {
-		this.date = date;
-	}
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDate() {
+        return date;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setDate(String date) {
+        this.date = date;
+    }
 
-	public Integer getUserId() {
-		return userId;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.grownited.entity.AccountEntity;
 import com.grownited.entity.UserEntity;
 import com.grownited.repository.AccountRepository;
+import com.grownited.repository.IncomeRepository;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -21,6 +22,10 @@ public class UserAccountController {
 
     @Autowired
     AccountRepository accountRepo;
+    
+    @Autowired
+    IncomeRepository incomeRepo;
+
 
     @GetMapping("userlistaccount")
     public String userlistaccount(Model model, HttpSession session) {
@@ -44,7 +49,12 @@ public class UserAccountController {
     }
 
     @GetMapping("/userdeleteaccount")
-    public String deleteaccount(@RequestParam Integer accountId) {
+    public String deleteaccount(@RequestParam Integer accountId, HttpSession session) {
+        if (incomeRepo.existsByAccountId(accountId)) {
+            session.setAttribute("error", "You cannot delete this account because it is used in income records.");
+            return "redirect:/userlistaccount";
+        }
+
         accountRepo.deleteById(accountId);
         return "redirect:/userlistaccount";
     }

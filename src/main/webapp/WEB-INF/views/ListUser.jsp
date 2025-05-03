@@ -32,17 +32,71 @@
 	
   	<!-- Template Main CSS File -->
   	<link href="assets/css/style.css" rel="stylesheet">
-	
-  	<!-- =======================================================
-  	* Template Name: NiceAdmin
-  	* Updated: Jan 29 2024 with Bootstrap v5.3.2
-  	* Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  	* Author: BootstrapMade.com
-  	* License: https://bootstrapmade.com/license/
-  	======================================================== -->
   	
-  	<!-- DataTables Buttons CSS -->
-  	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
+  	<!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.bootstrap5.min.css">
+    
+   <style>
+    /* Simplified action buttons */
+    .action-btns {
+        display: flex;
+        gap: 8px;
+    }
+    
+    .action-btns a {
+        color: #6c757d;
+        text-decoration: none;
+        font-size: 0.9rem;
+        padding: 4px 8px;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+    }
+    
+    .action-btns a:hover {
+        background-color: #f8f9fa;
+        text-decoration: none;
+    }
+    
+    .action-btns .delete {
+        color: #dc3545;
+    }
+    
+    .action-btns .edit {
+        color: #28a745;
+    }
+    
+    .action-btns .view {
+        color: #17a2b8;
+    }
+    
+    .action-btns a:hover.delete {
+        background-color: rgba(220, 53, 69, 0.1);
+    }
+    
+    .action-btns a:hover.edit {
+        background-color: rgba(40, 167, 69, 0.1);
+    }
+    
+    .action-btns a:hover.view {
+        background-color: rgba(23, 162, 184, 0.1);
+    }
+</style>
+
+<!-- In the table body -->
+<td class="action-btns">
+    <a href="deleteUser?userId=${user.userId}" 
+       class="delete" 
+       onclick="return confirm('Are you sure you want to delete this user?')">
+       Delete
+    </a>
+    <a href="editUser?userId=${user.userId}" class="edit">
+       Edit
+    </a>
+    <a href="viewUser?userId=${user.userId}" class="view">
+       View
+    </a>
+</td>
 </head>
 
 <body>
@@ -72,139 +126,68 @@
     	</div><!-- End Page Title -->
 
     	<section class="section dashboard">
-			<style>
-    .table-container {
-        overflow-x: auto;
-        background: white;
-        border-radius: 0.5rem;
-        box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.1);
-        margin: 2rem 0;
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        font-family: 'Nunito', sans-serif;
-        color: #444444;
-        margin: 0;
-    }
-
-    th {
-        background-color: #4154f1;
-        color: white;
-        padding: 1rem 1.5rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        font-size: 0.85em;
-        letter-spacing: 0.5px;
-    }
-
-    td {
-        padding: 1rem 1.5rem;
-        border-bottom: 1px solid #f0f0f0;
-        font-size: 0.95em;
-    }
-
-    tr:nth-child(even) {
-        background-color: #f9faff;
-    }
-
-    tr:hover {
-        background-color: #f1f3ff;
-        transition: background-color 0.3s ease;
-    }
-
-    .action-links {
-        display: flex;
-        gap: 1rem;
-    }
-
-    .action-links a {
-        color: #4154f1;
-        text-decoration: none;
-        padding: 0.25rem 0.5rem;
-        border-radius: 4px;
-        transition: all 0.3s ease;
-    }
-
-    .action-links a:hover {
-        background-color: #4154f1;
-        color: white;
-        text-decoration: none;
-    }
-
-    @media (max-width: 768px) {
-        th, td {
-            padding: 0.75rem 1rem;
-        }
-        
-        .table-container {
-            border-radius: 0.25rem;
-        }
-    }
-</style>
-
-<div class="table-container">
-    <table id="userTable" class="display">
-        <!-- Table content remains the same -->
-    </table>
-</div>
-<table id="userTable" class="display">
-    <thead>
-        <tr>
-            <th>User Id</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Gender</th>
-            <th>Contact Num</th>
-            <th>Email</th>
-            <th>Born Year</th>
-            <th>Role</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <c:forEach var="user" items="${userList}">
-            <tr>
-                <td>${user.userId}</td>  <!-- Changed from user.id -->
-                <td>${user.firstName}</td>
-                <td>${user.lastName}</td>
-                <td>${user.gender}</td>
-                <td>${user.contactNum}</td>
-                <td>${user.email}</td>
-                <td>${user.bornYear}</td>
-                <td>${user.role}</td>
-                <td>
-                    <a href="deleteUser?userId=${user.userId}">Delete</a> | 
-                  <a href="editUser?userId=${user.userId}">Edit</a>    |<a href="viewUser?userId=${user.userId}">View</a>
-                  
-
-                </td>
-            </tr>
-        </c:forEach>
-    </tbody>
-</table>
-
-
-<!-- Pagination Section (Insert Here) -->
-<div class="pagination" style="margin-top: 20px;">
-    <c:if test="${currentPage > 1}">
-        <a href="listuser?page=${currentPage - 1}" class="btn btn-primary">Previous</a>
-    </c:if>
-
-    <c:forEach begin="1" end="${totalPages}" var="i">
-        <a href="listuser?page=${i}" 
-           class="btn <c:if test="${i == currentPage}">btn-dark</c:if>">
-            ${i}
-        </a>
-    </c:forEach>
-
-    <c:if test="${currentPage < totalPages}">
-        <a href="listuser?page=${currentPage + 1}" class="btn btn-primary">Next</a>
-    </c:if>
-</div>
-			<br>
-			<a href="newuser">Add User</a>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card user-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Users</h5>
+                            
+                            <div class="table-responsive">
+                                <table id="userTable" class="table user-table">
+                                    <thead>
+                                        <tr>
+                                            <th>User Id</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Gender</th>
+                                            <th>Contact Num</th>
+                                            <th>Email</th>
+                                            <th>Born Year</th>
+                                            <th>Role</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="user" items="${userList}">
+                                            <tr>
+                                                <td>${user.userId}</td>
+                                                <td>${user.firstName}</td>
+                                                <td>${user.lastName}</td>
+                                                <td>${user.gender}</td>
+                                                <td>${user.contactNum}</td>
+                                                <td>${user.email}</td>
+                                                <td>${user.bornYear}</td>
+                                                <td>${user.role}</td>
+                                                <td class="action-btns">
+                                                    <a href="deleteUser?userId=${user.userId}" 
+                                                       class="btn btn-delete" 
+                                                       onclick="return confirm('Are you sure you want to delete this user?')">
+                                                        <i class="bi bi-trash"></i> Delete
+                                                    </a>
+                                                    <a href="editUser?userId=${user.userId}" 
+                                                       class="btn btn-edit">
+                                                        <i class="bi bi-pencil"></i> Edit
+                                                    </a>
+                                                    <a href="viewUser?userId=${user.userId}" 
+                                                       class="btn btn-view">
+                                                        <i class="bi bi-eye"></i> View
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="text-end mt-3">
+                                <a href="newuser" class="add-user-btn">
+                                    <i class="bi bi-plus-circle"></i> Add New User
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
     	</section>
 
   	</main><!-- End #main -->
@@ -227,7 +210,8 @@
   	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 					
 	<!-- DataTables and Buttons JS -->
-	<script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 	<script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
@@ -238,57 +222,56 @@
   	<!-- Template Main JS File -->
   	<script src="assets/js/main.js"></script>
 
-<!-- Initialize DataTables with Buttons -->
 <script>
     $(document).ready(function () {
         $('#userTable').DataTable({
-            dom: 'Bfrtip',
+            dom: '<"top"<"row"<"col-sm-12 col-md-6"B><"col-sm-12 col-md-6"f>>>rt<"bottom"<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"p>>>',
             buttons: [
                 {
                     extend: 'copy',
-                    exportOptions: {
-                        columns: ':not(:last-child)' // Exclude last column (Action)
-                    }
-                },
-                {
-                    extend: 'csv',
-                    exportOptions: {
-                        columns: ':not(:last-child)' // Exclude last column (Action)
-                    }
+                    className: 'btn btn-primary',
+                    text: '<i class="bi bi-files"></i> Copy'
                 },
                 {
                     extend: 'excel',
-                    exportOptions: {
-                        columns: ':not(:last-child)' // Exclude last column (Action)
-                    }
+                    className: 'btn btn-primary',
+                    text: '<i class="bi bi-file-earmark-excel"></i> Excel'
                 },
                 {
                     extend: 'pdf',
-                    exportOptions: {
-                        columns: ':not(:last-child)' // Exclude last column (Action)
-                    }
+                    className: 'btn btn-primary',
+                    text: '<i class="bi bi-file-earmark-pdf"></i> PDF'
                 },
                 {
                     extend: 'print',
-                    exportOptions: {
-                        columns: ':not(:last-child)' // Exclude last column (Action)
-                    }
+                    className: 'btn btn-primary',
+                    text: '<i class="bi bi-printer"></i> Print'
                 }
             ],
-            "paging": true,
-            "lengthMenu": [5, 10, 25, 50],
-            "ordering": true,
-            "info": true,
-            "searching": true,
-            "columnDefs": [
+            lengthMenu: [[5, 10, 20, -1], [5, 10, 20, "All"]],
+            pageLength: 10,
+            responsive: true,
+            language: {
+                search: "_INPUT_",
+                searchPlaceholder: "Search users...",
+                lengthMenu: "Show _MENU_ entries",
+                info: "Showing _START_ to _END_ of _TOTAL_ entries",
+                paginate: {
+                    first: "First",
+                    last: "Last",
+                    next: "Next",
+                    previous: "Previous"
+                }
+            },
+            columnDefs: [
                 {
-                    "targets": -1, // Last column
-                    "orderable": false // Make Action column non-orderable
+                    targets: -1, // Last column (Actions)
+                    orderable: false,
+                    searchable: false
                 }
             ]
         });
     });
 </script>
 </body>
-
 </html>

@@ -132,12 +132,12 @@
         		<div class="col-lg-12">
           			<div class="card">
             			<div class="card-body">
-              				<h5 class="card-title">Vendors</h5>
+              				<h5 class="card-title"> Your Vendors</h5>
               				<div class="table-responsive">
                 				<table class="table table-hover">
                   					<thead>
                     						<tr>
-                      						<th scope="col">Vendor ID</th>
+                      						
                       						<th scope="col">Vendor Name</th>
                       						<th scope="col">Action</th>
                     						</tr>
@@ -145,10 +145,10 @@
                   					<tbody>
                     						<c:forEach items="${vendorList}" var="vendor">
                       						<tr>
-                        						<td>${vendor.vendorId}</td>
+                        						
                         						<td>${vendor.vendorName}</td>
                         						<td>
-                          							<a href="deletevendor?vendorId=${vendor.vendorId}" class="action-btn delete-btn">
+                          							<a href="userdeletevendor?vendorId=${vendor.vendorId}" class="action-btn delete-btn">
                             							<i class="bi bi-trash"></i> Delete
                           							</a>
                         						</td>

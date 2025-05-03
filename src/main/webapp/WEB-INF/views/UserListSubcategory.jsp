@@ -34,124 +34,80 @@
   	<link href="assets/css/style.css" rel="stylesheet">
 	
   	<style>
-    	/* Custom CSS for Subcategories Table */
-    	.subcategory-table {
+    	.card {
+      		border-radius: 10px;
+      		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    	}
+    	.table-container {
+      		padding: 20px;
+    	}
+    	.table {
       		width: 100%;
       		border-collapse: collapse;
-      		margin: 25px 0;
-      		font-size: 0.9em;
-      		min-width: 600px;
-      		border-radius: 8px;
-      		overflow: hidden;
-      		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     	}
-    
-    	.subcategory-table thead tr {
+    	.table th {
       		background-color: #4154f1;
-      		color: #ffffff;
+      		color: white;
+      		padding: 12px;
       		text-align: left;
-      		font-weight: bold;
     	}
-    
-    	.subcategory-table th,
-    	.subcategory-table td {
-      		padding: 12px 15px;
+    	.table td {
+      		padding: 12px;
+      		border-bottom: 1px solid #e9ecef;
     	}
-    
-    	.subcategory-table tbody tr {
-      		border-bottom: 1px solid #e0e0e0;
-    	}
-    
-    	.subcategory-table tbody tr:nth-of-type(even) {
+    	.table tr:hover {
       		background-color: #f8f9fa;
     	}
-    
-    	.subcategory-table tbody tr:last-of-type {
-      		border-bottom: 2px solid #4154f1;
-    	}
-    
-    	.subcategory-table tbody tr:hover {
-      		background-color: #f1f3ff;
-    	}
-    
-    	.action-btns {
-      		display: flex;
-      		gap: 8px;
-    	}
-    
     	.action-btn {
-      		display: inline-flex;
-      		align-items: center;
+      		display: inline-block;
       		padding: 6px 12px;
       		border-radius: 4px;
       		text-decoration: none;
       		font-weight: 500;
-      		font-size: 0.85rem;
-      		transition: all 0.3s ease;
+      		transition: all 0.3s;
     	}
-    
     	.delete-btn {
-      		background-color: #ff3d3d;
+      		background-color: #dc3545;
       		color: white;
     	}
-    
     	.delete-btn:hover {
-      		background-color: #ff0000;
-      		transform: translateY(-2px);
-      		box-shadow: 0 2px 8px rgba(255, 0, 0, 0.2);
-    	}
-    
-    	.edit-btn {
-      		background-color: #2ecc71;
+      		background-color: #bb2d3b;
       		color: white;
     	}
-    
-    	.edit-btn:hover {
-      		background-color: #27ae60;
-      		transform: translateY(-2px);
-      		box-shadow: 0 2px 8px rgba(46, 204, 113, 0.2);
+    	.edit-btn {
+      		background-color: #28a745;
+      		color: white;
     	}
-    
-    	.add-subcategory-btn {
+    	.edit-btn:hover {
+      		background-color: #218838;
+      		color: white;
+    	}
+    	.add-btn {
       		background-color: #4154f1;
       		color: white;
       		padding: 10px 20px;
-      		border-radius: 6px;
+      		border-radius: 5px;
       		text-decoration: none;
-      		font-weight: 500;
-      		display: inline-flex;
-      		align-items: center;
-      		gap: 8px;
+      		display: inline-block;
       		margin-top: 20px;
-      		transition: all 0.3s ease;
-      		box-shadow: 0 2px 10px rgba(65, 84, 241, 0.2);
+      		transition: all 0.3s;
     	}
-    
-    	.add-subcategory-btn:hover {
-      		background-color: #2a3ac7;
-      		transform: translateY(-2px);
-      		box-shadow: 0 4px 12px rgba(65, 84, 241, 0.3);
+    	.add-btn:hover {
+      		background-color: #2a3ac9;
+      		color: white;
     	}
-    
-    	.card {
-      		border-radius: 10px;
-      		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      		padding: 25px;
-      		margin-bottom: 30px;
-      		background-color: #fff;
+    	.table-responsive {
+      		overflow-x: auto;
     	}
-    
-    	.card-title {
-      		color: #4154f1;
-      		margin-bottom: 20px;
-      		font-weight: 600;
-    	}
-    
     	.no-data {
       		text-align: center;
       		padding: 20px;
       		color: #6c757d;
       		font-style: italic;
+    	}
+    	.action-btns {
+      		display: flex;
+      		gap: 8px;
     	}
   	</style>
 </head>
@@ -188,50 +144,46 @@
           			<div class="card">
             			<div class="card-body">
               				<h5 class="card-title">Your Sub-categories</h5>
-              				
-              				<!-- Table with styled rows -->
-              				<table class="subcategory-table">
-                				<thead>
-                  					<tr>
-                    					<th>Sub-category ID</th>
-                    					<th>Sub-category Name</th>
-                    					<th>Category ID</th>
-                    					<th>Actions</th>
-                  					</tr>
-                				</thead>
-                				<tbody>
-                  					<c:choose>
-                    					<c:when test="${not empty subcategoryList}">
-                      						<c:forEach items="${subcategoryList}" var="subcategory">
-                        						<tr>
-                          							<td>${subcategory.subCategoryId}</td>
-                          							<td>${subcategory.subCategoryName}</td>
-                          							<td>${subcategory.categoryId}</td>
-                          							<td>
-                            							<div class="action-btns">
-                              								<a href="editsubcategory?subcategoryId=${subcategory.subCategoryId}" class="action-btn edit-btn">
-                                								<i class="bi bi-pencil-square"></i> Edit
-                              								</a>
-                              								<a href="deletesubcategory?subcategoryId=${subcategory.subCategoryId}" class="action-btn delete-btn">
-                                								<i class="bi bi-trash"></i> Delete
-                              								</a>
-                            							</div>
-                          							</td>
-                        						</tr>
-                      						</c:forEach>
-                    					</c:when>
-                    					<c:otherwise>
-                      						<tr>
-                        						<td colspan="4" class="no-data">No sub-categories found. Add your first sub-category!</td>
-                      						</tr>
-                    					</c:otherwise>
-                  					</c:choose>
-                				</tbody>
-              				</table>
-              				<!-- End Table -->
-              				
-              				<a href="usernewsubcategory" class="add-subcategory-btn">
-                					<i class="bi bi-plus-circle"></i> Add New Sub-category
+              				<div class="table-responsive">
+                				<table class="table table-hover">
+                  					<thead>
+                    					<tr>
+                      					
+                      					<th scope="col">Sub-category Name</th>
+                      					<th scope="col">Category Name</th>
+                      					<th scope="col">Actions</th>
+                    					</tr>
+                  					</thead>
+                  					<tbody>
+                    					<c:choose>
+                      					<c:when test="${not empty subcategoryList}">
+                        					<c:forEach items="${subcategoryList}" var="subcategory">
+                          					<tr>
+                            					
+                            					<td>${subcategory.subCategoryName}</td>
+                            					<td>${subcategory.categoryName}</td>
+                            					<td>
+                              					<div class="action-btns">
+                                					
+                                					<a href="userdeletesubcategory?subcategoryId=${subcategory.subCategoryId}" class="action-btn delete-btn">
+                                  						<i class="bi bi-trash"></i> Delete
+                                					</a>
+                              					</div>
+                            					</td>
+                          					</tr>
+                        					</c:forEach>
+                      					</c:when>
+                      					<c:otherwise>
+                        					<tr>
+                          					<td colspan="4" class="no-data">No sub-categories found. Add your first sub-category!</td>
+                        					</tr>
+                      					</c:otherwise>
+                    					</c:choose>
+                  					</tbody>
+                				</table>
+              				</div>
+              				<a href="usernewsubcategory" class="add-btn">
+                				<i class="bi bi-plus-circle"></i> Add New Sub-category
               				</a>
             			</div>
           			</div>

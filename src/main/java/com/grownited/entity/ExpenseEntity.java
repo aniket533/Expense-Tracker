@@ -21,7 +21,8 @@ public class ExpenseEntity {
 	private String date;
 	private String description;
 	private Integer userId;
-
+    private String subCategoryName;
+	
 	public Integer getExpenseId() {
 		return expenseId;
 	}
@@ -104,5 +105,13 @@ public class ExpenseEntity {
 
 	public void setUserId(Integer userId) {
 		this.userId = userId;
+	}
+	
+	public String getSubCategoryName() {
+	    return subCategoryName;
+	}
+
+	public void setSubCategoryName(String subCategoryName) {
+	    this.subCategoryName = subCategoryName;
 	}
 }

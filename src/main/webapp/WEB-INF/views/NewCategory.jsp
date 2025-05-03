@@ -151,6 +151,19 @@
                 					<label for="categoryName">Category Name</label>
                 					<input type="text" id="categoryName" name="categoryName" class="form-control" required>
               					</div>
+              					
+              					 <div class="form-group">
+                                    <label for="userId"> User</label>
+                                    <select id="userId" name="userId" class="form-control" required>
+                                        <option value="">Select User</option>
+                                        <c:forEach items="${userList}" var="user">
+                                            <c:if test="${user.role == 'USER'}">
+                                                <option value="${user.userId}">${user.userId}  ${user.firstName} ${user.lastName}</option>
+                                            </c:if>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+              					
               					<button type="submit" class="submit-btn">
                 					<i class="bi bi-save"></i>Save Category
               					</button>

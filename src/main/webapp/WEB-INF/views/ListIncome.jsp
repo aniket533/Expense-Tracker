@@ -34,111 +34,94 @@
   	<link href="assets/css/style.css" rel="stylesheet">
 	
   	<style>
-        /* Custom CSS for Income List */
-        .income-table-container {
-            background: #fff;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            margin-bottom: 30px;
-        }
-        
-        .income-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 1rem;
-        }
-        
-        .income-table th {
-            background-color: #4154f1;
-            color: white;
-            padding: 12px 15px;
-            text-align: left;
-            font-weight: 600;
-        }
-        
-        .income-table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #eee;
-            vertical-align: middle;
-        }
-        
-        .income-table tr:hover {
-            background-color: #f8f9fa;
-        }
-        
-        .income-table tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        
-        .action-link {
-            color: #4154f1;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        .action-link:hover {
-            color: #3143c5;
-            text-decoration: underline;
-        }
-        
-        .add-income-btn {
-            display: inline-block;
-            background-color: #4154f1;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: background-color 0.3s;
-            margin-top: 1rem;
-        }
-        
-        .add-income-btn:hover {
-            background-color: #3143c5;
-            color: white;
-        }
-        
-        /* Responsive table */
-        @media (max-width: 768px) {
-            .income-table-container {
-                padding: 1rem;
-                overflow-x: auto;
-            }
-            
-            .income-table {
-                display: block;
-                overflow-x: auto;
-                white-space: nowrap;
-            }
-        }
-        
-        /* Status badges */
-        .status-badge {
-            display: inline-block;
-            padding: 0.35rem 0.65rem;
-            border-radius: 50rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-        
-        .status-active {
-            background-color: #d1e7dd;
-            color: #0f5132;
-        }
-        
-        .status-inactive {
-            background-color: #f8d7da;
-            color: #842029;
-        }
-        
-        /* Amount formatting */
-        .income-amount {
-            font-weight: 600;
-            color: #2a9d8f;
-        }
-    </style>
+    	/* Custom CSS for Incomes Table - Matching Category style */
+    	.income-table {
+      		width: 100%;
+      		border-collapse: collapse;
+      		margin: 25px 0;
+      		font-size: 0.9em;
+      		min-width: 400px;
+      		border-radius: 5px 5px 0 0;
+      		overflow: hidden;
+      		box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    	}
+    
+    	.income-table thead tr {
+      		background-color: #4154f1;
+      		color: #ffffff;
+      		text-align: left;
+      		font-weight: bold;
+    	}
+    
+    	.income-table th,
+    	.income-table td {
+      		padding: 12px 15px;
+    	}
+    
+    	.income-table tbody tr {
+      		border-bottom: 1px solid #dddddd;
+    	}
+    
+    	.income-table tbody tr:nth-of-type(even) {
+      		background-color: #f3f3f3;
+    	}
+    
+    	.income-table tbody tr:last-of-type {
+      		border-bottom: 2px solid #4154f1;
+    	}
+    
+    	.income-table tbody tr:hover {
+      		background-color: #f1f3ff;
+    	}
+    
+    	.action-btn {
+      		display: inline-block;
+      		padding: 6px 12px;
+      		border-radius: 4px;
+      		text-decoration: none;
+      		font-weight: 500;
+      		transition: all 0.3s ease;
+    	}
+    
+    	.delete-btn {
+      		background-color: #ff3d3d;
+      		color: white;
+    	}
+    
+    	.delete-btn:hover {
+      		background-color: #ff0000;
+      		transform: translateY(-2px);
+    	}
+    
+    	.add-income-btn {
+      		background-color: #4154f1;
+      		color: white;
+      		padding: 10px 20px;
+      		border-radius: 4px;
+      		text-decoration: none;
+      		font-weight: 500;
+      		display: inline-block;
+      		margin-top: 20px;
+      		transition: all 0.3s ease;
+    	}
+    
+    	.add-income-btn:hover {
+      		background-color: #2a3ac7;
+      		transform: translateY(-2px);
+    	}
+    
+    	.card {
+      		border-radius: 10px;
+      		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      		padding: 20px;
+      		margin-bottom: 30px;
+    	}
+    
+    	.income-amount {
+      		font-weight: 600;
+      		color: #2a9d8f;
+    	}
+  	</style>
 </head>
 
 <body>
@@ -170,19 +153,20 @@
     	<section class="section dashboard">
       		<div class="row">
         		<div class="col-lg-12">
-          			<div class="income-table-container">
-            			<div class="table-responsive">
+          			<div class="card">
+            			<div class="card-body">
+              				<h5 class="card-title">Incomes</h5>
+              				
+              				<!-- Table with stripped rows -->
               				<table class="income-table">
                 				<thead>
                   					<tr>
                     					<th>Income ID</th>
                     					<th>Title</th>
-                    					<th>Account Type</th>
-                    					<th>Status</th>
+                    					<th>Account ID</th>
                     					<th>Amount</th>
                     					<th>Date</th>
-                    					<th>Description</th>
-                    					<th>User</th>
+                    					<th>User ID</th>
                     					<th>Action</th>
                   					</tr>
                 				</thead>
@@ -192,27 +176,26 @@
                       						<td>${income.incomeId}</td>
                       						<td>${income.title}</td>
                       						<td>${income.accountId}</td>
-                      						<td>
-                          						
-                      						</td>
-                      						<td class="income-amount">$${income.amount}</td>
+                      						<td class="income-amount">${income.amount}</td>
                       						<td>${income.date}</td>
-                      						<td>${income.description}</td>
                       						<td>${income.userId}</td>
                       						<td>
-                          						<a href="deleteincome?incomeId=${income.incomeId}" class="action-link" 
-                             						onclick="return confirm('Are you sure you want to delete this income record?')">
-                              						Delete
-                          						</a>
+                        						<a href="deleteincome?incomeId=${income.incomeId}" 
+                           						   class="action-btn delete-btn"
+                           						   onclick="return confirm('Are you sure you want to delete this income record?')">
+                          							<i class="bi bi-trash"></i> Delete
+                        						</a>
                       						</td>
                     					</tr>
                   					</c:forEach>
                 				</tbody>
               				</table>
+              				<!-- End Table with stripped rows -->
+              				
+              				<a href="newincome" class="add-income-btn">
+                					<i class="bi bi-plus-circle"></i> Add New Income
+              				</a>
             			</div>
-            			<a href="newincome" class="add-income-btn">
-              				<i class="bi bi-plus-circle"></i> Add New Income
-            			</a>
           			</div>
         		</div>
       		</div>

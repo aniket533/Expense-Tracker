@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cloudinary.Cloudinary;
@@ -100,7 +101,10 @@ public class UserDashboardController {
     }*/
     
     @PostMapping("updatemyprofile")
-    public String updateMyProfile(UserEntity entity, HttpSession session) {
+    public String updateMyProfile(
+        UserEntity entity, 
+        @RequestParam(value = "profilePic", required = false) MultipartFile profilePic,
+        HttpSession session) {
 
         Optional<UserEntity> op = userRepo.findById(entity.getUserId());
 
@@ -112,13 +116,27 @@ public class UserDashboardController {
             dbuser.setBornYear(entity.getBornYear());
             dbuser.setContactNum(entity.getContactNum());
 
-            userRepo.save(dbuser);
+            // Handle profile picture upload
+            if (profilePic != null && !profilePic.isEmpty()) {
+                try {
+                    Map result = cloudinary.uploader().upload(profilePic.getBytes(), 
+                        ObjectUtils.asMap(
+                            "public_id", "user_" + dbuser.getUserId(),
+                            "overwrite", true,
+                            "resource_type", "image"
+                        ));
+                    String imageUrl = result.get("url").toString();
+                    dbuser.setProfilePicPath(imageUrl);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    // Keep existing profile picture if upload fails
+                }
+            }
 
-            // 🟢 Update session
+            userRepo.save(dbuser);
             session.setAttribute("user", dbuser);
         }
 
-        return "redirect:/userdashboard";  // redirect to reflect new data
+        return "redirect:/userdashboard";
     }
-
 }

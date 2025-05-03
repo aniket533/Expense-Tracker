@@ -172,16 +172,9 @@
                   					<input type="text" id="title" name="title" class="form-control" required placeholder="e.g., Bank Account, Cash Wallet">
                 				</div>
                 
-                				<div class="form-group">
-                  					<label for="amount">Initial Amount</label>
-                  					<input type="number" id="amount" name="amount" class="form-control" step="0.01" min="0" required placeholder="0.00">
-                				</div>
+                				
                 
-                				<div class="checkbox-group">
-                  					<input type="checkbox" id="isDefault" name="isDefault">
-                  					<label for="isDefault">Set as Default Account</label>
-                				</div>
-                
+                				
                 				<button type="submit" class="submit-btn">
                   					<i class="bi bi-save"></i> Save Account
                 				</button>

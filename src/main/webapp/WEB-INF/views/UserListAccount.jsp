@@ -34,115 +34,97 @@
   	<link href="assets/css/style.css" rel="stylesheet">
 	
   	<style>
-        /* Custom CSS for Accounts List */
-        .accounts-container {
-            background: #fff;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            margin-bottom: 30px;
-        }
-        
-        .accounts-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 1.5rem;
-        }
-        
-        .accounts-table th {
-            background-color: #4154f1;
-            color: white;
-            padding: 12px 15px;
-            text-align: left;
-            font-weight: 600;
-        }
-        
-        .accounts-table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #eee;
-            vertical-align: middle;
-        }
-        
-        .accounts-table tr:hover {
-            background-color: #f8f9fa;
-        }
-        
-        .accounts-table tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        
-        .action-link {
-            color: #4154f1;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-        
-        .action-link:hover {
-            color: #3143c5;
-            text-decoration: underline;
-        }
-        
-        .add-account-btn {
-            display: inline-flex;
-            align-items: center;
-            background-color: #4154f1;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: background-color 0.3s;
-        }
-        
-        .add-account-btn:hover {
-            background-color: #3143c5;
-            color: white;
-        }
-        
-        .add-account-btn i {
-            margin-right: 8px;
-        }
-        
-        /* Status indicator */
-        .default-status {
-            display: inline-block;
-            padding: 0.35rem 0.75rem;
-            border-radius: 50rem;
-            font-size: 0.875rem;
-            font-weight: 600;
-        }
-        
-        .default-true {
-            background-color: #d1e7dd;
-            color: #0f5132;
-        }
-        
-        .default-false {
-            background-color: #fff3cd;
-            color: #664d03;
-        }
-        
-        /* Amount styling */
-        .account-amount {
-            font-weight: 600;
-            color: #2a9d8f;
-        }
-        
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .accounts-container {
-                padding: 1rem;
-                overflow-x: auto;
-            }
-            
-            .accounts-table {
-                display: block;
-                overflow-x: auto;
-                white-space: nowrap;
-            }
-        }
-    </style>
+    	.card {
+      		border-radius: 10px;
+      		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    	}
+    	.table-container {
+      		padding: 20px;
+    	}
+    	.table {
+      		width: 100%;
+      		border-collapse: collapse;
+    	}
+    	.table th {
+      		background-color: #4154f1;
+      		color: white;
+      		padding: 12px;
+      		text-align: left;
+    	}
+    	.table td {
+      		padding: 12px;
+      		border-bottom: 1px solid #e9ecef;
+    	}
+    	.table tr:hover {
+      		background-color: #f8f9fa;
+    	}
+    	.action-btn {
+      		display: inline-block;
+      		padding: 6px 12px;
+      		border-radius: 4px;
+      		text-decoration: none;
+      		font-weight: 500;
+      		transition: all 0.3s;
+    	}
+    	.delete-btn {
+      		background-color: #dc3545;
+      		color: white;
+    	}
+    	.delete-btn:hover {
+      		background-color: #bb2d3b;
+      		color: white;
+    	}
+    	.edit-btn {
+      		background-color: #28a745;
+      		color: white;
+    	}
+    	.edit-btn:hover {
+      		background-color: #218838;
+      		color: white;
+    	}
+    	.add-btn {
+      		background-color: #4154f1;
+      		color: white;
+      		padding: 10px 20px;
+      		border-radius: 5px;
+      		text-decoration: none;
+      		display: inline-block;
+      		margin-top: 20px;
+      		transition: all 0.3s;
+    	}
+    	.add-btn:hover {
+      		background-color: #2a3ac9;
+      		color: white;
+    	}
+    	.table-responsive {
+      		overflow-x: auto;
+    	}
+    	.no-data {
+      		text-align: center;
+      		padding: 20px;
+      		color: #6c757d;
+      		font-style: italic;
+    	}
+    	.default-status {
+      		display: inline-block;
+      		padding: 0.35rem 0.75rem;
+      		border-radius: 50rem;
+      		font-size: 0.875rem;
+      		font-weight: 600;
+    	}
+    	.default-true {
+      		background-color: #d1e7dd;
+      		color: #0f5132;
+    	}
+    	.default-false {
+      		background-color: #fff3cd;
+      		color: #664d03;
+    	}
+    	.account-amount {
+      		font-weight: 600;
+      		color: #2a9d8f;
+    	}
+  	</style>
 </head>
 
 <body>
@@ -150,7 +132,7 @@
 	<!-- ======= Session Validate ======= -->
   	<%@include file="SessionValidate.jsp" %>
   	<!-- End Session Validate -->
-	
+
   	<!-- ======= Header ======= -->
   	<jsp:include page="UserHeader.jsp"></jsp:include>
   	<!-- End Header -->
@@ -170,45 +152,53 @@
         		</ol>
       		</nav>
     	</div><!-- End Page Title -->
+    	
+    	<c:if test="${not empty error}">
+    <div style="color: red; font-weight: bold;">
+        ${error}
+    </div>
+</c:if>
+    	
 
     	<section class="section dashboard">
       		<div class="row">
         		<div class="col-lg-12">
-          			<div class="accounts-container">
-            			<div class="table-responsive">
-              				<table class="accounts-table">
-                				<thead>
-                  					<tr>
-                    					<th>Account Title</th>
-                    					<th>Amount</th>
-                    					<th>Default Account</th>
-                    					<th>Action</th>
-                  					</tr>
-                				</thead>
-                				<tbody>
-                  					<c:forEach items="${accountList}" var="account">
+          			<div class="card">
+            			<div class="card-body">
+              				<h5 class="card-title">Your Accounts</h5>
+              				<div class="table-responsive">
+                				<table class="table table-hover">
+                  					<thead>
                     					<tr>
-                      						<td>${account.title}</td>
-                      						<td class="account-amount">$${account.amount}</td>
-                      						<td>
-                          						<span class="default-status ${account.isDefault ? 'default-true' : 'default-false'}">
-                              						${account.isDefault ? 'Yes' : 'No'}
-                          						</span>
-                      						</td>
-                      						<td>
-                          						<a href="userdeleteaccount?accountId=${account.accountId}" class="action-link"
-                             						onclick="return confirm('Are you sure you want to delete this account?')">
-                              						Delete
-                          						</a>
-                      						</td>
+                      					<th scope="col">Account Title</th>
+                      					
+                      					
+                      					<th scope="col">Actions</th>
                     					</tr>
-                  					</c:forEach>
-                				</tbody>
-              				</table>
+                  					</thead>
+                  					<tbody>
+                    					<c:forEach items="${accountList}" var="account">
+                      					<tr>
+                        					<td>${account.title}</td>
+                        					
+                        					
+                        					<td>
+                          						<a href="userdeleteaccount?accountId=${account.accountId}" 
+                             						class="action-btn delete-btn"
+                             						onclick="return confirm('Are you sure you want to delete this account?')">
+                              						<i class="bi bi-trash"></i> Delete
+                          						</a>
+                          						
+                        					</td>
+                      					</tr>
+                    					</c:forEach>
+                  					</tbody>
+                				</table>
+              				</div>
+              				<a href="usernewaccount" class="add-btn">
+                				<i class="bi bi-plus-circle"></i> Add New Account
+              				</a>
             			</div>
-            			<a href="usernewaccount" class="add-account-btn">
-              				<i class="bi bi-plus-circle"></i> Add New Account
-            			</a>
           			</div>
         		</div>
       		</div>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -86,4 +87,25 @@ public class ExpenseController {
 		expenseRepo.deleteById(expenseId);
 		return "redirect:/listexpense";
 	}
+	 @GetMapping("/get-categories/{userId}")
+	    public List<CategoryEntity> getCategoriesByUserId(@PathVariable Integer userId) {
+	        return categoryRepo.findByUserId(userId);
+	    }
+
+	    @GetMapping("/get-accounts/{userId}")
+	    public List<AccountEntity> getAccountsByUserId(@PathVariable Integer userId) {
+	        return accountRepo.findByUserId(userId);
+	    }
+
+	    @GetMapping("/get-vendors/{userId}")
+	    public List<VendorEntity> getVendorsByUserId(@PathVariable Integer userId) {
+	        return vendorRepo.findByUserId(userId);
+	    }
+
+	    @GetMapping("/get-subcategories/{userId}/{categoryId}")
+	    public List<SubcategoryEntity> getSubcategoriesByUserIdAndCategoryId(
+	            @PathVariable Integer userId,
+	            @PathVariable Integer categoryId) {
+	        return subcategoryRepo.findByUserIdAndCategoryId(userId, categoryId);
+	    }
 }

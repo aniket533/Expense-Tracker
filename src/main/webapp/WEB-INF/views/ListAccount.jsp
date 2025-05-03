@@ -34,90 +34,87 @@
     <link href="assets/css/style.css" rel="stylesheet">
 
     <style>
-        .card {
-            border-radius: 0.5rem;
-            box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.1);
-        }
-        
-        .table-responsive {
-            overflow-x: auto;
-        }
-        
-        .table {
+        /* Custom CSS for Accounts Table - Matching Category style */
+        .account-table {
             width: 100%;
             border-collapse: collapse;
-            font-family: 'Nunito', sans-serif;
+            margin: 25px 0;
+            font-size: 0.9em;
+            min-width: 400px;
+            border-radius: 5px 5px 0 0;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
         }
-        
-        .table th {
+    
+        .account-table thead tr {
             background-color: #4154f1;
-            color: white;
-            padding: 1rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.85em;
-            letter-spacing: 0.5px;
+            color: #ffffff;
             text-align: left;
+            font-weight: bold;
         }
-        
-        .table td {
-            padding: 1rem;
-            border-bottom: 1px solid #f0f0f0;
-            font-size: 0.95em;
-            vertical-align: middle;
+    
+        .account-table th,
+        .account-table td {
+            padding: 12px 15px;
         }
-        
-        .table tr:nth-child(even) {
-            background-color: #f9faff;
+    
+        .account-table tbody tr {
+            border-bottom: 1px solid #dddddd;
         }
-        
-        .table tr:hover {
+    
+        .account-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+    
+        .account-table tbody tr:last-of-type {
+            border-bottom: 2px solid #4154f1;
+        }
+    
+        .account-table tbody tr:hover {
             background-color: #f1f3ff;
         }
-        
-        .badge {
-            font-size: 0.85em;
-            font-weight: 500;
-            padding: 0.35em 0.65em;
-        }
-        
-        .badge-success {
-            background-color: #e2ffe5;
-            color: #2ecc71;
-        }
-        
-        .badge-danger {
-            background-color: #ffe5e5;
-            color: #e74c3c;
-        }
-        
+    
         .action-btn {
-            padding: 0.25rem 0.5rem;
+            display: inline-block;
+            padding: 6px 12px;
             border-radius: 4px;
-            transition: all 0.3s ease;
-            margin-right: 0.5rem;
-        }
-        
-        .action-btn:hover {
             text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
-        
-        .btn-add {
+    
+        .delete-btn {
+            background-color: #ff3d3d;
+            color: white;
+        }
+    
+        .delete-btn:hover {
+            background-color: #ff0000;
+            transform: translateY(-2px);
+        }
+    
+        .add-account-btn {
             background-color: #4154f1;
             color: white;
-            padding: 0.5rem 1.5rem;
+            padding: 10px 20px;
             border-radius: 4px;
-            transition: background-color 0.3s ease;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            margin-top: 20px;
+            transition: all 0.3s ease;
         }
-        
-        .btn-add:hover {
-            background-color: #2d3dbf;
-            color: white;
+    
+        .add-account-btn:hover {
+            background-color: #2a3ac7;
+            transform: translateY(-2px);
         }
-        
-        .amount-cell {
-            font-weight: 600;
-            color: #4154f1;
+    
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 30px;
         }
     </style>
 </head>
@@ -139,67 +136,56 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Account Management</h1>
+            <h1>List of Accounts</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item active">Accounts</li>
+                    <li class="breadcrumb-item"><a href="home">Home</a></li>
+                    <li class="breadcrumb-item active">List Account</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
 
-        <section class="section">
+        <section class="section dashboard">
             <div class="row">
                 <div class="col-lg-12">
-
                     <div class="card">
                         <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center mb-4">
-                                <h5 class="card-title">All Accounts</h5>
-                                <a href="newaccount" class="btn btn-add">
-                                    <i class="bi bi-plus-circle"></i> Add New Account
-                                </a>
-                            </div>
-
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
+                            <h5 class="card-title">Accounts</h5>
+                            
+                            <!-- Table with stripped rows -->
+                            <table class="account-table">
+                                <thead>
+                                    <tr>
+                                        <th>Account ID</th>
+                                        <th>Title</th>
+                                        <th>User ID</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach items="${accountList}" var="account">
                                         <tr>
-                                            <th>Title</th>
-                                            <th>Amount</th>
-                                            <th>Default</th>
-                                            <th>User ID</th>
-                                            <th>Actions</th>
+                                            <td>${account.accountId}</td>
+                                            <td>${account.title}</td>
+                                            <td>${account.userId}</td>
+                                            <td>
+                                                <a href="deleteaccount?accountId=${account.accountId}" 
+                                                   class="action-btn delete-btn"
+                                                   onclick="return confirm('Are you sure you want to delete this account?')">
+                                                    <i class="bi bi-trash"></i> Delete
+                                                </a>
+                                            </td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach items="${accountList}" var="account">
-                                            <tr>
-                                                <td>${account.title}</td>
-                                                <td class="amount-cell">$${account.amount}</td>
-                                                <td>
-                                                    <span class="badge ${account.isDefault ? 'badge-success' : 'badge-danger'}">
-                                                        ${account.isDefault ? 'Yes' : 'No'}
-                                                    </span>
-                                                </td>
-                                                <td>${account.userId}</td>
-                                                <td>
-                                                    <a href="deleteaccount?accountId=${account.accountId}" 
-                                                       class="action-btn text-danger"
-                                                       onclick="return confirm('Are you sure you want to delete this account?')">
-                                                        <i class="bi bi-trash"></i> Delete
-                                                    </a>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
-
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                            <!-- End Table with stripped rows -->
+                            
+                            <a href="newaccount" class="add-account-btn">
+                                <i class="bi bi-plus-circle"></i> Add New Account
+                            </a>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
@@ -228,5 +214,4 @@
     <script src="assets/js/main.js"></script>
 
 </body>
-
 </html>

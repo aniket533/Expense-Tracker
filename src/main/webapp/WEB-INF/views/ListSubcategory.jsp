@@ -195,7 +195,8 @@
                   					<tr>
                     					<th>Sub-category ID</th>
                     					<th>Sub-category Name</th>
-                    					<th>Category ID</th>
+                    					<th>Category Name</th>
+                    					<th>User ID</th>
                     					<th>Actions</th>
                   					</tr>
                 				</thead>
@@ -206,7 +207,8 @@
                         						<tr>
                           							<td>${subcategory.subCategoryId}</td>
                           							<td>${subcategory.subCategoryName}</td>
-                          							<td>${subcategory.categoryId}</td>
+                          							<td>${subcategory.categoryName}</td>
+                          							<td>${subcategory.userId}</td>
                           							<td>
                             							<div class="action-btns">
                               								

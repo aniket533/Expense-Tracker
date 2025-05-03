@@ -34,103 +34,63 @@
   	<link href="assets/css/style.css" rel="stylesheet">
 	
   	<style>
-    	/* Custom CSS for Categories Table */
-    	.category-table {
+    	.card {
+      		border-radius: 10px;
+      		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    	}
+    	.table-container {
+      		padding: 20px;
+    	}
+    	.table {
       		width: 100%;
       		border-collapse: collapse;
-      		margin: 25px 0;
-      		font-size: 0.9em;
-      		min-width: 400px;
-      		border-radius: 8px;
-      		overflow: hidden;
-      		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     	}
-    
-    	.category-table thead tr {
+    	.table th {
       		background-color: #4154f1;
-      		color: #ffffff;
+      		color: white;
+      		padding: 12px;
       		text-align: left;
-      		font-weight: bold;
     	}
-    
-    	.category-table th,
-    	.category-table td {
-      		padding: 12px 15px;
+    	.table td {
+      		padding: 12px;
+      		border-bottom: 1px solid #e9ecef;
     	}
-    
-    	.category-table tbody tr {
-      		border-bottom: 1px solid #e0e0e0;
-    	}
-    
-    	.category-table tbody tr:nth-of-type(even) {
+    	.table tr:hover {
       		background-color: #f8f9fa;
     	}
-    
-    	.category-table tbody tr:last-of-type {
-      		border-bottom: 2px solid #4154f1;
-    	}
-    
-    	.category-table tbody tr:hover {
-      		background-color: #f1f3ff;
-    	}
-    
     	.action-btn {
-      		display: inline-flex;
-      		align-items: center;
+      		display: inline-block;
       		padding: 6px 12px;
       		border-radius: 4px;
       		text-decoration: none;
       		font-weight: 500;
-      		font-size: 0.85rem;
-      		transition: all 0.3s ease;
+      		transition: all 0.3s;
     	}
-    
     	.delete-btn {
-      		background-color: #ff3d3d;
+      		background-color: #dc3545;
       		color: white;
     	}
-    
     	.delete-btn:hover {
-      		background-color: #ff0000;
-      		transform: translateY(-2px);
-      		box-shadow: 0 2px 8px rgba(255, 0, 0, 0.2);
+      		background-color: #bb2d3b;
+      		color: white;
     	}
-    
-    	.add-category-btn {
+    	.add-btn {
       		background-color: #4154f1;
       		color: white;
       		padding: 10px 20px;
-      		border-radius: 6px;
+      		border-radius: 5px;
       		text-decoration: none;
-      		font-weight: 500;
-      		display: inline-flex;
-      		align-items: center;
-      		gap: 8px;
+      		display: inline-block;
       		margin-top: 20px;
-      		transition: all 0.3s ease;
-      		box-shadow: 0 2px 10px rgba(65, 84, 241, 0.2);
+      		transition: all 0.3s;
     	}
-    
-    	.add-category-btn:hover {
-      		background-color: #2a3ac7;
-      		transform: translateY(-2px);
-      		box-shadow: 0 4px 12px rgba(65, 84, 241, 0.3);
+    	.add-btn:hover {
+      		background-color: #2a3ac9;
+      		color: white;
     	}
-    
-    	.card {
-      		border-radius: 10px;
-      		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      		padding: 25px;
-      		margin-bottom: 30px;
-      		background-color: #fff;
+    	.table-responsive {
+      		overflow-x: auto;
     	}
-    
-    	.card-title {
-      		color: #4154f1;
-      		margin-bottom: 20px;
-      		font-weight: 600;
-    	}
-    
     	.no-data {
       		text-align: center;
       		padding: 20px;
@@ -172,43 +132,41 @@
           			<div class="card">
             			<div class="card-body">
               				<h5 class="card-title">Your Categories</h5>
-              				
-              				<!-- Table with styled rows -->
-              				<table class="category-table">
-                				<thead>
-                  					<tr>
-                    					<th>Category ID</th>
-                    					<th>Category Name</th>
-                    					<th>Actions</th>
-                  					</tr>
-                				</thead>
-                				<tbody>
-                  					<c:choose>
-                    					<c:when test="${not empty categoryList}">
-                      						<c:forEach items="${categoryList}" var="category">
-                        						<tr>
-                          							<td>${category.categoryId}</td>
-                          							<td>${category.categoryName}</td>
-                          							<td>
-                            							<a href="userdeletecategory?categoryId=${category.categoryId}" class="action-btn delete-btn">
-                              								<i class="bi bi-trash"></i> Delete
-                            							</a>
-                          							</td>
-                        						</tr>
-                      						</c:forEach>
-                    					</c:when>
-                    					<c:otherwise>
-                      						<tr>
-                        						<td colspan="3" class="no-data">No categories found. Add your first category!</td>
-                      						</tr>
-                    					</c:otherwise>
-                  					</c:choose>
-                				</tbody>
-              				</table>
-              				<!-- End Table -->
-              				
-              				<a href="usernewcategory" class="add-category-btn">
-                					<i class="bi bi-plus-circle"></i> Add New Category
+              				<div class="table-responsive">
+                				<table class="table table-hover">
+                  					<thead>
+                    					<tr>
+                      					
+                      					<th scope="col">Category Name</th>
+                      					<th scope="col">Action</th>
+                    					</tr>
+                  					</thead>
+                  					<tbody>
+                    					<c:choose>
+                      					<c:when test="${not empty categoryList}">
+                        					<c:forEach items="${categoryList}" var="category">
+                          					<tr>
+                            					
+                            					<td>${category.categoryName}</td>
+                            					<td>
+                              					<a href="userdeletecategory?categoryId=${category.categoryId}" class="action-btn delete-btn">
+                                					<i class="bi bi-trash"></i> Delete
+                              					</a>
+                            					</td>
+                          					</tr>
+                        					</c:forEach>
+                      					</c:when>
+                      					<c:otherwise>
+                        					<tr>
+                          					<td colspan="3" class="no-data">No categories found. Add your first category!</td>
+                        					</tr>
+                      					</c:otherwise>
+                    					</c:choose>
+                  					</tbody>
+                				</table>
+              				</div>
+              				<a href="usernewcategory" class="add-btn">
+                				<i class="bi bi-plus-circle"></i> Add New Category
               				</a>
             			</div>
           			</div>

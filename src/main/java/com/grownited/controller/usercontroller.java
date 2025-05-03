@@ -54,10 +54,16 @@ public class UserController {
     }
 
     @GetMapping("/editUser")
-    public String editUser(@RequestParam Integer userId, Model model) {
-        userRepo.findById(userId).ifPresent(user -> model.addAttribute("user", user));
+    public String editUser(@RequestParam Integer userId, Model model, HttpSession session) {
+        UserEntity loggedInUser = (UserEntity) session.getAttribute("user");
+        if (loggedInUser == null || (!loggedInUser.getRole().equals("ADMIN") && !loggedInUser.getUserId().equals(userId))) {
+            return "redirect:/accessDenied";
+        }
+        
+        userRepo.findById(userId).ifPresent(editingUser -> model.addAttribute("editUser", editingUser));
         return "EditUser";
     }
+
 
     @PostMapping("/updateUser")
     public String updateUser(
@@ -109,10 +115,7 @@ public class UserController {
                     
                     // Update session if same user
                     UserEntity sessionUser = (UserEntity) session.getAttribute("user");
-                    if (sessionUser != null && sessionUser.getUserId().equals(userId)) {
-                        sessionUser.setProfilePicPath(imageUrl);
-                        session.setAttribute("user", sessionUser);
-                    }
+                    
                 } catch (IOException e) {
                     e.printStackTrace();
                     user.setProfilePicPath(currentProfilePic); // Keep current if upload fails

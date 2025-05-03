@@ -23,13 +23,13 @@ public interface ExpenseRepository extends JpaRepository<ExpenseEntity, Integer>
 	Integer getCurrentYearExpAmountByUserId(Integer year,Integer userId);
 
 	@Query(value = "SELECT e.title as expenseTitle, e.expense_id as expenseId, e.amount, e.description, e.date, "
-		    + "u.first_name as firstName, a.title as accountTitle, v.vendor_name as vendorName, "
-		    + "c.category_name as categoryName, sc.subcategory_name as subCategoryName "
-		    + "FROM expenses e, users u, accounts a, vendors v, categories c, subcategories sc "
-		    + "WHERE e.user_id = u.user_id AND a.account_id = e.account_id AND v.vendor_id = e.vendor_id "
-		    + "AND c.category_id = e.category_id AND sc.subcategory_id = e.subcategory_id", 
-		    nativeQuery = true)
-		List<ExpenseDto> getAllExpenses();  // 👈 Keep original method name
+	        + "u.first_name as firstName, a.title as accountTitle, v.vendor_name as vendorName, "
+	        + "c.category_name as categoryName, sc.subcategory_name as subCategoryName, e.user_id as userId "
+	        + "FROM expenses e, users u, accounts a, vendors v, categories c, subcategories sc "
+	        + "WHERE e.user_id = u.user_id AND a.account_id = e.account_id AND v.vendor_id = e.vendor_id "
+	        + "AND c.category_id = e.category_id AND sc.subcategory_id = e.subcategory_id", 
+	        nativeQuery = true)
+	List<ExpenseDto> getAllExpenses();
 
 	@Query(value = " select sum(amount),month(date) from expenses group by month(date)",nativeQuery = true)
 	List<Integer[]> getExpenseSumByMonth();
@@ -46,6 +46,11 @@ public interface ExpenseRepository extends JpaRepository<ExpenseEntity, Integer>
 	@Query(value = "select sum(amount),c.category_name  from expenses e,categories c  where c.category_id = e.category_id  and e.user_id = :userId group by e.category_id",nativeQuery = true)
 	List<Integer[]> getMonthlyCategorywiseByUser(Integer userId);
 	
-	
+	@Query(value = "SELECT u.user_id, u.first_name, SUM(e.amount) as total_expense " +
+            "FROM expenses e JOIN users u ON e.user_id = u.user_id " +
+            "GROUP BY u.user_id", nativeQuery = true)
+List<Object[]> getTotalExpensesByUser();
+
+
 
 }

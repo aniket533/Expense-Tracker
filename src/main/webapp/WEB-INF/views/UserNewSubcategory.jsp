@@ -135,7 +135,7 @@
             			<div class="card-body">
               				<h5 class="card-title">Create New Sub-category</h5>
               				<div class="form-container">
-                				<form action="savesubcategory" method="post" class="row g-3" onsubmit="return validateForm()">
+                				<form action="usersavesubcategory" method="post" class="row g-3" onsubmit="return validateForm()">
                   					<div class="col-md-12 form-group">
                     						<label for="subcategoryName" class="form-label required-field">Sub-category Name</label>
                     						<input type="text" class="form-control" id="subcategoryName" name="subcategoryName" required>

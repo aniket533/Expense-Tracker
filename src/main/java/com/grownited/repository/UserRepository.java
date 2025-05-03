@@ -10,9 +10,8 @@ import org.springframework.stereotype.Repository;
 import com.grownited.entity.UserEntity;
 
 @Repository
-public interface UserRepository extends JpaRepository<UserEntity, Integer>{
-	
-	Optional<UserEntity> findByEmail(String email);
-	
-	List<UserEntity> findByRole(String role);
+public interface UserRepository extends JpaRepository<UserEntity, Integer> {
+    Optional<UserEntity> findByEmail(String email);
+    List<UserEntity> findByRole(String role);
+    List<UserEntity> findByRoleNot(String role); // Add this method
 }

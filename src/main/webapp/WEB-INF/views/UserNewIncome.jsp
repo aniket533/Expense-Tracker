@@ -179,7 +179,7 @@
                 <div class="col-lg-8">
                     <div class="card income-form-card">
                         <div class="card-body">
-                            <div class="card-title">New Income Details</div>
+                            <div class="card-title"> Add New Income </div>
                             <form action="usersaveincome" method="post">
 
                                 <div class="row mb-3">

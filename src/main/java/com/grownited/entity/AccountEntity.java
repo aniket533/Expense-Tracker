@@ -17,6 +17,14 @@ public class AccountEntity {
 	private Integer userId;
 	private String title;
 	private Double amount;
+	private String accountName;
+	public String getAccountName() {
+		return accountName;
+	}
+
+	public void setAccountName(String accountName) {
+		this.accountName = accountName;
+	}
 
 	public Integer getAccountId() {
 		return accountId;
