@@ -51,6 +51,18 @@ public interface ExpenseRepository extends JpaRepository<ExpenseEntity, Integer>
             "GROUP BY u.user_id", nativeQuery = true)
 List<Object[]> getTotalExpensesByUser();
 
+@Query(value = "SELECT e.expense_id as expenseId, e.title as expenseTitle, e.amount, e.description, e.date, "
+        + "a.title as accountTitle, c.category_name as categoryName, sc.subcategory_name as subCategoryName, "
+        + "v.vendor_name as vendorName "
+        + "FROM expenses e "
+        + "JOIN accounts a ON e.account_id = a.account_id "
+        + "JOIN categories c ON e.category_id = c.category_id "
+        + "JOIN subcategories sc ON e.subcategory_id = sc.subcategory_id "
+        + "JOIN vendors v ON e.vendor_id = v.vendor_id "
+        + "WHERE e.user_id = :userId", 
+        nativeQuery = true)
+List<ExpenseDto> getExpensesByUserIdWithAccountTitle(@Param("userId") Integer userId);
+
 
 
 }

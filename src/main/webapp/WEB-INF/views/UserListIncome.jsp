@@ -158,7 +158,7 @@
     <c:forEach items="${incomeList}" var="inc">
         <tr>
             <td>${inc.title}</td>
-            <td class="amount-positive">$${inc.amount}</td>
+            <td class="amount-positive">${inc.amount}</td>
             <td>${inc.date}</td>
             <td>
                 <a href="userdeleteincome?incomeId=${inc.incomeId}" class="action-btn delete-btn">

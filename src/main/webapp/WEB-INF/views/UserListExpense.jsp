@@ -99,8 +99,8 @@
             padding: 0.5em 0.75em;
         }
         .amount-badge {
-            background-color: #28a745 !important;
-            color: white;
+            
+            color: black;
         }
     </style>
 </head>
@@ -136,7 +136,7 @@
 <thead>
     <tr>
         <th scope="col">No</th>
-        <th scope="col">Title</th>
+       
         <th scope="col">Vendor</th>  <!-- New Column -->
         <th scope="col">Category</th>
         <th scope="col">Sub-Category</th>
@@ -152,7 +152,7 @@
     <c:forEach items="${expenseList}" var="expense">
         <tr>
             <td>${count}</td>
-            <td>${expense.title}</td>
+            
             
             <!-- New: Vendor Name Column -->
             <td>
@@ -180,7 +180,8 @@
             </td>
             <td>
                 <span class="badge amount-badge">
-                    <fmt:formatNumber value="${expense.amount}" type="currency"/>
+                   <fmt:formatNumber value="${expense.amount}" type="number" minFractionDigits="2" />
+
                 </span>
             </td>
             <td>

@@ -1,7 +1,8 @@
 package com.grownited.controller.user;
 
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,7 +32,7 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UserExpenseController {
-    
+
     @Autowired
     ExpenseRepository expenseRepo;
 
@@ -52,18 +53,6 @@ public class UserExpenseController {
 
     @Autowired
     UserRepository userRepo;
-    
-    @Autowired
-    private CategoryRepository categoryRepository;
-
-    @Autowired
-    private AccountRepository accountRepository;
-
-    @Autowired
-    private VendorRepository vendorRepository;
-
-    @Autowired
-    private SubcategoryRepository subcategoryRepository;
 
     @GetMapping("/usernewexpense")
     public String usernewExpense(Model model, HttpSession session) {
@@ -72,12 +61,11 @@ public class UserExpenseController {
             Integer userId = user.getUserId();
             session.setAttribute("userId", userId);
 
-            // ✅ Only user's own data
             List<CategoryEntity> categoryList = categoryRepo.findByUserId(userId);
             List<SubcategoryEntity> subcategoryList = subcategoryRepo.findByUserId(userId);
             List<VendorEntity> vendorList = vendorRepo.findByUserId(userId);
             List<AccountEntity> accountList = accountRepo.findByUserId(userId);
-            List<StatusEntity> statusList = statusRepo.findAll(); // Statuses may be global
+            List<StatusEntity> statusList = statusRepo.findAll(); // status usually global
 
             model.addAttribute("categoryList", categoryList);
             model.addAttribute("subcategoryList", subcategoryList);
@@ -87,6 +75,17 @@ public class UserExpenseController {
         }
 
         return "UserNewExpense";
+    }
+
+    @PostMapping("/usersaveexpense")
+    public String usersaveExpense(ExpenseEntity expense, HttpSession session) {
+        if (expense.getUserId() == null) {
+            Integer userId = (Integer) session.getAttribute("userId");
+            expense.setUserId(userId);
+        }
+
+        expenseRepo.save(expense);
+        return "redirect:/userlistexpense";
     }
 
     @GetMapping("/userlistexpense")
@@ -106,48 +105,28 @@ public class UserExpenseController {
         return "UserListExpense";
     }
 
-    @PostMapping("/usersaveexpense")
-    public String usersaveExpense(ExpenseEntity expense, HttpSession session) {
-        if (expense.getUserId() == null) {
-            Integer userId = (Integer) session.getAttribute("userId");
-            expense.setUserId(userId);
-        }
-
-        expenseRepo.save(expense);
-        return "redirect:/userlistexpense";
-    }
-
     @GetMapping("/userdeleteexpense")
     public String userdeleteExpense(@RequestParam Integer expenseId) {
         expenseRepo.deleteById(expenseId);
         return "redirect:/userlistexpense";
     }
-    
-    @GetMapping("/user/subcategories/by-category")
+
+    // ✅ Get categories, vendors, and accounts for a given user
+    @GetMapping("/user/{userId}/metadata")
     @ResponseBody
-    public List<SubcategoryEntity> getSubcategoriesByCategory(@RequestParam Integer categoryId) {
-        return subcategoryRepo.findByCategoryId(categoryId);
-    }
-    @GetMapping("/user/{userId}/categories")
-    public List<CategoryEntity> getCategoriesByUser(@PathVariable Long userId) {
-        return categoryRepository.findByUserId(userId);
-    }
-
-    @GetMapping("/user/{userId}/accounts")
-    public List<AccountEntity> getAccountsByUser(@PathVariable Long userId) {
-        return accountRepository.findByUserId(userId);
+    public Map<String, List<?>> getUserMetadata(@PathVariable Integer userId) {
+        Map<String, List<?>> response = new HashMap<>();
+        response.put("accounts", accountRepo.findByUserId(userId));
+        response.put("vendors", vendorRepo.findByUserId(userId));
+        response.put("categories", categoryRepo.findByUserId(userId));
+        return response;
     }
 
-    @GetMapping("/user/{userId}/vendors")
-    public List<VendorEntity> getVendorsByUser(@PathVariable Long userId) {
-        return vendorRepository.findByUserId(userId);
-    }
-
+    // ✅ Get subcategories for user and selected category
     @GetMapping("/user/{userId}/category/{categoryId}/subcategories")
-    public List<SubcategoryEntity> getSubcategoriesByUserAndCategory(
-            @PathVariable Long userId,
-            @PathVariable Long categoryId) {
-        return subcategoryRepository.findByUserIdAndCategoryId(userId, categoryId);
+    @ResponseBody
+    public List<SubcategoryEntity> getSubcategories(@PathVariable Integer userId, @PathVariable Integer categoryId) {
+        return subcategoryRepo.findByUserIdAndCategoryId(userId, categoryId);
     }
-    
+
 }

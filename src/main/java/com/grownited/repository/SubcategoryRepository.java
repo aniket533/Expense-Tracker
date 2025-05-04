@@ -36,5 +36,6 @@ public interface SubcategoryRepository extends JpaRepository<SubcategoryEntity, 
     List<SubcategoryEntity> findByUserId(Integer userId);
     List<SubcategoryEntity> findByCategoryId(Integer categoryId);
     List<SubcategoryEntity> findByUserIdAndCategoryId(Long userId, Long categoryId);
+    List<SubcategoryEntity> findByCategoryIdAndUserId(Integer categoryId, Integer userId);
 
 }

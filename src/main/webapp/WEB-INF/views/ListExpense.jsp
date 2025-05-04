@@ -260,7 +260,7 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Title</th>
+                                          
                                             <th>Amount</th>
                                             <th>Date</th>
                                             <th>User ID</th>
@@ -275,7 +275,7 @@
                                         <c:forEach items="${expenseList}" var="expense">
                                             <tr>
                                                 <td>${expense.expenseId}</td>
-                                                <td>${expense.expenseTitle}</td>
+                                                
                                                 <td class="amount-cell">${expense.amount}</td>
                                                 <td>${expense.date}</td>
                                                 <td>${expense.userId}</td>

@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Expense | Expense Tracker</title>
     <meta name="description" content="Add new expense record">
@@ -15,39 +15,45 @@
     <link href="${pageContext.request.contextPath}/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="${pageContext.request.contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/assets/vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/assets/vendor/simple-datatables/style.css" rel="stylesheet">
     
     <!-- Template Main CSS File -->
     <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet">
     
     <style>
+        :root {
+            --primary-color: #4154f1;
+            --danger-color: #dc3545;
+            --secondary-color: #6c757d;
+        }
+        
         .required-field::after {
             content: " *";
-            color: #dc3545;
+            color: var(--danger-color);
         }
+        
         .is-invalid {
-            border-color: #dc3545 !important;
+            border-color: var(--danger-color) !important;
         }
+        
         .invalid-feedback {
             display: none;
             width: 100%;
             margin-top: 0.25rem;
             font-size: 0.875em;
-            color: #dc3545;
+            color: var(--danger-color);
         }
+        
         .is-invalid ~ .invalid-feedback {
             display: block;
         }
+        
         .loading-spinner {
             display: none;
             width: 20px;
@@ -58,8 +64,33 @@
             animation: spin 1s ease-in-out infinite;
             margin-left: 10px;
         }
+        
         @keyframes spin {
             to { transform: rotate(360deg); }
+        }
+        
+        .form-select {
+            cursor: pointer;
+        }
+        
+        .card {
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        /* Loading indicator for dropdowns */
+        .dropdown-loading {
+            color: #6c757d;
+            font-style: italic;
+        }
+        
+        .dropdown-error {
+            color: var(--danger-color);
+            font-style: italic;
         }
     </style>
 </head>
@@ -74,51 +105,53 @@
     <main id="main" class="main">
         <div class="pagetitle">
             <h1>New Expense</h1>
-            <nav>
+            <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="home">Home</a></li>
-                    <li class="breadcrumb-item active">New Expense</li>
+                    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/home">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">New Expense</li>
                 </ol>
             </nav>
         </div>
 
-        <section class="section dashboard">
+        <section class="section">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Add New Expense</h5>
                     
-                    <form action="${pageContext.request.contextPath}/saveexpense" method="post" class="row g-3 needs-validation" id="expenseForm" novalidate>
+                    <form action="${pageContext.request.contextPath}/saveexpense" method="post" 
+                          class="row g-3 needs-validation" id="expenseForm" novalidate>
+                        
                         <!-- Expense Title -->
                         <div class="col-md-6">
                             <label for="title" class="form-label required-field">Title</label>
                             <input type="text" class="form-control" id="title" name="title" required 
                                    placeholder="Enter expense description" maxlength="100">
-                            <div class="invalid-feedback">Please provide a title for the expense.</div>
+                            <div class="invalid-feedback">Please provide a valid title for the expense.</div>
                         </div>
                         
                         <!-- Amount -->
                         <div class="col-md-6">
                             <label for="amount" class="form-label required-field">Amount</label>
-                            <div class="input-group">
-                                <span class="input-group-text">$</span>
+                            <div class="input-group has-validation">
+                               
                                 <input type="number" step="0.01" min="0.01" class="form-control" 
                                        id="amount" name="amount" required placeholder="0.00">
+                                <div class="invalid-feedback">Please enter a valid amount greater than 0.</div>
                             </div>
-                            <div class="invalid-feedback">Please enter a valid amount greater than 0.</div>
                         </div>
                         
                         <!-- Date -->
                         <div class="col-md-6">
                             <label for="date" class="form-label required-field">Date</label>
                             <input type="date" class="form-control" id="date" name="date" required>
-                            <div class="invalid-feedback">Please select a date.</div>
+                            <div class="invalid-feedback">Please select a valid date.</div>
                         </div>
                         
                         <!-- User Selection -->
                         <div class="col-md-6">
                             <label for="userId" class="form-label required-field">User</label>
                             <select class="form-select" id="userId" name="userId" required>
-                                <option value="">--- Select User ---</option>
+                                <option value="" disabled selected>--- Select User ---</option>
                                 <c:forEach items="${userList}" var="user">
                                     <option value="${user.userId}">
                                         ${user.firstName} ${user.lastName}
@@ -132,7 +165,7 @@
                         <div class="col-md-6">
                             <label for="categoryId" class="form-label required-field">Category</label>
                             <select class="form-select" id="categoryId" name="categoryId" required>
-                                <option value="">--- Select Category ---</option>
+                                <option value="" disabled selected>--- Select Category ---</option>
                             </select>
                             <div class="invalid-feedback">Please select a category.</div>
                         </div>
@@ -141,7 +174,7 @@
                         <div class="col-md-6">
                             <label for="subcategoryId" class="form-label required-field">Sub-category</label>
                             <select class="form-select" id="subcategoryId" name="subcategoryId" required disabled>
-                                <option value="">--- Select Sub-category ---</option>
+                                <option value="" disabled selected>--- Select Sub-category ---</option>
                             </select>
                             <div class="invalid-feedback">Please select a sub-category.</div>
                         </div>
@@ -150,7 +183,7 @@
                         <div class="col-md-6">
                             <label for="vendorId" class="form-label required-field">Vendor</label>
                             <select class="form-select" id="vendorId" name="vendorId" required>
-                                <option value="">--- Select Vendor ---</option>
+                                <option value="" disabled selected>--- Select Vendor ---</option>
                             </select>
                             <div class="invalid-feedback">Please select a vendor.</div>
                         </div>
@@ -159,10 +192,12 @@
                         <div class="col-md-6">
                             <label for="accountId" class="form-label required-field">Account</label>
                             <select class="form-select" id="accountId" name="accountId" required>
-                                <option value="">--- Select Account ---</option>
+                                <option value="" disabled selected>--- Select Account ---</option>
                             </select>
                             <div class="invalid-feedback">Please select an account.</div>
                         </div>
+                        
+                      
                         
                         <!-- Form Actions -->
                         <div class="col-12 text-center mt-4">
@@ -187,14 +222,7 @@
     </a>
 
     <!-- Vendor JS Files -->
-    <script src="${pageContext.request.contextPath}/assets/vendor/apexcharts/apexcharts.min.js"></script>
     <script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/vendor/chart.js/chart.umd.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/vendor/echarts/echarts.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/vendor/quill/quill.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/vendor/simple-datatables/simple-datatables.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/vendor/tinymce/tinymce.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/vendor/php-email-form/validate.js"></script>
     
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -206,12 +234,13 @@
     <script>
     $(document).ready(function() {
         // Set today's date as default
-        $('#date').val(new Date().toISOString().split('T')[0]);
+        const today = new Date().toISOString().split('T')[0];
+        $('#date').val(today);
         
         // Initialize form validation
         initFormValidation();
         
-        // Load dependent dropdowns when user changes
+        // Load dependent data when user changes
         $('#userId').on('change', function() {
             const userId = $(this).val();
             if (userId) {
@@ -229,12 +258,11 @@
             if (categoryId && userId) {
                 loadSubcategories(userId, categoryId);
             } else {
-                $('#subcategoryId').html('<option value="">--- Select Sub-category ---</option>')
-                                 .prop('disabled', true);
+                resetSubcategoryDropdown();
             }
         });
     });
-    
+
     function initFormValidation() {
         // Client-side validation
         $('#expenseForm').on('submit', function(e) {
@@ -253,60 +281,78 @@
         
         // Custom validation for amount
         $('#amount').on('input', function() {
-            if (parseFloat($(this).val()) <= 0) {
+            const amount = parseFloat($(this).val());
+            if (isNaN(amount)) {
+                this.setCustomValidity('Please enter a valid number');
+            } else if (amount <= 0) {
                 this.setCustomValidity('Amount must be greater than 0');
             } else {
                 this.setCustomValidity('');
             }
         });
     }
-    
+
     function loadUserDependentData(userId) {
         // Show loading states
-        $('#categoryId').html('<option value="">Loading categories...</option>');
-        $('#vendorId').html('<option value="">Loading vendors...</option>');
-        $('#accountId').html('<option value="">Loading accounts...</option>');
-        $('#subcategoryId').html('<option value="">Select category first</option>')
-                         .prop('disabled', true);
+        setDropdownLoadingState('#categoryId', 'Loading categories...');
+        setDropdownLoadingState('#vendorId', 'Loading vendors...');
+        setDropdownLoadingState('#accountId', 'Loading accounts...');
+        resetSubcategoryDropdown();
         
         // Load categories
-        $.get('${pageContext.request.contextPath}/user/' + userId + '/categories', function(data) {
-            updateDropdown('#categoryId', data, 'categoryId', 'categoryName');
-        }).fail(function() {
-            $('#categoryId').html('<option value="">Error loading categories</option>');
-        });
-        
-        // Load vendors
-        $.get('${pageContext.request.contextPath}/user/' + userId + '/vendors', function(data) {
-            updateDropdown('#vendorId', data, 'vendorId', 'vendorName');
-        }).fail(function() {
-            $('#vendorId').html('<option value="">Error loading vendors</option>');
-        });
-        
-        // Load accounts
-        $.get('${pageContext.request.contextPath}/user/' + userId + '/accounts', function(data) {
-            updateDropdown('#accountId', data, 'accountId', 'accountName');
-        }).fail(function() {
-            $('#accountId').html('<option value="">Error loading accounts</option>');
-        });
-    }
-    
-    function loadSubcategories(userId, categoryId) {
-        $('#subcategoryId').html('<option value="">Loading subcategories...</option>')
-                         .prop('disabled', false);
-        
-        $.get('${pageContext.request.contextPath}/user/' + userId + '/category/' + categoryId + '/subcategories', 
-            function(data) {
-                updateDropdown('#subcategoryId', data, 'subcategoryId', 'subcategoryName');
+        $.get({
+            url: '${pageContext.request.contextPath}/getDataForUser/' + userId,
+            success: function(response) {
+                if (response.categories && response.categories.length > 0) {
+                    updateDropdown('#categoryId', response.categories, 'categoryId', 'categoryName');
+                } else {
+                    setDropdownErrorState('#categoryId', 'No categories found');
+                }
+                
+                if (response.vendors && response.vendors.length > 0) {
+                    updateDropdown('#vendorId', response.vendors, 'vendorId', 'vendorName');
+                } else {
+                    setDropdownErrorState('#vendorId', 'No vendors found');
+                }
+                
+                if (response.accounts && response.accounts.length > 0) {
+                    updateDropdown('#accountId', response.accounts, 'accountId', 'title');
+                } else {
+                    setDropdownErrorState('#accountId', 'No accounts found');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error loading user data:', error);
+                setDropdownErrorState('#categoryId', 'Error loading data');
+                setDropdownErrorState('#vendorId', 'Error loading data');
+                setDropdownErrorState('#accountId', 'Error loading data');
             }
-        ).fail(function() {
-            $('#subcategoryId').html('<option value="">Error loading subcategories</option>');
         });
     }
-    
+
+    function loadSubcategories(userId, categoryId) {
+        setDropdownLoadingState('#subcategoryId', 'Loading subcategories...');
+        
+        $.get({
+            url: '${pageContext.request.contextPath}/user/' + userId + '/category/' + categoryId + '/subcategories',
+            success: function(data) {
+                if (data && data.length > 0) {
+                    updateDropdown('#subcategoryId', data, 'subcategoryId', 'subcategoryName');
+                    $('#subcategoryId').prop('disabled', false);
+                } else {
+                    setDropdownErrorState('#subcategoryId', 'No subcategories available');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error loading subcategories:', error);
+                setDropdownErrorState('#subcategoryId', 'Error loading subcategories');
+            }
+        });
+    }
+
     function updateDropdown(selector, data, valueField, textField) {
         const dropdown = $(selector);
-        dropdown.empty().append('<option value="">--- Select ---</option>');
+        dropdown.empty().append('<option value="" disabled selected>--- Select ---</option>');
         
         if (data && data.length > 0) {
             $.each(data, function(index, item) {
@@ -317,17 +363,33 @@
                     })
                 );
             });
+            dropdown.prop('disabled', false);
         } else {
-            dropdown.append('<option value="">No options available</option>');
+            setDropdownErrorState(selector, 'No options available');
         }
     }
-    
+
+    function setDropdownLoadingState(selector, message) {
+        $(selector).empty()
+                   .append(`<option value="" disabled selected class="dropdown-loading">${message}</option>`)
+                   .prop('disabled', true);
+    }
+
+    function setDropdownErrorState(selector, message) {
+        $(selector).empty()
+                   .append(`<option value="" disabled selected class="dropdown-error">${message}</option>`)
+                   .prop('disabled', true);
+    }
+
     function resetDependentDropdowns() {
-        $('#categoryId, #accountId, #vendorId').each(function() {
-            $(this).html('<option value="">--- Select ---</option>');
-        });
-        $('#subcategoryId').html('<option value="">Select category first</option>')
-                         .prop('disabled', true);
+        setDropdownLoadingState('#categoryId', 'Select user first');
+        setDropdownLoadingState('#vendorId', 'Select user first');
+        setDropdownLoadingState('#accountId', 'Select user first');
+        resetSubcategoryDropdown();
+    }
+
+    function resetSubcategoryDropdown() {
+        setDropdownLoadingState('#subcategoryId', 'Select category first');
     }
     </script>
 </body>
