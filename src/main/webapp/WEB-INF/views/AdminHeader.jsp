@@ -2,7 +2,7 @@
    	
    	<div class="d-flex align-items-center justify-content-between">
     	
-    	<a  class="logo d-flex align-items-center">
+    	<a  class="logo d-flex align-items-center" href="admindashboard">
        		<img src="assets/img/logo.png" alt="">
        		<span class="d-none d-lg-block">ExpenseTracker</span>
    		</a>
@@ -28,7 +28,7 @@
 				<c:if test="${not empty user}">
         			
           				<a class="nav-link nav-profile d-flex align-items-center pe-0 show" href="#" data-bs-toggle="dropdown" aria-expanded="true">
-            				<img src="${user.profilePicPath }" class="rounded-circle">
+            				<img src="${user.profilePicPath }" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
             				<span class="d-none d-md-block dropdown-toggle ps-2">${user.firstName} ${user.lastName}</span>
           				</a><!-- End Profile Iamge Icon -->
 
@@ -40,7 +40,7 @@
               					<hr class="dropdown-divider">
             				</li>
             				<li>
-              					<a class="dropdown-item d-flex align-items-center" href="myprofile">
+              					<a class="dropdown-item d-flex align-items-center" href="adminprofile">
                 					<i class="bi bi-person"></i>
                 					<span>My Profile</span>
               					</a>

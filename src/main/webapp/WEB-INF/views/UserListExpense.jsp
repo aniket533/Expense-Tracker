@@ -136,7 +136,7 @@
 <thead>
     <tr>
         <th scope="col">No</th>
-       
+         <th scope="col">Account</th>
         <th scope="col">Vendor</th>  <!-- New Column -->
         <th scope="col">Category</th>
         <th scope="col">Sub-Category</th>
@@ -152,6 +152,15 @@
     <c:forEach items="${expenseList}" var="expense">
         <tr>
             <td>${count}</td>
+            
+            <td>
+                <c:forEach items="${accountList}" var="account">
+                    <c:if test="${account.accountId == expense.accountId}">
+                        ${account.title}
+                    </c:if>
+                </c:forEach>
+            </td>
+            
             
             
             <!-- New: Vendor Name Column -->

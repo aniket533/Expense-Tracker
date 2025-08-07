@@ -173,6 +173,12 @@ public class SessionController {
        return "AdminNotification"; 
    }
    
+   
+   @GetMapping("adminprofile")
+   public String adminprofile() {
+       return "AdminProfile"; 
+   }
+   
    @GetMapping("home")
    public String home() {
        return "Home"; 

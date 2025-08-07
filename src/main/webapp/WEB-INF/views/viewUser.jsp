@@ -123,7 +123,7 @@
                 <c:if test="${not empty sessionScope.user}">
                     <li class="nav-item dropdown pe-3">
                         <a class="nav-link nav-profile d-flex align-items-center pe-0 show" href="#" data-bs-toggle="dropdown" aria-expanded="true">
-                            <img src="${sessionScope.user.profilePicPath}" class="rounded-circle">
+                            <img src="${sessionScope.user.profilePicPath}" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
                             <span class="d-none d-md-block dropdown-toggle ps-2">${sessionScope.user.firstName} ${sessionScope.user.lastName}</span>
                         </a><!-- End Profile Image Icon -->
 

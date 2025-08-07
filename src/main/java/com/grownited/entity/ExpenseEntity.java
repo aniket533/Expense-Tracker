@@ -22,7 +22,16 @@ public class ExpenseEntity {
 	private String description;
 	private Integer userId;
     private String subCategoryName;
+    private String accountName;
 	
+	public String getAccountName() {
+		return accountName;
+	}
+
+	public void setAccountName(String accountName) {
+		this.accountName = accountName;
+	}
+
 	public Integer getExpenseId() {
 		return expenseId;
 	}

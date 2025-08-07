@@ -96,11 +96,13 @@ public class UserExpenseController {
         List<CategoryEntity> categoryList = categoryRepo.findByUserId(userId);
         List<SubcategoryEntity> subcategoryList = subcategoryRepo.findByUserId(userId);
         List<VendorEntity> vendorList = vendorRepo.findByUserId(userId);
+        List<AccountEntity> accountList = accountRepo.findByUserId(userId);
 
         model.addAttribute("expenseList", userExpenses);
         model.addAttribute("categoryList", categoryList);
         model.addAttribute("subcategoryList", subcategoryList);
         model.addAttribute("vendorList", vendorList);
+        model.addAttribute("accountList", accountList);
 
         return "UserListExpense";
     }
