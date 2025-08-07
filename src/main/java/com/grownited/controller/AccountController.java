@@ -36,17 +36,18 @@ public class AccountController {
 	    return "NewAccount";
 	}
 	
-	@PostMapping("/saveaccount")
-	public String saveAccount(AccountEntity account) {
-		accountRepo.save(account);
-		return "redirect:/listaccount";
-	}
 	
 	@GetMapping("/listaccount")
 	public String listAccount(Model model) {
 		List<AccountEntity> accountList = accountRepo.findAll();
 		model.addAttribute("accountList", accountList);
 		return "ListAccount";
+	}
+	
+	@PostMapping("/saveaccount")
+	public String saveAccount(AccountEntity account) {
+		accountRepo.save(account);
+		return "redirect:/listaccount";
 	}
 	
 	@GetMapping("/deleteaccount")

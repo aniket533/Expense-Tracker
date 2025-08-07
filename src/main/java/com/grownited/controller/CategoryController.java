@@ -43,6 +43,14 @@ public class CategoryController {
 	    return "redirect:/listcategory";
 	}
 
+	
+	
+	@GetMapping("/deletecategory")
+	public String deleteCategory(@RequestParam Integer categoryId) {
+		categoryRepo.deleteById(categoryId);
+		return "redirect:/listcategory";
+	}
+	
 	@GetMapping("/listcategory")
 	public String listCategory(Model model) {
 		List<CategoryEntity> categoryList = categoryRepo.findAll();
@@ -50,11 +58,6 @@ public class CategoryController {
 		return "ListCategory";
 	}
 	
-	@GetMapping("/deletecategory")
-	public String deleteCategory(@RequestParam Integer categoryId) {
-		categoryRepo.deleteById(categoryId);
-		return "redirect:/listcategory";
-	}
 	@GetMapping("/getcategoriesbyuser")
 	public ResponseEntity<List<CategoryEntity>> getCategoriesByUser(@RequestParam Integer userId) {
 	    List<CategoryEntity> categories = categoryRepo.findByUserId(userId);

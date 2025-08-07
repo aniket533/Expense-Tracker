@@ -65,10 +65,10 @@ public class ExpenseController {
 
         model.addAttribute("categoryList", categoryList);
         model.addAttribute("subcategoryList", subcategoryList);
-        model.addAttribute("vendorList", vendorList);
         model.addAttribute("accountList", accountList);
         model.addAttribute("statusList", statusList);
         model.addAttribute("userList", userList);
+        model.addAttribute("vendorList", vendorList);
 
         return "NewExpense";
     }
